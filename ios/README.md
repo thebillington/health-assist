@@ -30,6 +30,12 @@ xcodegen generate
 
 Select the `AppleHealthSync` scheme and an iPhone simulator, then Run.
 
+From the command line, after the simulator runtime is installed:
+
+```bash
+ios/scripts/run_in_simulator.sh "iPhone 16 Pro"
+```
+
 To run on a physical iPhone:
 
 1. Open the project in Xcode.
@@ -90,6 +96,12 @@ double counted. Stand hours are the number of Apple Stand Hour samples marked
 ## Testing without a simulator runtime
 
 The shared payload/math logic is a Swift package with its own tests:
+
+```bash
+ios/scripts/test.sh
+```
+
+or directly:
 
 ```bash
 swift test --package-path ios/AppleHealthSyncCore

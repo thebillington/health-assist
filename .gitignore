@@ -10,6 +10,7 @@ htmlcov/
 
 # Swift / Xcode
 ios/AppleHealthSyncCore/.build/
+ios/.build/
 ios/AppleHealthSyncCore/.swiftpm/
 ios/*.xcodeproj/xcuserdata/
 ios/*.xcodeproj/project.xcworkspace/xcuserdata/
