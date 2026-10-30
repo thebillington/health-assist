@@ -1,8 +1,7 @@
 # Apple Health Sync
 
-A free, open-source Home Assistant custom integration (HACS) that receives Apple
-Health data from an iOS app over a local webhook and exposes it as native
-sensor entities.
+A free, open-source Home Assistant custom integration (HACS) plus a SwiftUI
+iOS companion app that reads Apple Health and pushes it over a local webhook.
 
 - **Local push only** — no cloud, no polling, no telemetry, no outbound calls.
 - **No external Python dependencies** — runs with a stock Home Assistant.
@@ -11,12 +10,14 @@ sensor entities.
 - **Multi-device** — add the integration once per iPhone/iPad. Each phone gets
   its own webhook, device and entities.
 - **No YAML required.**
+- **Open iOS source** — SwiftUI + HealthKit app in [`ios/`](ios/), with a
+  simulator-friendly test payload mode.
 
-This repository is the Home Assistant half of a paired project. The iOS app is
-built separately and must follow the [webhook contract](#webhook-contract)
-below.
+This repository contains both halves of the project: the Home Assistant
+integration and the iOS app. The webhook contract below is the boundary
+between them.
 
-> **Screenshots:** add setup, device and statistics screenshots under
+> **Screenshots:** add setup, device, statistics and app screenshots under
 > `docs/images/` after the first release.
 
 ---
@@ -25,6 +26,7 @@ below.
 
 - Home Assistant 2024.1 or newer (tested against 2026.2).
 - HACS (recommended) or manual installation.
+- iOS 18 or newer and Xcode 16 or newer to build the app.
 - An HTTPS-reachable Home Assistant URL if the phone is not on the same LAN.
   The webhook can be used over plain HTTP on a trusted LAN, but HTTPS is
   strongly recommended because the webhook URL is a credential.
@@ -80,6 +82,34 @@ after saving; sensors return after the app's next sync.
 > Removing a metric from the allow-list stops new values from being accepted,
 > but Home Assistant may keep the old entity registry entry. Delete it manually
 > under **Settings → Devices & services → Entities** if you want it gone.
+
+---
+
+## iOS app
+
+The companion app lives in [`ios/`](ios/) and is built from this same
+repository.
+
+1. Open `ios/AppleHealthSync.xcodeproj` in Xcode.
+2. Select the `AppleHealthSync` scheme and an iPhone simulator or device.
+3. For a physical device, choose your development team under **Signing &
+   Capabilities** and change the bundle identifier if needed.
+4. Run the app, paste the webhook URL and optional shared secret from Home
+   Assistant, tap **Request Health Access**, then **Sync Now**.
+
+The app reads HealthKit data in the foreground, merges overlapping sleep
+samples, and sends the latest values plus today's activity totals. It also has
+a **Send a Test Payload** button that does not need HealthKit, so it can verify
+the URL, secret and network path in the iOS Simulator.
+
+HealthKit does not expose identifiers for muscle mass, bone mass, body water or
+basal metabolic rate. The server still supports those sensors for other data
+sources; the app sends basal energy burned as the generic
+`basal_energy_burned` metric instead. Background delivery, workouts and ECG are
+not in v1.
+
+See [`ios/README.md`](ios/README.md) for the full app notes, limitations and
+signing instructions.
 
 ---
 
@@ -364,15 +394,49 @@ custom_components/apple_health_sync/
   strings.json
   translations/en.json
   webhook.py        parsing, validation, dispatch
+ios/
+  AppleHealthSync.xcodeproj/
+  AppleHealthSync/  SwiftUI app, HealthKit queries, catalog, networking
+  AppleHealthSyncCore/  shared payload + math Swift package with tests
+  project.yml       XcodeGen project definition
+  scripts/          icon generator
 tests/
   test_webhook.py
   test_config_flow.py
   test_sensor.py
   test_diagnostics.py
+  test_ios_contract.py
 scripts/
   send_sample_payload.py
 hacs.json
-.github/workflows/   pytest, hassfest, ruff
+.github/workflows/   pytest, hassfest, ruff, iOS build/tests
+```
+
+### iOS tests and build
+
+The payload encoder, percentage conversion and sleep interval merging are in a
+standalone Swift package:
+
+```bash
+swift test --package-path ios/AppleHealthSyncCore
+```
+
+Build the app:
+
+```bash
+xcodebuild \
+  -project ios/AppleHealthSync.xcodeproj \
+  -scheme AppleHealthSync \
+  -sdk iphonesimulator \
+  CODE_SIGNING_ALLOWED=NO \
+  build
+```
+
+Regenerate the project after editing `ios/project.yml`:
+
+```bash
+brew install xcodegen
+cd ios && xcodegen generate
 ```
 
 ### End-to-end test on the homelab
@@ -417,7 +481,8 @@ GitHub Actions runs:
 
 - `pytest` with `pytest-homeassistant-custom-component`;
 - `ruff check`;
-- `hassfest` validation.
+- `hassfest` validation;
+- Swift package tests and an iOS simulator build.
 
 ### Releasing
 
@@ -431,11 +496,12 @@ offering updates.
 
 v1 intentionally stops at push-to-sensor. Planned for later:
 
+- HealthKit background delivery;
 - backfill / historical imports;
 - event entities for workouts, ECG and other discrete records;
 - more Apple Health categories;
 - default HACS store listing;
-- a published iOS app link.
+- App Store/TestFlight packaging for the iOS app.
 
 ## License
 

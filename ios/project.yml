@@ -1,0 +1,78 @@
+name: AppleHealthSync
+
+options:
+  bundleIdPrefix: uk.rebecchi
+  deploymentTarget:
+    iOS: "18.0"
+  createIntermediateGroups: true
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    IPHONEOS_DEPLOYMENT_TARGET: "18.0"
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    CODE_SIGN_STYLE: Automatic
+    SWIFT_STRICT_CONCURRENCY: minimal
+
+packages:
+  AppleHealthSyncCore:
+    path: AppleHealthSyncCore
+
+targets:
+  AppleHealthSync:
+    type: application
+    platform: iOS
+    sources:
+      - path: AppleHealthSync
+    dependencies:
+      - package: AppleHealthSyncCore
+        product: AppleHealthSyncCore
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: uk.rebecchi.applehealthsync
+        PRODUCT_NAME: AppleHealthSync
+        INFOPLIST_FILE: AppleHealthSync/Info.plist
+        CODE_SIGN_ENTITLEMENTS: AppleHealthSync/AppleHealthSync.entitlements
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SUPPORTS_MACCATALYST: NO
+        ENABLE_PREVIEWS: YES
+        ENABLE_USER_SCRIPT_SANDBOXING: YES
+    info:
+      path: AppleHealthSync/Info.plist
+      properties:
+        CFBundleDisplayName: "Apple Health Sync"
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
+        UILaunchScreen: {}
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        NSHealthShareUsageDescription: "Apple Health Sync reads your health data so it can send it to your Home Assistant instance."
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
+    entitlements:
+      path: AppleHealthSync/AppleHealthSync.entitlements
+      properties:
+        com.apple.developer.healthkit: true
+
+schemes:
+  AppleHealthSync:
+    build:
+      targets:
+        AppleHealthSync: all
+    run:
+      config: Debug
+    archive:
+      config: Release

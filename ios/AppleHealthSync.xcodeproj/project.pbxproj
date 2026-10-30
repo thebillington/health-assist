@@ -1,0 +1,387 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1396E285564878D373193D64 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919229651F0A31A69D86409B /* AppModel.swift */; };
+		226E3313E0898B77511784C2 /* MetricCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEF046FD33DBD2446A5ED7B /* MetricCatalog.swift */; };
+		2ABC034BE27916006E1A85B5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8B17068792A82D822CE96A /* ContentView.swift */; };
+		5A003487B906DE2C6D2E53E5 /* AppleHealthSyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6775F6A8407F78A02CB3FBA1 /* AppleHealthSyncApp.swift */; };
+		7CD038BF8565089C51B12588 /* WebhookClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9FDD628532CBEBDBB0288E /* WebhookClient.swift */; };
+		C81FB2A8E30A70F897717C2F /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DD0DB313AE969B01105A26 /* SettingsStore.swift */; };
+		C8F443B3006D41F1D72BD035 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB1E7F71C30CAB8B753CC958 /* Assets.xcassets */; };
+		EF96FE400441AC9C394DD024 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBCFC61B99B3FA208A4563F /* HealthKitManager.swift */; };
+		F87AF3CDA49D0E7ED8134A0D /* AppleHealthSyncCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7B156CE75186C1B55FD699AA /* AppleHealthSyncCore */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1F9FDD628532CBEBDBB0288E /* WebhookClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebhookClient.swift; sourceTree = "<group>"; };
+		208F175C8471F788197F6AFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		27DD0DB313AE969B01105A26 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
+		51A540BA566444F1F9771301 /* AppleHealthSync.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppleHealthSync.entitlements; sourceTree = "<group>"; };
+		5BBCFC61B99B3FA208A4563F /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		6775F6A8407F78A02CB3FBA1 /* AppleHealthSyncApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleHealthSyncApp.swift; sourceTree = "<group>"; };
+		7EEF046FD33DBD2446A5ED7B /* MetricCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricCatalog.swift; sourceTree = "<group>"; };
+		842D468A870B08480E037CBA /* AppleHealthSyncCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AppleHealthSyncCore; path = AppleHealthSyncCore; sourceTree = SOURCE_ROOT; };
+		919229651F0A31A69D86409B /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		A4A59D0C0E9F605C9C68D044 /* AppleHealthSync.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = AppleHealthSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB1E7F71C30CAB8B753CC958 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BB8B17068792A82D822CE96A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		36828B99EC16D4D55DEB5DC3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F87AF3CDA49D0E7ED8134A0D /* AppleHealthSyncCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		320979B9B4F65BFC16A9191A /* AppleHealthSync */ = {
+			isa = PBXGroup;
+			children = (
+				51A540BA566444F1F9771301 /* AppleHealthSync.entitlements */,
+				6775F6A8407F78A02CB3FBA1 /* AppleHealthSyncApp.swift */,
+				919229651F0A31A69D86409B /* AppModel.swift */,
+				AB1E7F71C30CAB8B753CC958 /* Assets.xcassets */,
+				BB8B17068792A82D822CE96A /* ContentView.swift */,
+				5BBCFC61B99B3FA208A4563F /* HealthKitManager.swift */,
+				208F175C8471F788197F6AFD /* Info.plist */,
+				7EEF046FD33DBD2446A5ED7B /* MetricCatalog.swift */,
+				27DD0DB313AE969B01105A26 /* SettingsStore.swift */,
+				1F9FDD628532CBEBDBB0288E /* WebhookClient.swift */,
+			);
+			path = AppleHealthSync;
+			sourceTree = "<group>";
+		};
+		3AE7157685CDF65C7E8902C4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A4A59D0C0E9F605C9C68D044 /* AppleHealthSync.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		85FCCBAE61A0B6A0C38790A4 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				842D468A870B08480E037CBA /* AppleHealthSyncCore */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		D52BFCA13B95B58D29106FB8 = {
+			isa = PBXGroup;
+			children = (
+				320979B9B4F65BFC16A9191A /* AppleHealthSync */,
+				85FCCBAE61A0B6A0C38790A4 /* Packages */,
+				3AE7157685CDF65C7E8902C4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3DDCA0A5EFA9236B4841220D /* AppleHealthSync */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9998B06D8E5BADE36C8A8E11 /* Build configuration list for PBXNativeTarget "AppleHealthSync" */;
+			buildPhases = (
+				89953BD9EC693BEBFB3FE7FD /* Sources */,
+				43935DA57C76C683015C3096 /* Resources */,
+				36828B99EC16D4D55DEB5DC3 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AppleHealthSync;
+			packageProductDependencies = (
+				7B156CE75186C1B55FD699AA /* AppleHealthSyncCore */,
+			);
+			productName = AppleHealthSync;
+			productReference = A4A59D0C0E9F605C9C68D044 /* AppleHealthSync.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D7A28B7684519121900C6DE6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					3DDCA0A5EFA9236B4841220D = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = DE692E22A353E578EF442A79 /* Build configuration list for PBXProject "AppleHealthSync" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = D52BFCA13B95B58D29106FB8;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				83C78ECDD718DB92E87FA347 /* XCLocalSwiftPackageReference "AppleHealthSyncCore" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 3AE7157685CDF65C7E8902C4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3DDCA0A5EFA9236B4841220D /* AppleHealthSync */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		43935DA57C76C683015C3096 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C8F443B3006D41F1D72BD035 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		89953BD9EC693BEBFB3FE7FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1396E285564878D373193D64 /* AppModel.swift in Sources */,
+				5A003487B906DE2C6D2E53E5 /* AppleHealthSyncApp.swift in Sources */,
+				2ABC034BE27916006E1A85B5 /* ContentView.swift in Sources */,
+				EF96FE400441AC9C394DD024 /* HealthKitManager.swift in Sources */,
+				226E3313E0898B77511784C2 /* MetricCatalog.swift in Sources */,
+				C81FB2A8E30A70F897717C2F /* SettingsStore.swift in Sources */,
+				7CD038BF8565089C51B12588 /* WebhookClient.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		36F476FE982A907D245D39BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		E7FE419B8A33E447F47FF041 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AppleHealthSync/AppleHealthSync.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				INFOPLIST_FILE = AppleHealthSync/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = uk.rebecchi.applehealthsync;
+				PRODUCT_NAME = AppleHealthSync;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E949A62E169982BD2F73CB59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F0B7AA3E5201D2B9A4E4A831 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AppleHealthSync/AppleHealthSync.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				INFOPLIST_FILE = AppleHealthSync/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = uk.rebecchi.applehealthsync;
+				PRODUCT_NAME = AppleHealthSync;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9998B06D8E5BADE36C8A8E11 /* Build configuration list for PBXNativeTarget "AppleHealthSync" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F0B7AA3E5201D2B9A4E4A831 /* Debug */,
+				E7FE419B8A33E447F47FF041 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		DE692E22A353E578EF442A79 /* Build configuration list for PBXProject "AppleHealthSync" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E949A62E169982BD2F73CB59 /* Debug */,
+				36F476FE982A907D245D39BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		83C78ECDD718DB92E87FA347 /* XCLocalSwiftPackageReference "AppleHealthSyncCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = AppleHealthSyncCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7B156CE75186C1B55FD699AA /* AppleHealthSyncCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppleHealthSyncCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = D7A28B7684519121900C6DE6 /* Project object */;
+}

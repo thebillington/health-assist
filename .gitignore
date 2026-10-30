@@ -7,3 +7,12 @@ __pycache__/
 .coverage
 htmlcov/
 .DS_Store
+
+# Swift / Xcode
+ios/AppleHealthSyncCore/.build/
+ios/AppleHealthSyncCore/.swiftpm/
+ios/*.xcodeproj/xcuserdata/
+ios/*.xcodeproj/project.xcworkspace/xcuserdata/
+ios/DerivedData/
+DerivedData/
+*.xcuserstate
