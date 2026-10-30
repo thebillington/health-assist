@@ -351,3 +351,13 @@ async def test_http_endpoint_accepts_real_requests(
         json=sample_payload(),
     )
     assert unauthorized.status == 401
+
+    oversized = await client.post(
+        f"/api/webhook/{TEST_WEBHOOK_ID}",
+        data=b"x" * (MAX_PAYLOAD_BYTES + 1),
+        headers={
+            "Content-Type": "application/json",
+            "X-Webhook-Secret": TEST_SECRET,
+        },
+    )
+    assert oversized.status == 413
