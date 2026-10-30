@@ -4,17 +4,17 @@ import Security
 final class SettingsStore {
     private let defaults = UserDefaults.standard
 
-    private let urlKey = "webhookURL"
     private let includeExtrasKey = "includeExtras"
     private let syncOnOpenKey = "syncOnOpen"
     private let deviceIDKey = "deviceID"
 
-    private let secretService = "uk.rebecchi.applehealthsync"
+    private let keychainService = "uk.rebecchi.applehealthsync"
+    private let urlAccount = "webhook-url"
     private let secretAccount = "webhook-secret"
 
     var webhookURL: String {
-        get { defaults.string(forKey: urlKey) ?? "" }
-        set { defaults.set(newValue, forKey: urlKey) }
+        get { readKeychain(account: urlAccount) }
+        set { writeKeychain(newValue, account: urlAccount) }
     }
 
     var includeExtras: Bool {
@@ -37,20 +37,20 @@ final class SettingsStore {
     }
 
     var secret: String {
-        get { readSecret() }
-        set { writeSecret(newValue) }
+        get { readKeychain(account: secretAccount) }
+        set { writeKeychain(newValue, account: secretAccount) }
     }
 
-    private var keychainQuery: [String: Any] {
+    private func keychainQuery(account: String) -> [String: Any] {
         [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: secretService,
-            kSecAttrAccount as String: secretAccount,
+            kSecAttrService as String: keychainService,
+            kSecAttrAccount as String: account,
         ]
     }
 
-    private func readSecret() -> String {
-        var query = keychainQuery
+    private func readKeychain(account: String) -> String {
+        var query = keychainQuery(account: account)
         query[kSecReturnData as String] = true
         query[kSecMatchLimit as String] = kSecMatchLimitOne
 
@@ -64,13 +64,14 @@ final class SettingsStore {
         return value
     }
 
-    private func writeSecret(_ value: String) {
-        SecItemDelete(keychainQuery as CFDictionary)
+    private func writeKeychain(_ value: String, account: String) {
+        let query = keychainQuery(account: account)
+        SecItemDelete(query as CFDictionary)
 
         let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return }
 
-        var attributes = keychainQuery
+        var attributes = query
         attributes[kSecValueData as String] = Data(trimmed.utf8)
         attributes[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
         SecItemAdd(attributes as CFDictionary, nil)

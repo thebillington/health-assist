@@ -7,6 +7,7 @@ webhook contract to your Home Assistant instance.
 - SwiftUI, iOS 18+, no third-party dependencies.
 - Read-only HealthKit access; the app never writes health data.
 - No analytics, no telemetry, no cloud service.
+- Webhook URL and shared secret stored in the iOS Keychain.
 - Manual sync plus optional sync when the app opens.
 - "Send a Test Payload" works without HealthKit, including in the iOS
   Simulator.

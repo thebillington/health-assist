@@ -130,7 +130,7 @@ struct ContentView: View {
                 }
 
                 Section {
-                    Text("Apple Health Sync sends data directly to your Home Assistant instance. It has no analytics, no telemetry and no cloud service. The shared secret is stored in the iOS Keychain.")
+                    Text("Apple Health Sync sends data directly to your Home Assistant instance. It has no analytics, no telemetry and no cloud service. The webhook URL and shared secret are stored in the iOS Keychain.")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }
