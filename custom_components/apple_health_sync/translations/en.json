@@ -1,0 +1,46 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add an Apple Health device",
+        "description": "Create a private webhook for one iPhone or iPad. The iOS app will POST Apple Health data to it.\n\nThere are {metric_count} built-in metrics. Leave the allow-list empty to expose all of them.",
+        "data": {
+          "name": "Device name",
+          "secret": "Shared secret (optional)",
+          "metrics": "Metric allow-list"
+        },
+        "data_description": {
+          "name": "Used as the Home Assistant device name, for example \"Simon's iPhone\".",
+          "secret": "If set, the app must send the same value in the X-Webhook-Secret header.",
+          "metrics": "Only these metrics become entities. Leave empty to enable all built-in metrics. Unknown metrics are always exposed as generic sensors."
+        }
+      },
+      "webhook": {
+        "title": "Webhook ready",
+        "description": "Copy these values into the iOS app. The webhook URL is a credential: anyone who has it can send data to this Home Assistant instance.\n\n**Webhook URL**\n\n`{webhook_url}`\n\n**Shared secret**\n\n`{secret}`\n\nIf the URL above is only a path, prepend your Home Assistant base URL. Select **Submit** when you have copied the values."
+      }
+    },
+    "error": {
+      "name_required": "A device name is required."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Apple Health Sync options",
+        "description": "Update the shared secret or choose which of the {metric_count} built-in metrics become entities. Leave the allow-list empty to enable all of them. The webhook URL does not change.",
+        "data": {
+          "secret": "Shared secret (optional)",
+          "metrics": "Metric allow-list"
+        },
+        "data_description": {
+          "secret": "If set, the app must send the same value in the X-Webhook-Secret header.",
+          "metrics": "Only these metrics become entities. Leave empty to enable all built-in metrics. Unknown metrics are always exposed as generic sensors."
+        }
+      }
+    },
+    "abort": {
+      "unknown_entry": "This config entry could not be found."
+    }
+  }
+}
