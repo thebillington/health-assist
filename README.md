@@ -24,7 +24,7 @@ between them.
 
 ## Requirements
 
-- Home Assistant 2024.1 or newer (tested against 2026.2).
+- Home Assistant 2024.1 or newer (tested against 2026.2 and 2026.10).
 - HACS (recommended) or manual installation.
 - iOS 18 or newer and Xcode 16 or newer to build the app.
 - An HTTPS-reachable Home Assistant URL if the phone is not on the same LAN.
@@ -90,6 +90,8 @@ after saving; sensors return after the app's next sync.
 The companion app lives in [`ios/`](ios/) and is built from this same
 repository.
 
+![Apple Health Sync iOS app](docs/images/app.png)
+
 1. Open `ios/AppleHealthSync.xcodeproj` in Xcode.
 2. Select the `AppleHealthSync` scheme and an iPhone simulator or device.
 3. For a physical device, choose your development team under **Signing &
@@ -107,6 +109,11 @@ basal metabolic rate. The server still supports those sensors for other data
 sources; the app sends basal energy burned as the generic
 `basal_energy_burned` metric instead. Background delivery, workouts and ECG are
 not in v1.
+
+The app has been run in the iOS 27.2 simulator and verified end-to-end against
+Home Assistant 2026.10.4: the test payload created the weight, body fat, steps,
+heart rate, sleep total and generic blood-glucose sensors with the expected
+units. Real HealthKit data still requires a physical iPhone.
 
 See [`ios/README.md`](ios/README.md) for the full app notes, limitations and
 signing instructions.

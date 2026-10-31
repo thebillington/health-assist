@@ -23,6 +23,6 @@ xcodebuild \
   build
 
 xcrun simctl boot "${DEVICE}" 2>/dev/null || true
-open -a Simulator
+open -a Simulator 2>/dev/null || open -a DeviceHub 2>/dev/null || true
 xcrun simctl install "${DEVICE}" "${APP}"
 xcrun simctl launch "${DEVICE}" uk.rebecchi.applehealthsync

@@ -17,3 +17,6 @@ ios/*.xcodeproj/project.xcworkspace/xcuserdata/
 ios/DerivedData/
 DerivedData/
 *.xcuserstate
+
+# Local Home Assistant end-to-end test config
+.ha-test/

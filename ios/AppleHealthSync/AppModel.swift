@@ -21,16 +21,23 @@ final class AppModel: ObservableObject {
     private let health = HealthKitManager()
     private let client = WebhookClient()
     private var lastAutoSync: Date?
+    private let autoTestPayload: Bool
+    private let environmentOverrides: Bool
 
     init(settings: SettingsStore = SettingsStore()) {
+        let environment = ProcessInfo.processInfo.environment
         self.settings = settings
-        self.webhookURL = settings.webhookURL
-        self.secret = settings.secret
+        self.webhookURL = environment["AHS_WEBHOOK_URL"] ?? settings.webhookURL
+        self.secret = environment["AHS_SECRET"] ?? settings.secret
         self.includeExtras = settings.includeExtras
         self.syncOnOpen = settings.syncOnOpen
+        self.autoTestPayload = environment["AHS_AUTO_TEST_PAYLOAD"] == "1"
+        self.environmentOverrides = environment["AHS_WEBHOOK_URL"] != nil
+            || environment["AHS_SECRET"] != nil
     }
 
     func saveSettings() {
+        guard !environmentOverrides else { return }
         settings.webhookURL = webhookURL
         settings.secret = secret
         settings.includeExtras = includeExtras
@@ -38,11 +45,22 @@ final class AppModel: ObservableObject {
     }
 
     func prepare() async {
+        if autoTestPayload {
+            healthStatus = "Simulator test mode"
+            await sendTestPayload()
+            return
+        }
+
         await refreshHealthStatus()
         await syncOnLaunchIfNeeded()
     }
 
     func refreshHealthStatus() async {
+        #if targetEnvironment(simulator)
+        healthStatus = "Simulator (test payload only)"
+        return
+        #endif
+
         guard health.isAvailable else {
             healthStatus = "Unavailable"
             return
@@ -62,6 +80,11 @@ final class AppModel: ObservableObject {
     }
 
     func requestHealthAccess() async {
+        #if targetEnvironment(simulator)
+        statusMessage = "HealthKit access is only available on a physical iPhone. Use Send a Test Payload in the simulator."
+        return
+        #endif
+
         guard !isRequestingAccess else { return }
         isRequestingAccess = true
         defer { isRequestingAccess = false }
@@ -76,6 +99,10 @@ final class AppModel: ObservableObject {
     }
 
     func syncOnLaunchIfNeeded() async {
+        #if targetEnvironment(simulator)
+        return
+        #endif
+
         guard syncOnOpen, !isSyncing else { return }
         guard !webhookURL.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             return
@@ -94,6 +121,11 @@ final class AppModel: ObservableObject {
     }
 
     func sync() async {
+        #if targetEnvironment(simulator)
+        statusMessage = "HealthKit sync is only available on a physical iPhone. Use Send a Test Payload in the simulator."
+        return
+        #endif
+
         guard !isSyncing else { return }
         saveSettings()
 

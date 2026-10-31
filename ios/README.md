@@ -121,9 +121,20 @@ swift test --package-path ios/AppleHealthSyncCore \
   -Xlinker -rpath -Xlinker "$LIB"
 ```
 
-In the simulator, HealthKit may be unavailable or contain no data. Use **Send a
+In the simulator, HealthKit is intentionally disabled by the app; use **Send a
 Test Payload** to verify the URL, secret, network route, and Home Assistant
-entities without needing HealthKit.
+entities without needing HealthKit. For repeatable automated checks, launch the
+app with these environment variables through `simctl`:
+
+```bash
+SIMCTL_CHILD_AHS_WEBHOOK_URL="http://127.0.0.1:8124/api/webhook/<id>" \
+SIMCTL_CHILD_AHS_SECRET="<secret>" \
+SIMCTL_CHILD_AHS_AUTO_TEST_PAYLOAD="1" \
+xcrun simctl launch "iPhone 18 Pro" uk.rebecchi.applehealthsync
+```
+
+This sends the test payload automatically on launch and is useful for CI or
+end-to-end checks.
 
 ## Known limitations
 
