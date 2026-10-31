@@ -8,7 +8,8 @@ webhook contract to your Home Assistant instance.
 - Read-only HealthKit access; the app never writes health data.
 - No analytics, no telemetry, no cloud service.
 - Webhook URL and shared secret stored in the iOS Keychain.
-- Manual sync plus optional sync when the app opens.
+- Manual sync, optional sync when the app opens, HealthKit background
+  delivery, and a weekly background fallback.
 - "Send a Test Payload" works without HealthKit, including in the iOS
   Simulator.
 
@@ -61,6 +62,35 @@ If the app is on the same LAN, an `http://homeassistant.local:8123/...` or
 `http://192.168.x.x:8123/...` URL works. `NSAllowsLocalNetworking` is enabled
 for local HTTP. For remote access, use HTTPS (Nabu Casa Cloud, a reverse proxy,
 or a VPN).
+
+## Background sync
+
+The app uses two best-effort mechanisms on a physical iPhone:
+
+- **HealthKit background delivery** — observer queries for the enabled metric
+  types, delivered at an hourly frequency. When new Health data arrives, iOS
+  wakes the app and it sends a normal webhook payload.
+- **Weekly BGTaskScheduler fallback** — an app refresh task with an earliest
+  begin date seven days out, re-queued after every run. This catches weeks
+  where no HealthKit observer fired.
+
+iOS treats both as suggestions, not guaranteed schedules. The weekly task may
+run later than seven days, or not at all if the phone is idle, low on power, or
+the app was force-quit. Opened the app recently? It resets the weekly timer,
+but it also syncs, so that is normally fine.
+
+Background delivery requires the **HealthKit** capability with **Background
+Delivery** enabled, plus the `fetch` background mode. Those are already in
+`AppleHealthSync.entitlements` and `Info.plist`. If you use automatic signing
+and Xcode cannot provision the background-delivery entitlement, enable the
+capability under **Signing & Capabilities** for your team.
+
+To debug the weekly task from Xcode while the app is running, pause execution
+and use:
+
+```text
+e -l objc -- (void)[[BGTaskScheduler sharedScheduler] _simulateLaunchForTaskWithIdentifier:@"uk.rebecchi.applehealthsync.weekly-sync"]
+```
 
 ## What is read
 
@@ -138,8 +168,11 @@ end-to-end checks.
 
 ## Known limitations
 
-- No background delivery yet. The app syncs manually or when opened
-  (`Sync when the app opens`).
+- Background execution is not an exact schedule; iOS may defer the weekly task
+  and coalesce HealthKit delivery. Force-quitting the app stops background work
+  until it is opened again.
+- Background delivery needs a physical iPhone. The simulator uses the test
+  payload path instead.
 - Only the latest sample is sent for point-in-time metrics; activity totals are
   today's cumulative totals.
 - Workouts, ECG, clinical records, symptoms and other category/event data are

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import plistlib
 import re
 from pathlib import Path
 
@@ -11,6 +12,9 @@ IOS_CATALOG = (
     Path(__file__).resolve().parents[1] / "ios" / "AppleHealthSync" / "MetricCatalog.swift"
 )
 IOS_HEALTH_MANAGER = IOS_CATALOG.with_name("HealthKitManager.swift")
+IOS_BACKGROUND_MANAGER = IOS_CATALOG.with_name("BackgroundSyncManager.swift")
+IOS_INFO = IOS_CATALOG.with_name("Info.plist")
+IOS_ENTITLEMENTS = IOS_CATALOG.with_name("AppleHealthSync.entitlements")
 
 # HealthKit does not expose identifiers for these Apple Health concepts.
 # They remain supported by the server for data from other sources.
@@ -66,3 +70,19 @@ def test_ios_catalog_keys_are_slug_safe() -> None:
     """Catalog keys can be used directly as Home Assistant metric keys."""
     for key in canonical_keys():
         assert re.fullmatch(r"[a-z0-9_]+", key), key
+
+
+def test_ios_background_sync_configuration() -> None:
+    """Background delivery and the weekly task are wired consistently."""
+    info = plistlib.loads(IOS_INFO.read_bytes())
+    entitlements = plistlib.loads(IOS_ENTITLEMENTS.read_bytes())
+    source = IOS_BACKGROUND_MANAGER.read_text(encoding="utf-8")
+
+    identifier_match = re.search(r'weeklyTaskIdentifier\s*=\s*"([^"]+)"', source)
+    assert identifier_match is not None
+    identifier = identifier_match.group(1)
+
+    assert "fetch" in info["UIBackgroundModes"]
+    assert identifier in info["BGTaskSchedulerPermittedIdentifiers"]
+    assert entitlements["com.apple.developer.healthkit"] is True
+    assert entitlements["com.apple.developer.healthkit.background-delivery"] is True

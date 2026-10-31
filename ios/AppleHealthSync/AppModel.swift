@@ -15,6 +15,7 @@ final class AppModel: ObservableObject {
     @Published private(set) var isSyncing = false
     @Published private(set) var isRequestingAccess = false
     @Published private(set) var lastSync: Date?
+    @Published private(set) var lastBackgroundSync: Date?
     @Published private(set) var readings: [MetricReading] = []
 
     private let settings: SettingsStore
@@ -34,6 +35,7 @@ final class AppModel: ObservableObject {
         self.autoTestPayload = environment["AHS_AUTO_TEST_PAYLOAD"] == "1"
         self.environmentOverrides = environment["AHS_WEBHOOK_URL"] != nil
             || environment["AHS_SECRET"] != nil
+        self.lastBackgroundSync = settings.lastBackgroundSync
     }
 
     func saveSettings() {
@@ -45,6 +47,9 @@ final class AppModel: ObservableObject {
     }
 
     func prepare() async {
+        BackgroundSyncManager.shared.start(includeExtras: includeExtras)
+        refreshBackgroundSyncDate()
+
         if autoTestPayload {
             healthStatus = "Simulator test mode"
             await sendTestPayload()
@@ -91,11 +96,20 @@ final class AppModel: ObservableObject {
 
         do {
             try await health.requestAuthorization(includeExtras: includeExtras)
+            BackgroundSyncManager.shared.start(includeExtras: includeExtras, force: true)
             await refreshHealthStatus()
             statusMessage = "Health access updated. Tap Sync Now to send data."
         } catch {
             statusMessage = error.localizedDescription
         }
+    }
+
+    func updateBackgroundDelivery() {
+        BackgroundSyncManager.shared.start(includeExtras: includeExtras, force: true)
+    }
+
+    func refreshBackgroundSyncDate() {
+        lastBackgroundSync = settings.lastBackgroundSync
     }
 
     func syncOnLaunchIfNeeded() async {

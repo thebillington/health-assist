@@ -59,6 +59,10 @@ targets:
           - UIInterfaceOrientationPortraitUpsideDown
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
+        UIBackgroundModes:
+          - fetch
+        BGTaskSchedulerPermittedIdentifiers:
+          - uk.rebecchi.applehealthsync.weekly-sync
         NSHealthShareUsageDescription: "Apple Health Sync reads your health data so it can send it to your Home Assistant instance."
         NSAppTransportSecurity:
           NSAllowsLocalNetworking: true
@@ -66,6 +70,7 @@ targets:
       path: AppleHealthSync/AppleHealthSync.entitlements
       properties:
         com.apple.developer.healthkit: true
+        com.apple.developer.healthkit.background-delivery: true
 
 schemes:
   AppleHealthSync:

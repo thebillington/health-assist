@@ -77,7 +77,7 @@ struct ContentView: View {
                     } header: {
                         Text("Sync")
                     } footer: {
-                        Text("The test payload uses fixed sample values and works without HealthKit, including in the iOS simulator.")
+                        Text("The test payload uses fixed sample values and works without HealthKit, including in the iOS simulator. On a physical iPhone, HealthKit background delivery syncs hourly and a weekly fallback is scheduled when iOS allows it.")
                     }
 
                     Section {
@@ -91,6 +91,16 @@ struct ContentView: View {
                                 Text("Last successful sync")
                                 Spacer()
                                 Text(lastSync, format: .dateTime.day().month().year().hour().minute())
+                                    .foregroundStyle(.secondary)
+                            }
+                            .font(.footnote)
+                        }
+
+                        if let lastBackgroundSync = model.lastBackgroundSync {
+                            HStack {
+                                Text("Last background sync")
+                                Spacer()
+                                Text(lastBackgroundSync, format: .dateTime.day().month().year().hour().minute())
                                     .foregroundStyle(.secondary)
                             }
                             .font(.footnote)
@@ -143,6 +153,7 @@ struct ContentView: View {
                 .onChange(of: model.syncOnOpen) { _, _ in model.saveSettings() }
                 .onChange(of: model.includeExtras) { _, _ in
                     model.saveSettings()
+                    model.updateBackgroundDelivery()
                     Task { await model.refreshHealthStatus() }
                 }
                 .onChange(of: model.lastSync) { _, newValue in
@@ -154,6 +165,7 @@ struct ContentView: View {
                 .task { await model.prepare() }
                 .onChange(of: scenePhase) { _, newPhase in
                     if newPhase == .active {
+                        model.refreshBackgroundSyncDate()
                         Task { await model.syncOnLaunchIfNeeded() }
                     }
                 }

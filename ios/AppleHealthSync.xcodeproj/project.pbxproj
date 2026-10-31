@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1396E285564878D373193D64 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919229651F0A31A69D86409B /* AppModel.swift */; };
 		226E3313E0898B77511784C2 /* MetricCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEF046FD33DBD2446A5ED7B /* MetricCatalog.swift */; };
+		2786662E89CA9A1B846F59D5 /* BackgroundSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56ABD3DF808CACC73F334AF /* BackgroundSyncManager.swift */; };
 		2ABC034BE27916006E1A85B5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8B17068792A82D822CE96A /* ContentView.swift */; };
 		5A003487B906DE2C6D2E53E5 /* AppleHealthSyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6775F6A8407F78A02CB3FBA1 /* AppleHealthSyncApp.swift */; };
 		7CD038BF8565089C51B12588 /* WebhookClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9FDD628532CBEBDBB0288E /* WebhookClient.swift */; };
@@ -30,6 +31,7 @@
 		919229651F0A31A69D86409B /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		A4A59D0C0E9F605C9C68D044 /* AppleHealthSync.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = AppleHealthSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB1E7F71C30CAB8B753CC958 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B56ABD3DF808CACC73F334AF /* BackgroundSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSyncManager.swift; sourceTree = "<group>"; };
 		BB8B17068792A82D822CE96A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -52,6 +54,7 @@
 				6775F6A8407F78A02CB3FBA1 /* AppleHealthSyncApp.swift */,
 				919229651F0A31A69D86409B /* AppModel.swift */,
 				AB1E7F71C30CAB8B753CC958 /* Assets.xcassets */,
+				B56ABD3DF808CACC73F334AF /* BackgroundSyncManager.swift */,
 				BB8B17068792A82D822CE96A /* ContentView.swift */,
 				5BBCFC61B99B3FA208A4563F /* HealthKitManager.swift */,
 				208F175C8471F788197F6AFD /* Info.plist */,
@@ -164,6 +167,7 @@
 			files = (
 				1396E285564878D373193D64 /* AppModel.swift in Sources */,
 				5A003487B906DE2C6D2E53E5 /* AppleHealthSyncApp.swift in Sources */,
+				2786662E89CA9A1B846F59D5 /* BackgroundSyncManager.swift in Sources */,
 				2ABC034BE27916006E1A85B5 /* ContentView.swift in Sources */,
 				EF96FE400441AC9C394DD024 /* HealthKitManager.swift in Sources */,
 				226E3313E0898B77511784C2 /* MetricCatalog.swift in Sources */,

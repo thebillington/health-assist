@@ -7,6 +7,7 @@ final class SettingsStore {
     private let includeExtrasKey = "includeExtras"
     private let syncOnOpenKey = "syncOnOpen"
     private let deviceIDKey = "deviceID"
+    private let lastBackgroundSyncKey = "lastBackgroundSync"
 
     private let keychainService = "uk.rebecchi.applehealthsync"
     private let urlAccount = "webhook-url"
@@ -25,6 +26,11 @@ final class SettingsStore {
     var syncOnOpen: Bool {
         get { defaults.object(forKey: syncOnOpenKey) as? Bool ?? true }
         set { defaults.set(newValue, forKey: syncOnOpenKey) }
+    }
+
+    var lastBackgroundSync: Date? {
+        get { defaults.object(forKey: lastBackgroundSyncKey) as? Date }
+        set { defaults.set(newValue, forKey: lastBackgroundSyncKey) }
     }
 
     var deviceID: String {

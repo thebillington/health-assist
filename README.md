@@ -99,16 +99,18 @@ repository.
 4. Run the app, paste the webhook URL and optional shared secret from Home
    Assistant, tap **Request Health Access**, then **Sync Now**.
 
-The app reads HealthKit data in the foreground, merges overlapping sleep
-samples, and sends the latest values plus today's activity totals. It also has
-a **Send a Test Payload** button that does not need HealthKit, so it can verify
-the URL, secret and network path in the iOS Simulator.
+The app merges overlapping sleep samples and sends the latest values plus
+today's activity totals. On a physical iPhone it registers HealthKit observer
+queries with hourly background delivery, and queues a weekly `BGTaskScheduler`
+fallback. iOS decides when background work actually runs, so neither path is a
+guaranteed fixed-time cron schedule. The app also has a **Send a Test Payload**
+button that does not need HealthKit, so it can verify the URL, secret and
+network path in the iOS Simulator.
 
 HealthKit does not expose identifiers for muscle mass, bone mass, body water or
 basal metabolic rate. The server still supports those sensors for other data
 sources; the app sends basal energy burned as the generic
-`basal_energy_burned` metric instead. Background delivery, workouts and ECG are
-not in v1.
+`basal_energy_burned` metric instead. Workouts and ECG are not in v1.
 
 The app has been run in the iOS 27.2 simulator and verified end-to-end against
 Home Assistant 2026.10.4: the test payload created the weight, body fat, steps,
@@ -503,7 +505,6 @@ offering updates.
 
 v1 intentionally stops at push-to-sensor. Planned for later:
 
-- HealthKit background delivery;
 - backfill / historical imports;
 - event entities for workouts, ECG and other discrete records;
 - more Apple Health categories;
