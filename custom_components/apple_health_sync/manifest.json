@@ -1,6 +1,6 @@
 {
   "domain": "apple_health_sync",
-  "name": "Apple Health Sync",
+  "name": "Health Assist",
   "after_dependencies": [
     "recorder"
   ],
@@ -11,10 +11,10 @@
   "dependencies": [
     "webhook"
   ],
-  "documentation": "https://github.com/thebillington/homeassist-apple-health-importer",
+  "documentation": "https://github.com/thebillington/health-assist",
   "integration_type": "service",
   "iot_class": "local_push",
-  "issue_tracker": "https://github.com/thebillington/homeassist-apple-health-importer/issues",
+  "issue_tracker": "https://github.com/thebillington/health-assist/issues",
   "requirements": [],
-  "version": "1.0.0"
+  "version": "1.1.0"
 }

@@ -1,4 +1,4 @@
-"""Webhook parsing and validation for Apple Health Sync."""
+"""Webhook parsing and validation for Health Assist."""
 
 from __future__ import annotations
 

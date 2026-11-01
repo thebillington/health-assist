@@ -1,4 +1,4 @@
-"""Config and options flows for Apple Health Sync."""
+"""Config and options flows for Health Assist."""
 
 from __future__ import annotations
 
@@ -72,7 +72,7 @@ def _build_schema() -> vol.Schema:
 
 
 class AppleHealthSyncConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    """Handle adding an Apple Health Sync device."""
+    """Handle adding an Health Assist device."""
 
     VERSION = 1
 

@@ -1,4 +1,4 @@
-"""Small helpers shared by the Apple Health Sync platforms."""
+"""Small helpers shared by the Health Assist platforms."""
 
 from __future__ import annotations
 

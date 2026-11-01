@@ -160,7 +160,7 @@ async def test_entity_registry_unique_id_and_device(hass: HomeAssistant) -> None
     device = dr.async_get(hass).async_get(weight_entry.device_id)
     assert device is not None
     assert device.name == "Test Phone"
-    assert device.manufacturer == "Apple Health Sync"
+    assert device.manufacturer == "Health Assist"
 
 
 async def test_two_phones_create_two_devices(hass: HomeAssistant) -> None:

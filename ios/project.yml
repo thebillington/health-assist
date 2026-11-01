@@ -11,8 +11,8 @@ settings:
   base:
     SWIFT_VERSION: "5.0"
     IPHONEOS_DEPLOYMENT_TARGET: "18.0"
-    MARKETING_VERSION: "1.0.0"
-    CURRENT_PROJECT_VERSION: "1"
+    MARKETING_VERSION: "1.1.0"
+    CURRENT_PROJECT_VERSION: "2"
     CODE_SIGN_STYLE: Automatic
     SWIFT_STRICT_CONCURRENCY: minimal
 
@@ -44,7 +44,7 @@ targets:
     info:
       path: AppleHealthSync/Info.plist
       properties:
-        CFBundleDisplayName: "Apple Health Sync"
+        CFBundleDisplayName: "Health Assist"
         CFBundleURLTypes:
           - CFBundleURLName: uk.rebecchi.applehealthsync
             CFBundleURLSchemes:
@@ -67,7 +67,7 @@ targets:
           - fetch
         BGTaskSchedulerPermittedIdentifiers:
           - uk.rebecchi.applehealthsync.weekly-sync
-        NSHealthShareUsageDescription: "Apple Health Sync reads your health data so it can send it to your Home Assistant instance."
+        NSHealthShareUsageDescription: "Health Assist reads your health data so it can send it to your Home Assistant instance."
         NSCameraUsageDescription: "Scan the Home Assistant QR code to configure the webhook URL and shared secret."
         NSAppTransportSecurity:
           NSAllowsLocalNetworking: true

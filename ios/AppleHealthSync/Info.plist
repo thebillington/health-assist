@@ -9,7 +9,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Apple Health Sync</string>
+	<string>Health Assist</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -43,7 +43,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Scan the Home Assistant QR code to configure the webhook URL and shared secret.</string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>Apple Health Sync reads your health data so it can send it to your Home Assistant instance.</string>
+	<string>Health Assist reads your health data so it can send it to your Home Assistant instance.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

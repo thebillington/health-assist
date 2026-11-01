@@ -1,4 +1,6 @@
-# Apple Health Sync
+# Health Assist
+
+[![Sponsor on GitHub](https://img.shields.io/badge/Sponsor-GitHub%20Sponsors-ea4aaa?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/thebillington)
 
 A free, open-source Home Assistant custom integration (HACS) plus a SwiftUI
 iOS companion app that reads Apple Health and pushes it over a local webhook.
@@ -17,8 +19,9 @@ This repository contains both halves of the project: the Home Assistant
 integration and the iOS app. The webhook contract below is the boundary
 between them.
 
-> **Screenshots:** add setup, device, statistics and app screenshots under
-> `docs/images/` after the first release.
+Documentation: <https://healthassist.thebillington.co.uk>.
+
+Screenshots and generated assets live under `docs/images/`.
 
 ---
 
@@ -39,11 +42,10 @@ This integration is not in the default HACS store yet.
 
 1. Open **HACS → Integrations**.
 2. Select the three-dot menu → **Custom repositories**.
-3. Add `https://github.com/thebillington/homeassist-apple-health-importer`
+3. Add `https://github.com/thebillington/health-assist`
    with category **Integration**.
-4. Search for **Apple Health Sync**, install it, and restart Home Assistant.
-5. Go to **Settings → Devices & services → Add integration → Apple Health
-   Sync**.
+4. Search for **Health Assist**, install it, and restart Home Assistant.
+5. Go to **Settings → Devices & services → Add integration → Health Assist**.
 
 ### Manual installation
 
@@ -96,14 +98,14 @@ reloads after saving; sensors return after the app's next sync.
 The companion app lives in [`ios/`](ios/) and is built from this same
 repository.
 
-![Apple Health Sync iOS app](docs/images/app.png)
+![Health Assist iOS app](docs/images/app.png)
 
 1. Open `ios/AppleHealthSync.xcodeproj` in Xcode.
 2. Select the `AppleHealthSync` scheme and an iPhone simulator or device.
 3. For a physical device, choose your development team under **Signing &
    Capabilities** and change the bundle identifier if needed.
-4. Run the app, paste the webhook URL and optional shared secret from Home
-   Assistant, tap **Request Health Access**, then **Sync Now**.
+4. Run the app, tap **Scan QR Code** under **Home Assistant**, or paste the
+   webhook URL and secret, then tap **Request Health Access** and **Sync Now**.
 
 The app merges overlapping sleep samples and sends the latest values plus
 today's activity totals. On a physical iPhone it registers HealthKit observer
@@ -373,7 +375,7 @@ sync is far below the limit.
   unknown metric).
 - Entity creation happens on the first accepted payload, not when the entry is
   added.
-- Check **Settings → Devices & services → Apple Health Sync** and open the
+- Check **Settings → Devices & services → Health Assist** and open the
   device to see whether entities exist.
 - Enable debug logging:
 
@@ -547,6 +549,11 @@ v1 intentionally stops at push-to-sensor. Planned for later:
 - more Apple Health categories;
 - default HACS store listing;
 - App Store/TestFlight packaging for the iOS app.
+
+## Support
+
+This project is free and open source. If it saves you time, you can support
+ongoing maintenance through [GitHub Sponsors](https://github.com/sponsors/thebillington).
 
 ## License
 

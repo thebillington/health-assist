@@ -1,0 +1,66 @@
+site_name: Health Assist
+site_description: Apple Health to Home Assistant — a free, local-first integration and iOS app.
+site_url: https://healthassist.thebillington.co.uk/
+repo_url: https://github.com/thebillington/health-assist
+repo_name: thebillington/health-assist
+edit_uri: edit/main/docs/
+copyright: MIT licensed. Apple Health is a trademark of Apple Inc. Health Assist is not affiliated with Apple.
+
+theme:
+  name: material
+  language: en
+  logo: images/icon-192.png
+  favicon: images/icon-192.png
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - content.code.copy
+    - search.suggest
+    - search.highlight
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+nav:
+  - Home: index.md
+  - Install: install.md
+  - Setup: setup.md
+  - Webhook contract: webhook.md
+  - History and statistics: history.md
+  - iOS app: ios.md
+  - Security: security.md
+  - Troubleshooting: troubleshooting.md
+  - Gotchas: gotchas.md
+  - Development: development.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+
+strict: true

@@ -1,4 +1,4 @@
-"""Constants and the metric registry for Apple Health Sync."""
+"""Constants and the metric registry for Health Assist."""
 
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ CONF_QR_CODE: Final = "qr_code"
 CONF_WEBHOOK_URL: Final = "webhook_url"
 
 DEFAULT_NAME: Final = "Apple Health"
-DEFAULT_TITLE: Final = "Apple Health Sync"
+DEFAULT_TITLE: Final = "Health Assist"
 
 SECRET_HEADER: Final = "X-Webhook-Secret"
 
@@ -27,7 +27,7 @@ MAX_METRIC_KEY_LENGTH: Final = 64
 MAX_TEXT_LENGTH: Final = 128
 MAX_UNIT_LENGTH: Final = 32
 
-MANUFACTURER: Final = "Apple Health Sync"
+MANUFACTURER: Final = "Health Assist"
 MODEL: Final = "iOS App"
 
 

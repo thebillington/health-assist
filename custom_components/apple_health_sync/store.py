@@ -1,4 +1,4 @@
-"""In-memory data store for a single Apple Health Sync config entry."""
+"""In-memory data store for a single Health Assist config entry."""
 
 from __future__ import annotations
 

@@ -1,6 +1,6 @@
-# Apple Health Sync for iOS
+# Health Assist for iOS
 
-The companion iOS app for the [Apple Health Sync Home Assistant
+The companion iOS app for the [Health Assist Home Assistant
 integration](../README.md). It reads Apple Health with HealthKit and POSTs the
 webhook contract to your Home Assistant instance.
 
@@ -54,7 +54,7 @@ are intentionally left to whoever builds it.
 
 ## Configure
 
-1. In Home Assistant, add the **Apple Health Sync** integration. Copy the
+1. In Home Assistant, add the **Health Assist** integration. Copy the
    webhook URL and optional shared secret.
 2. In the app, paste the URL and secret in the **Home Assistant** section.
 3. Tap **Request Health Access** and grant read access.
@@ -97,7 +97,7 @@ applehealthsync://configure?url=<webhook URL>&secret=<shared secret>
 ```
 
 Scan it with the app's **Scan QR Code** button (under Home Assistant), or with
-the iPhone Camera; iOS opens **Apple Health Sync** and imports the URL and
+the iPhone Camera; iOS opens **Health Assist** and imports the URL and
 secret. If the app already has a URL or secret, it asks for confirmation before
 replacing them. The in-app scanner uses the rear camera and requires camera
 permission. The QR reflects the saved secret, so save and reopen Configure after
@@ -223,4 +223,4 @@ end-to-end checks.
   not sent in this version.
 - HealthKit read authorization is intentionally opaque: iOS does not tell apps
   which read types were granted. If values are missing, check **Settings →
-  Privacy & Security → Health → Apple Health Sync**.
+  Privacy & Security → Health → Health Assist**.

@@ -20,3 +20,6 @@ DerivedData/
 
 # Local Home Assistant end-to-end test config
 .ha-test/
+
+# MkDocs output
+site/
