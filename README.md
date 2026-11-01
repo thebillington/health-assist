@@ -57,9 +57,10 @@ Copy `custom_components/apple_health_sync` into your Home Assistant
    the `X-Webhook-Secret` header.
 3. Choose which metrics should become entities. Leave the allow-list empty to
    enable every built-in metric.
-4. Select **Submit**. The next screen shows the full webhook URL and the shared
-   secret. Copy both into the iOS app.
-5. Trigger a sync in the app. Sensors appear within a few seconds.
+4. Select **Submit**. The next screen shows the full webhook URL, the shared
+   secret and a QR code.
+5. Scan the QR code with the iPhone Camera, or copy the URL and secret into the
+   app manually. Trigger a sync. Sensors appear within a few seconds.
 
 The webhook URL looks like:
 
@@ -76,8 +77,11 @@ device and set of entities.
 ### Changing settings later
 
 Open the integration entry → **Configure**. You can change the shared secret
-and the metric allow-list without changing the webhook URL. The entry reloads
-after saving; sensors return after the app's next sync.
+and the metric allow-list without changing the webhook URL. The dialog also
+shows a QR code containing the current URL and secret; scan it with the iPhone
+Camera to reconfigure the app. Save and reopen the dialog after changing the
+secret to refresh the QR. The entry reloads after saving; sensors return after
+the app's next sync.
 
 > Removing a metric from the allow-list stops new values from being accepted,
 > but Home Assistant may keep the old entity registry entry. Delete it manually
@@ -330,6 +334,8 @@ and confirm the entity has a numeric state with a state class.
   want LAN-only delivery, restrict `/api/webhook/` at your reverse proxy.
 - The shared secret is stored in the Home Assistant config entry (in
   `.storage`) like other integration credentials. Protect backups accordingly.
+- The QR code in Configure contains both the webhook URL and the secret. Treat
+  a screenshot of it like a password.
 - Diagnostics redact the webhook ID, shared secret, device identifiers and all
   metric values. Metric keys, units and timestamps remain visible.
 - There are no outbound network calls and no telemetry.

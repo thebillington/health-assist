@@ -167,6 +167,9 @@ struct ContentView: View {
                         proxy.scrollTo("result", anchor: .top)
                     }
                 }
+                .onOpenURL { url in
+                    model.importConfiguration(from: url)
+                }
                 .task { await model.prepare() }
                 .onChange(of: scenePhase) { _, newPhase in
                     if newPhase == .active {

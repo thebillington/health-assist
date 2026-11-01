@@ -17,7 +17,13 @@
       },
       "webhook": {
         "title": "Webhook ready",
-        "description": "Copy these values into the iOS app. The webhook URL is a credential: anyone who has it can send data to this Home Assistant instance.\n\n**Webhook URL**\n\n`{webhook_url}`\n\n**Shared secret**\n\n`{secret}`\n\nIf the URL above is only a path, prepend your Home Assistant base URL. Select **Submit** when you have copied the values."
+        "description": "Copy these values into the iOS app. The webhook URL is a credential: anyone who has it can send data to this Home Assistant instance.\n\n**Webhook URL**\n\n`{webhook_url}`\n\n**Shared secret**\n\n`{secret}`\n\nIf the URL above is only a path, prepend your Home Assistant base URL. Select **Submit** when you have copied the values.\n\n**Scan with the iOS app**\n\nThe QR code below contains the webhook URL and shared secret. Scan it with the iPhone Camera to populate the app automatically.",
+        "data": {
+          "qr_code": "Apple Health Sync QR code"
+        },
+        "data_description": {
+          "qr_code": "Scan this with the iPhone Camera. It contains the webhook URL and secret."
+        }
       }
     },
     "error": {
@@ -28,14 +34,16 @@
     "step": {
       "init": {
         "title": "Apple Health Sync options",
-        "description": "Update the shared secret or choose which of the {metric_count} built-in metrics become entities. Leave the allow-list empty to enable all of them. The webhook URL does not change.",
+        "description": "Update the shared secret or choose which of the {metric_count} built-in metrics become entities. Leave the allow-list empty to enable all of them. The webhook URL does not change.\n\nScan the QR code with the iPhone Camera to import the webhook URL and shared secret into the app.",
         "data": {
           "secret": "Shared secret (optional)",
-          "metrics": "Metric allow-list"
+          "metrics": "Metric allow-list",
+          "qr_code": "Apple Health Sync QR code"
         },
         "data_description": {
           "secret": "If set, the app must send the same value in the X-Webhook-Secret header.",
-          "metrics": "Only these metrics become entities. Leave empty to enable all built-in metrics. Unknown metrics are always exposed as generic sensors."
+          "metrics": "Only these metrics become entities. Leave empty to enable all built-in metrics. Unknown metrics are always exposed as generic sensors.",
+          "qr_code": "Scan this with the iPhone Camera. It reflects the saved secret; save and reopen after changing the secret."
         }
       }
     },

@@ -226,6 +226,31 @@ final class AppModel: ObservableObject {
         await sync(forceFullHistory: true)
     }
 
+    /// Handle `applehealthsync://configure?url=...&secret=...` from a QR code.
+    func importConfiguration(from url: URL) {
+        guard url.scheme?.lowercased() == "applehealthsync",
+              url.host?.lowercased() == "configure",
+              let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+              let queryItems = components.queryItems else {
+            statusMessage = "That link was not an Apple Health Sync configuration code."
+            return
+        }
+
+        let values = Dictionary(
+            uniqueKeysWithValues: queryItems.map { ($0.name, $0.value ?? "") }
+        )
+        guard let rawURL = values["url"],
+              WebhookClient.validateURL(rawURL) != nil else {
+            statusMessage = "The QR code did not contain a valid webhook URL."
+            return
+        }
+
+        webhookURL = rawURL
+        secret = values["secret"] ?? ""
+        saveSettings()
+        statusMessage = "Imported the webhook URL and secret from the QR code. Tap Request Health Access, then Sync Now."
+    }
+
     /// Send deterministic sample values. This works without HealthKit, which
     /// makes it useful for testing the integration from the iOS simulator.
     func sendTestPayload() async {

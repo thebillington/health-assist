@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Any
+from urllib.parse import urlencode
 
 import voluptuous as vol
 from homeassistant import config_entries
@@ -13,8 +14,19 @@ from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers import selector
 from homeassistant.helpers.network import NoURLAvailableError
 
+try:  # QrCodeSelector was added after the integration's HA 2024.1 floor.
+    from homeassistant.helpers.selector import (
+        QrCodeSelector,
+        QrCodeSelectorConfig,
+    )
+
+    QR_CODE_AVAILABLE = True
+except ImportError:
+    QR_CODE_AVAILABLE = False
+
 from .const import (
     CONF_METRICS,
+    CONF_QR_CODE,
     CONF_SECRET,
     CONF_WEBHOOK_ID,
     DEFAULT_NAME,
@@ -22,6 +34,24 @@ from .const import (
     METRIC_NAMES,
 )
 from .helpers import get_entry_metrics, get_entry_secret
+
+
+def _build_webhook_url(hass, webhook_id: str) -> str:
+    """Return the full webhook URL, or the path if HA cannot detect a URL."""
+    try:
+        return ha_webhook.async_generate_url(hass, webhook_id)
+    except NoURLAvailableError:
+        return ha_webhook.async_generate_path(webhook_id)
+
+
+def _qr_field(webhook_url: str, secret: str) -> dict:
+    """Return a display-only QR selector field when supported by this HA."""
+    if not QR_CODE_AVAILABLE or not webhook_url.startswith(("http://", "https://")):
+        return {}
+
+    query = urlencode({"url": webhook_url, "secret": secret})
+    data = f"applehealthsync://configure?{query}"
+    return {vol.Optional(CONF_QR_CODE): QrCodeSelector(QrCodeSelectorConfig(data=data, scale=6))}
 
 
 def _build_schema() -> vol.Schema:
@@ -83,18 +113,15 @@ class AppleHealthSyncConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             )
 
         webhook_id = self._pending_data[CONF_WEBHOOK_ID]
-        try:
-            webhook_url = ha_webhook.async_generate_url(self.hass, webhook_id)
-        except NoURLAvailableError:
-            # The URL cannot always be detected (for example in a fresh test
-            # instance). The path is still enough to finish setup later.
-            webhook_url = ha_webhook.async_generate_path(webhook_id)
+        webhook_url = _build_webhook_url(self.hass, webhook_id)
+        secret = self._pending_data[CONF_SECRET]
 
         return self.async_show_form(
             step_id="webhook",
+            data_schema=vol.Schema(_qr_field(webhook_url, secret)),
             description_placeholders={
                 "webhook_url": webhook_url,
-                "secret": self._pending_data[CONF_SECRET] or "Not set",
+                "secret": secret or "Not set",
             },
         )
 
@@ -127,21 +154,23 @@ class AppleHealthSyncOptionsFlow(config_entries.OptionsFlow):
                 },
             )
 
+        secret = get_entry_secret(entry)
+        schema: dict = {
+            vol.Optional(CONF_SECRET, default=secret): selector.TextSelector(
+                selector.TextSelectorConfig(
+                    type=selector.TextSelectorType.PASSWORD,
+                )
+            ),
+            vol.Optional(CONF_METRICS, default=get_entry_metrics(entry)): cv.multi_select(
+                METRIC_NAMES
+            ),
+        }
+        webhook_id = entry.data.get(CONF_WEBHOOK_ID)
+        if webhook_id is not None:
+            schema.update(_qr_field(_build_webhook_url(self.hass, str(webhook_id)), secret))
+
         return self.async_show_form(
             step_id="init",
-            data_schema=vol.Schema(
-                {
-                    vol.Optional(
-                        CONF_SECRET, default=get_entry_secret(entry)
-                    ): selector.TextSelector(
-                        selector.TextSelectorConfig(
-                            type=selector.TextSelectorType.PASSWORD,
-                        )
-                    ),
-                    vol.Optional(CONF_METRICS, default=get_entry_metrics(entry)): cv.multi_select(
-                        METRIC_NAMES
-                    ),
-                }
-            ),
+            data_schema=vol.Schema(schema),
             description_placeholders={"metric_count": str(len(METRIC_NAMES))},
         )

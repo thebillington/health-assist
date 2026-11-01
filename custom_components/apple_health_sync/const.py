@@ -12,6 +12,7 @@ DOMAIN: Final = "apple_health_sync"
 CONF_WEBHOOK_ID: Final = "webhook_id"
 CONF_SECRET: Final = "secret"
 CONF_METRICS: Final = "metrics"
+CONF_QR_CODE: Final = "qr_code"
 
 DEFAULT_NAME: Final = "Apple Health"
 DEFAULT_TITLE: Final = "Apple Health Sync"

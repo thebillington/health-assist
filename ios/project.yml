@@ -45,6 +45,10 @@ targets:
       path: AppleHealthSync/Info.plist
       properties:
         CFBundleDisplayName: "Apple Health Sync"
+        CFBundleURLTypes:
+          - CFBundleURLName: uk.rebecchi.applehealthsync
+            CFBundleURLSchemes:
+              - applehealthsync
         CFBundleShortVersionString: "$(MARKETING_VERSION)"
         CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
         UILaunchScreen: {}

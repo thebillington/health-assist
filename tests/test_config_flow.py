@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from urllib.parse import parse_qs, urlparse
+
 from homeassistant import config_entries
 from homeassistant.const import CONF_NAME
 from homeassistant.core import HomeAssistant
@@ -16,6 +18,14 @@ from custom_components.apple_health_sync.const import (
 )
 
 from .helpers import TEST_SECRET, TEST_WEBHOOK_ID, make_entry, post_payload, setup_entry
+
+
+def qr_data(schema) -> str | None:
+    """Return the QR selector's encoded data from a form schema."""
+    for key, value in schema.schema.items():
+        if getattr(key, "schema", None) == "qr_code":
+            return value.config["data"]
+    return None
 
 
 async def test_user_flow_creates_entry_and_shows_url(hass: HomeAssistant) -> None:
@@ -43,6 +53,14 @@ async def test_user_flow_creates_entry_and_shows_url(hass: HomeAssistant) -> Non
     secret = result["description_placeholders"]["secret"]
     assert webhook_url.startswith("https://ha.example.com/api/webhook/")
     assert secret == "s3cret"
+
+    qr = qr_data(result["data_schema"])
+    assert qr is not None
+    parsed = urlparse(qr)
+    assert parsed.scheme == "applehealthsync"
+    assert parsed.netloc == "configure"
+    assert parse_qs(parsed.query)["url"] == [webhook_url]
+    assert parse_qs(parsed.query)["secret"] == ["s3cret"]
 
     result = await hass.config_entries.flow.async_configure(result["flow_id"], {})
     assert result["type"] is FlowResultType.CREATE_ENTRY
@@ -105,6 +123,15 @@ async def test_options_update_secret_and_allow_list(hass: HomeAssistant) -> None
     result = await hass.config_entries.options.async_init(entry.entry_id)
     assert result["type"] is FlowResultType.FORM
     assert result["step_id"] == "init"
+
+    qr = qr_data(result["data_schema"])
+    assert qr is not None
+    parsed = urlparse(qr)
+    assert parsed.scheme == "applehealthsync"
+    assert parsed.netloc == "configure"
+    query = parse_qs(parsed.query)
+    assert TEST_WEBHOOK_ID in query["url"][0]
+    assert query["secret"] == ["old"]
 
     result = await hass.config_entries.options.async_configure(
         result["flow_id"],
