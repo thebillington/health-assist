@@ -1,6 +1,6 @@
-# Support Health Sync for Home Assistant
+# Support Home Assistant Health Bridge
 
-Health Sync is free and open source. There is no paid tier, no account and no
+Health Bridge is free and open source. There is no paid tier, no account and no
 subscription.
 
 ## Support My Work
@@ -18,7 +18,7 @@ When the source repository is public, open an issue at
 Include:
 
 - the Home Assistant version;
-- the Health Sync integration version;
+- the Health Bridge integration version;
 - whether the problem happens on a manual sync, a background sync, or both;
 - the relevant Home Assistant log lines with secrets removed.
 

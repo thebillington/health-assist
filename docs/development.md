@@ -11,7 +11,7 @@ scripts/                              payload simulator
 .github/workflows/                    tests, lint, hassfest, iOS, docs
 ```
 
-The integration domain stays `apple_health_sync`; Health Sync for Home Assistant is the product
+The integration domain stays `apple_health_sync`; Home Assistant Health Bridge is the product
 name. The iOS bundle identifier is `uk.co.thebillington.applehealthsync`, and the
 app targets iPhone.
 

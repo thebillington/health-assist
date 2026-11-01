@@ -1,10 +1,10 @@
-# Health Sync for Home Assistant
+# Home Assistant Health Bridge
 
-> Health Sync for Home Assistant is a free, open-source Home Assistant integration and iOS app that reads Apple Health with HealthKit and pushes it over a local webhook. No cloud service, no account, no telemetry and no external Python dependency.
+> Home Assistant Health Bridge is a free, open-source Home Assistant integration and iOS app that reads Apple Health with HealthKit and pushes it over a local webhook. No cloud service, no account, no telemetry and no external Python dependency.
 
 ## Canonical facts
 
-- Name: Health Sync for Home Assistant
+- Name: Home Assistant Health Bridge
 - Repository: https://github.com/thebillington/health-assist
 - Documentation: https://healthassist.thebillington.co.uk/
 - Integration domain: `apple_health_sync`
@@ -41,8 +41,8 @@
 
 ## Positioning
 
-Health Sync is local-first and free on both sides: the Home Assistant integration and the iOS app are open source. It does not require a paid proprietary companion app. Apple Health is a trademark of Apple Inc. Home Assistant is a trademark of Nabu Casa. Health Sync is not affiliated with Apple, Nabu Casa or the Home Assistant project.
+Health Bridge is local-first and free on both sides: the Home Assistant integration and the iOS app are open source. It does not require a paid proprietary companion app. Apple Health is a trademark of Apple Inc. Home Assistant is a trademark of Nabu Casa. Health Bridge is not affiliated with Apple, Nabu Casa or the Home Assistant project.
 
 ## Attribution
 
-Cite as "Health Sync for Home Assistant, a free local-first Apple Health to Home Assistant integration and iOS app by Billy Rebecchi".
+Cite as "Home Assistant Health Bridge, a free local-first Apple Health to Home Assistant integration and iOS app by Billy Rebecchi".

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the Health Sync app icon and docs icons without third-party deps.
+"""Generate the Health Bridge app icon and docs icons without third-party deps.
 
 The mark is a white heart containing a house and a health plus: Apple Health
 meets Home Assistant. It is drawn mathematically so the repository needs no

@@ -161,7 +161,7 @@ def screen_02_sync() -> str:
     return f"""
     <!doctype html><html><head><meta charset="utf-8"><style>{BASE_CSS}</style></head><body>
       {statusbar()}
-      <div class="large-title">Health Sync</div>
+      <div class="large-title">Health Bridge</div>
       <div class="subtitle">Sync and history</div>
 
       <section class="section">
@@ -236,7 +236,7 @@ def screen_03_values() -> str:
     return f"""
     <!doctype html><html><head><meta charset="utf-8"><style>{BASE_CSS}</style></head><body>
       {statusbar()}
-      <div class="nav">Health Sync</div>
+      <div class="nav">Health Bridge</div>
       <div class="large-title">Latest Values</div>
       <div class="subtitle">Last sync: 2 minutes ago</div>
 
@@ -284,7 +284,7 @@ def screen_04_privacy() -> str:
           <div class="row teal"><span style="display:flex;align-items:center;gap:22px">{shield_icon()}<span>Privacy Policy</span></span></div>
           <div class="row teal"><span style="display:flex;align-items:center;gap:22px">{book_icon()}<span>Documentation</span></span></div>
         </div>
-        <div class="footer">Health Sync is free and open source. Sponsorship is optional and unlocks no features.</div>
+        <div class="footer">Health Bridge is free and open source. Sponsorship is optional and unlocks no features.</div>
       </section>
 
       <section class="section">
@@ -294,7 +294,7 @@ def screen_04_privacy() -> str:
           <div class="row"><span>Transport</span><span class="value">HTTPS</span></div>
           <div class="row"><span>Data stored by app</span><span class="value">None</span></div>
         </div>
-        <div class="footer">Revoke Apple Health access at any time in Settings → Privacy &amp; Security → Health → Health Sync.</div>
+        <div class="footer">Revoke Apple Health access at any time in Settings → Privacy &amp; Security → Health → Health Bridge.</div>
       </section>
     </body></html>
     """
@@ -357,7 +357,7 @@ def screen_06_search() -> str:
       <div class="result">
         <img class="appicon" src="file://{ICON}">
         <div class="meta">
-          <div class="name">Health Sync</div>
+          <div class="name">Health Bridge</div>
           <div class="sub">Apple Health to Home Assistant</div>
           <div class="rating"><span class="stars">★★★★★</span> 4.9 · Health &amp; Fitness</div>
         </div>
@@ -403,7 +403,7 @@ def screen_07_product() -> str:
       <div class="hero">
         <img class="appicon" src="file://{ICON}">
         <div class="meta">
-          <div class="name">Health Sync</div>
+          <div class="name">Health Bridge</div>
           <div class="sub">Apple Health to Home Assistant</div>
           <div class="getrow"><span class="get">GET</span><span style="font-size:28px;color:#8E8E93">In-App<br>Purchases: No</span></div>
         </div>
@@ -437,7 +437,7 @@ def screen_08_sponsor() -> str:
     return f"""
     <!doctype html><html><head><meta charset="utf-8"><style>{BASE_CSS}</style></head><body>
       {statusbar()}
-      <div class="large-title" style="font-size:74px">Support<br>Health Sync</div>
+      <div class="large-title" style="font-size:74px">Support<br>Health Bridge</div>
       <div class="subtitle" style="padding-top:10px">Free and open source, on both sides.</div>
 
       <section class="section">
@@ -484,7 +484,7 @@ def screen_01_setup() -> str:
     return f"""
     <!doctype html><html><head><meta charset="utf-8"><style>{BASE_CSS}</style></head><body>
       {statusbar()}
-      <div class="large-title">Health Sync</div>
+      <div class="large-title">Health Bridge</div>
 
       <section class="section">
         <div class="section-title">Home Assistant</div>
@@ -494,7 +494,7 @@ def screen_01_setup() -> str:
           <div class="row"><span>Sync when the app opens</span><div class="toggle"></div></div>
           <div class="row teal"><span style="display:flex;align-items:center;gap:22px">{qr_icon()}<span>Scan QR Code</span></span></div>
         </div>
-        <div class="footer">Create a webhook under Settings → Devices &amp; services → Health Sync. The full URL is a credential; keep it private.</div>
+        <div class="footer">Create a webhook under Settings → Devices &amp; services → Health Bridge. The full URL is a credential; keep it private.</div>
       </section>
 
       <section class="section">
@@ -504,7 +504,7 @@ def screen_01_setup() -> str:
           <div class="row teal"><span>Request Health Access</span></div>
           <div class="row"><span>Include additional<br>HealthKit metrics</span><div class="toggle"></div></div>
         </div>
-        <div class="footer">Read-only access. The app never writes to Apple Health. If values are missing, check Settings → Privacy &amp; Security → Health → Health Sync.</div>
+        <div class="footer">Read-only access. The app never writes to Apple Health. If values are missing, check Settings → Privacy &amp; Security → Health → Health Bridge.</div>
       </section>
 
       <section class="section">
@@ -576,7 +576,7 @@ def make_og(chrome: str) -> None:
     </style></head><body>
       <div class="grid"></div><div class="glow"></div>
       <div class="content">
-        <div class="brand"><img class="icon" src="file://{ICON}"><div class="name">Health Sync</div></div>
+        <div class="brand"><img class="icon" src="file://{ICON}"><div class="name">Health Bridge</div></div>
         <div class="eyebrow">APPLE HEALTH → HOME ASSISTANT</div>
         <h1>Your health,<br>in your home.</h1>
         <p>A free, local-first bridge from Apple Health to your own Home Assistant. No vendor cloud, no account, no telemetry.</p>

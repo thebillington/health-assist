@@ -9,7 +9,7 @@
 
 ## HACS custom repository
 
-Health Sync is not in the default HACS store yet.
+Health Bridge is not in the default HACS store yet.
 
 1. Open **HACS → Integrations**.
 2. Open the three-dot menu → **Custom repositories**.
@@ -20,8 +20,8 @@ Health Sync is not in the default HACS store yet.
    ```
 
    Category: **Integration**.
-4. Search for **Health Sync for Home Assistant**, install it and restart Home Assistant.
-5. Open **Settings → Devices & services → Add integration → Health Sync for Home Assistant**.
+4. Search for **Home Assistant Health Bridge**, install it and restart Home Assistant.
+5. Open **Settings → Devices & services → Add integration → Home Assistant Health Bridge**.
 
 ## Manual installation
 

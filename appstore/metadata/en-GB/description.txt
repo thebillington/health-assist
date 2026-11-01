@@ -1,4 +1,4 @@
-Health Sync for Home Assistant reads Apple Health on your iPhone and sends the readings to a webhook in your Home Assistant.
+Home Assistant Health Bridge reads Apple Health on your iPhone and sends the readings to a webhook in your Home Assistant.
 
 The app and the integration are separate, free, MIT-licensed pieces. Install the integration in Home Assistant, create a webhook, then paste the URL (or scan its QR code) into the app. The phone must be able to reach Home Assistant directly: the same Wi-Fi, a VPN such as Tailscale, or a remote address such as Nabu Casa. If the phone cannot reach that address, the sync fails.
 
@@ -9,9 +9,9 @@ There is no account, no analytics, no telemetry and no vendor cloud. The app nev
 WHAT YOU NEED
 • Home Assistant 2024.1 or newer
 • iOS 18 or newer
-• The Health Sync for Home Assistant integration, installed with HACS or manually
+• The Home Assistant Health Bridge integration, installed with HACS or manually
 • A webhook URL and optional shared secret
 
 The app is free. There is no paid tier. The app has an optional Tip Jar using Apple's in-app purchase. Tips unlock nothing.
 
-Apple Health is a trademark of Apple Inc. Home Assistant is a trademark of Nabu Casa. HACS is a separate open-source project. Health Sync for Home Assistant is not affiliated with or endorsed by Apple, Nabu Casa or the Home Assistant project.
+Apple Health is a trademark of Apple Inc. Home Assistant is a trademark of Nabu Casa. HACS is a separate open-source project. Home Assistant Health Bridge is not affiliated with or endorsed by Apple, Nabu Casa or the Home Assistant project.

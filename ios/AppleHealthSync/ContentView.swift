@@ -32,7 +32,7 @@ struct ContentView: View {
                     } header: {
                         Text("Home Assistant")
                     } footer: {
-                        Text("Create a webhook under Settings → Devices & services → Health Sync. The full URL is a credential; keep it private.")
+                        Text("Create a webhook under Settings → Devices & services → Health Bridge. The full URL is a credential; keep it private.")
                     }
 
                     Section {
@@ -60,7 +60,7 @@ struct ContentView: View {
                     } header: {
                         Text("Apple Health")
                     } footer: {
-                        Text("Read-only access. The app never writes to Apple Health. iOS does not reveal which read permissions were granted; if values are missing, check Settings → Privacy & Security → Health → Health Sync. Changing the additional-metrics option requires requesting access again.")
+                        Text("Read-only access. The app never writes to Apple Health. iOS does not reveal which read permissions were granted; if values are missing, check Settings → Privacy & Security → Health → Health Bridge. Changing the additional-metrics option requires requesting access again.")
                     }
 
                     Section {
@@ -155,7 +155,7 @@ struct ContentView: View {
                     }
 
                     Section {
-                        Text("Health Sync sends data directly to your Home Assistant instance. It has no analytics, no telemetry and no cloud service. The webhook URL and shared secret are stored in the iOS Keychain.")
+                        Text("Health Bridge sends data directly to your Home Assistant instance. It has no analytics, no telemetry and no cloud service. The webhook URL and shared secret are stored in the iOS Keychain.")
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                     }
@@ -212,7 +212,7 @@ struct ContentView: View {
                         Text("Links")
                     }
                 }
-                .navigationTitle("Health Sync")
+                .navigationTitle("Health Bridge")
                 .onChange(of: model.webhookURL) { _, _ in model.saveSettings() }
                 .onChange(of: model.secret) { _, _ in model.saveSettings() }
                 .onChange(of: model.syncOnOpen) { _, _ in model.saveSettings() }

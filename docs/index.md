@@ -1,15 +1,15 @@
-# Health Sync for Home Assistant
+# Home Assistant Health Bridge
 
-![Health Sync for Home Assistant](images/logo.svg)
+![Home Assistant Health Bridge](images/logo.svg)
 
 **Apple Health → Home Assistant, without a cloud service.**
 
-Health Sync for Home Assistant is a free, open-source Home Assistant integration and companion
+Home Assistant Health Bridge is a free, open-source Home Assistant integration and companion
 iOS app. The app reads Apple Health with HealthKit and pushes the data over a
 local webhook. Home Assistant exposes it as native sensors and long-term
 statistics.
 
-<img src="images/app.png" alt="Health Sync for Home Assistant iOS app" style="display:block;width:100%;max-width:420px;margin:0 auto;border-radius:18px">
+<img src="images/app.png" alt="Home Assistant Health Bridge iOS app" style="display:block;width:100%;max-width:420px;margin:0 auto;border-radius:18px">
 
 ## Why
 
@@ -30,7 +30,7 @@ statistics.
 
 ## Project status
 
-Health Sync is pre-1.2 and actively developed. The webhook and long-term
+Health Bridge is pre-1.2 and actively developed. The webhook and long-term
 statistics path are working end to end. Workouts, ECG and clinical records are
 not yet exported.
 
@@ -48,11 +48,11 @@ upgraded in place.
 
 ## Support My Work
 
-Health Sync is free, with no paid tier or account. The iOS app has an optional
+Health Bridge is free, with no paid tier or account. The iOS app has an optional
 **Tip Jar** using Apple's in-app purchase. Tips unlock nothing. You can also
 [support my work on GitHub Sponsors](https://github.com/sponsors/thebillington).
 Support is optional and does not unlock any features.
 
 Apple Health is a trademark of Apple Inc. Home Assistant is a trademark of
-Nabu Casa. Health Sync is not affiliated with Apple, Nabu Casa or the Home
+Nabu Casa. Health Bridge is not affiliated with Apple, Nabu Casa or the Home
 Assistant project.

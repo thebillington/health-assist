@@ -1,4 +1,4 @@
-Health Sync for Home Assistant is a companion app for Home Assistant, the open-source home
+Home Assistant Health Bridge is a companion app for Home Assistant, the open-source home
 automation platform that the user runs themselves. The app has no account and
 no developer-operated backend. The developer receives no data.
 
@@ -52,7 +52,7 @@ PRIVACY
 Full policy: https://healthassist.thebillington.co.uk/privacy/
 
 TRADEMARKS
-Health Sync for Home Assistant is independent. Apple Health is a trademark of
+Home Assistant Health Bridge is independent. Apple Health is a trademark of
 Apple Inc. Home Assistant and Nabu Casa are trademarks of Nabu Casa. HACS is a
 separate open-source project.
 

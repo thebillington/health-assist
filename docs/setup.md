@@ -3,7 +3,7 @@
 ## Home Assistant
 
 1. Go to **Settings → Devices & services → Add integration**.
-2. Choose **Health Sync for Home Assistant**.
+2. Choose **Home Assistant Health Bridge**.
 3. Enter a device name, for example `Billy's iPhone`.
 4. Optionally set a **shared secret**. The app will send it in the
    `X-Webhook-Secret` header.

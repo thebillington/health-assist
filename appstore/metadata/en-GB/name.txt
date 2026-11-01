@@ -1,1 +1,1 @@
-Health Sync for Home Assistant
+Home Assistant Health Bridge

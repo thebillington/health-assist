@@ -1,6 +1,6 @@
 # Release the iOS app
 
-Health Sync ships as a **free** app. The optional Tip Jar uses in-app purchase
+Health Bridge ships as a **free** app. The optional Tip Jar uses in-app purchase
 and unlocks nothing.
 
 This page covers the manual Apple steps. The repository side — privacy policy,
@@ -28,7 +28,7 @@ usage descriptions, listing copy and review notes — is already prepared in
    app's entitlements.
 3. In App Store Connect, create the app record:
    - platform iOS;
-   - name **Health Sync for Home Assistant**;
+   - name **Home Assistant Health Bridge**;
    - primary language **English (UK)**;
    - bundle ID `uk.co.thebillington.applehealthsync`;
    - SKU `healthassist-ios`;

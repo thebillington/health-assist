@@ -1,6 +1,6 @@
 {
   "domain": "apple_health_sync",
-  "name": "Health Sync for Home Assistant",
+  "name": "Home Assistant Health Bridge",
   "after_dependencies": [
     "recorder"
   ],

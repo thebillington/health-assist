@@ -1,4 +1,4 @@
-"""Small helpers shared by the Health Sync platforms."""
+"""Small helpers shared by the Health Bridge platforms."""
 
 from __future__ import annotations
 

@@ -1,7 +1,7 @@
-# Health Sync for Home Assistant
+# Home Assistant Health Bridge
 
 <p align="center">
-  <img src="docs/images/logo.svg" alt="Health Sync for Home Assistant — Apple Health to Home Assistant" width="420">
+  <img src="docs/images/logo.svg" alt="Home Assistant Health Bridge — Apple Health to Home Assistant" width="420">
 </p>
 
 [![Support Me](https://img.shields.io/badge/Support%20Me-GitHub%20Sponsors-ea4aaa?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/thebillington)
@@ -46,8 +46,8 @@ This integration is not in the default HACS store yet.
 2. Select the three-dot menu → **Custom repositories**.
 3. Add `https://github.com/thebillington/health-assist`
    with category **Integration**.
-4. Search for **Health Sync for Home Assistant**, install it, and restart Home Assistant.
-5. Go to **Settings → Devices & services → Add integration → Health Sync for Home Assistant**.
+4. Search for **Home Assistant Health Bridge**, install it, and restart Home Assistant.
+5. Go to **Settings → Devices & services → Add integration → Home Assistant Health Bridge**.
 
 ### Manual installation
 
@@ -100,7 +100,7 @@ reloads after saving; sensors return after the app's next sync.
 The companion app lives in [`ios/`](ios/) and is built from this same
 repository.
 
-![Health Sync for Home Assistant iOS app](docs/images/app.png)
+![Home Assistant Health Bridge iOS app](docs/images/app.png)
 
 1. Open `ios/AppleHealthSync.xcodeproj` in Xcode.
 2. Select the `AppleHealthSync` scheme and an iPhone simulator or device.
@@ -377,7 +377,7 @@ sync is far below the limit.
   unknown metric).
 - Entity creation happens on the first accepted payload, not when the entry is
   added.
-- Check **Settings → Devices & services → Health Sync** and open the
+- Check **Settings → Devices & services → Health Bridge** and open the
   device to see whether entities exist.
 - Enable debug logging:
 
@@ -555,7 +555,7 @@ v1 intentionally stops at push-to-sensor. Planned for later:
 
 ## Support My Work
 
-Health Sync is free and open source, with no paid tier, account or
+Health Bridge is free and open source, with no paid tier, account or
 subscription. The iOS app has an optional **Tip Jar** using Apple's in-app
 purchase. Tips are optional and unlock nothing.
 

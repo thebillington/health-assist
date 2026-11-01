@@ -1,6 +1,6 @@
-# Health Sync for Home Assistant — iOS app
+# Home Assistant Health Bridge — iOS app
 
-The companion iOS app for the [Health Sync for Home Assistant
+The companion iOS app for the [Home Assistant Health Bridge
 integration](../README.md). It reads Apple Health with HealthKit and POSTs the
 webhook contract to your Home Assistant instance.
 
@@ -57,7 +57,7 @@ StoreKit **Tip Jar**; tips unlock nothing.
 
 ## Configure
 
-1. In Home Assistant, add the **Health Sync for Home Assistant** integration. Copy the
+1. In Home Assistant, add the **Home Assistant Health Bridge** integration. Copy the
    webhook URL and optional shared secret.
 2. In the app, paste the URL and secret in the **Home Assistant** section.
 3. Tap **Request Health Access** and grant read access.
@@ -100,7 +100,7 @@ applehealthsync://configure?url=<webhook URL>&secret=<shared secret>
 ```
 
 Scan it with the app's **Scan QR Code** button (under Home Assistant), or with
-the iPhone Camera; iOS opens **Health Sync** and imports the URL and
+the iPhone Camera; iOS opens **Health Bridge** and imports the URL and
 secret. If the app already has a URL or secret, it asks for confirmation before
 replacing them. The in-app scanner uses the rear camera and requires camera
 permission. The QR reflects the saved secret, so save and reopen Configure after
@@ -226,4 +226,4 @@ end-to-end checks.
   not sent in this version.
 - HealthKit read authorization is intentionally opaque: iOS does not tell apps
   which read types were granted. If values are missing, check **Settings →
-  Privacy & Security → Health → Health Sync**.
+  Privacy & Security → Health → Health Bridge**.

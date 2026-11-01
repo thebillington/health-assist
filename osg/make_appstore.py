@@ -93,9 +93,9 @@ def toggle_row(left: str) -> str:
 def page(title: str, body: str, phone: str) -> str:
     return f"""<!doctype html><html><head><meta charset="utf-8"><style>{CSS}</style></head><body>
 <div class="page">
-  {header("HEALTH SYNC", title, body)}
+  {header("HEALTH BRIDGE", title, body)}
   <div class="visual">{phone}</div>
-  <div class="footer">HEALTH SYNC · APPLE HEALTH → HOME ASSISTANT</div>
+  <div class="footer">HEALTH BRIDGE · APPLE HEALTH → HOME ASSISTANT</div>
 </div></body></html>"""
 
 

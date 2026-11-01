@@ -2,14 +2,14 @@
 
 **Effective date: 1 November 2026**
 
-Health Sync for Home Assistant is a free, open-source Home Assistant integration and iOS app by
+Home Assistant Health Bridge is a free, open-source Home Assistant integration and iOS app by
 Billy Rebecchi ("I", "me"). This policy explains what the iOS app does with your
 data. The Home Assistant integration runs on your own Home Assistant server,
 under your control.
 
 ## Summary
 
-- Health Sync reads Apple Health data only after you grant permission.
+- Health Bridge reads Apple Health data only after you grant permission.
 - The app sends that data directly to the Home Assistant address you configure.
 - I do not receive, see, sell, rent or share your health data.
 - There is no account, no analytics, no advertising, no tracking and no
@@ -18,7 +18,7 @@ under your control.
 
 ## Data the app reads
 
-With your permission, Health Sync reads HealthKit data needed to build its
+With your permission, Health Bridge reads HealthKit data needed to build its
 sensors. This can include activity, body measurements, heart and respiratory
 metrics, sleep analysis, nutrition, and other health and fitness samples. You
 choose which data types to allow in the iOS Health permission sheet. iOS does
@@ -27,7 +27,7 @@ not tell the app which permissions you denied.
 The app only reads from Apple Health. It never writes to Apple Health.
 
 You can revoke access at any time in **Settings → Privacy & Security → Health →
-Health Sync**, or by deleting the app.
+Health Bridge**, or by deleting the app.
 
 ## Where the data goes
 
@@ -81,7 +81,7 @@ Treat the webhook URL, the shared secret and the setup QR code as passwords.
 
 ## Children
 
-Health Sync is not directed at children under 13, and I do not knowingly
+Health Bridge is not directed at children under 13, and I do not knowingly
 collect data from children.
 
 ## Changes
@@ -96,5 +96,5 @@ Open an issue at
 Do not include health data, webhook URLs or shared secrets in an issue.
 
 Apple Health is a trademark of Apple Inc. Home Assistant is a trademark of
-Nabu Casa. Health Sync is not affiliated with Apple, Nabu Casa or the Home
+Nabu Casa. Health Bridge is not affiliated with Apple, Nabu Casa or the Home
 Assistant project.

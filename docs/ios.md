@@ -41,7 +41,7 @@ The QR contains credentials. Treat a screenshot as a password.
 The app requests read-only access. iOS does not reveal which read types were
 granted. If values are missing, check:
 
-**Settings → Privacy & Security → Health → Health Sync → Turn On All**
+**Settings → Privacy & Security → Health → Health Bridge → Turn On All**
 
 The simulator intentionally disables HealthKit. Use **Send a Test Payload** to
 verify the webhook and HA entities there.

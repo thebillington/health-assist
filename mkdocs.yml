@@ -1,10 +1,10 @@
-site_name: Health Sync for Home Assistant
-site_description: Health Sync for Home Assistant — a free, local-first Apple Health integration and iOS app.
+site_name: Home Assistant Health Bridge
+site_description: Home Assistant Health Bridge — a free, local-first Apple Health integration and iOS app.
 site_url: https://healthassist.thebillington.co.uk/
 repo_url: https://github.com/thebillington/health-assist
 repo_name: thebillington/health-assist
 edit_uri: edit/main/docs/
-copyright: MIT licensed. Apple Health is a trademark of Apple Inc. Health Sync is not affiliated with Apple.
+copyright: MIT licensed. Apple Health is a trademark of Apple Inc. Health Bridge is not affiliated with Apple.
 
 theme:
   name: material

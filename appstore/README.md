@@ -11,7 +11,7 @@ three consumable in-app purchases handled by Apple and unlocks no features.
 
 | Field | Value |
 | --- | --- |
-| App name | Health Sync for Home Assistant |
+| App name | Home Assistant Health Bridge |
 | Subtitle | Read-only health data sync |
 | Bundle ID | `uk.co.thebillington.applehealthsync` |
 | SKU | `healthassist-ios` (or any private SKU) |
