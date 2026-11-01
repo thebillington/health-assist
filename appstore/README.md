@@ -103,7 +103,8 @@ priority support.
 - [ ] iPhone 6.9" screenshots uploaded (iPhone-only; no iPad screenshots needed).
 - [ ] `MARKETING_VERSION` and `CURRENT_PROJECT_VERSION` bumped in
       `ios/project.yml`.
-- [ ] Archive built, exported and uploaded to TestFlight.
+- [ ] Archive built, exported and uploaded to TestFlight (Codemagic
+      `ios-release` workflow, or manual Option B).
 - [ ] Tested from TestFlight on a physical iPhone and a clean install.
 - [ ] Review notes filled in, including the demo webhook URL if used.
 - [ ] Price set to Free; no in-app purchases configured.

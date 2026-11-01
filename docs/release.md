@@ -14,7 +14,8 @@ usage descriptions, listing copy and review notes — is already prepared in
 ## Before you begin
 
 - An active Apple Developer Program membership.
-- A Mac with Xcode 16 or newer (iOS 18 SDK).
+- A Codemagic account (free tier is fine) **or** a Mac with Xcode 16 or newer
+  (iOS 18 SDK) for a manual build.
 - Access to App Store Connect for the account that owns the bundle ID.
 - The docs site deployed, so the privacy policy is live at
   <https://healthassist.thebillington.co.uk/privacy/>.
@@ -43,8 +44,11 @@ MARKETING_VERSION: "1.2.0"
 CURRENT_PROJECT_VERSION: "1"
 ```
 
-`CURRENT_PROJECT_VERSION` must increase for every upload. Then regenerate the
-project:
+`CURRENT_PROJECT_VERSION` must increase for every upload. The Codemagic
+workflow increments it automatically from TestFlight (`latest + 1`). If you
+build manually (Option B), bump it yourself before archiving.
+
+Then regenerate the project:
 
 ```bash
 cd ios
@@ -54,7 +58,33 @@ xcodegen generate
 The generated `Info.plist` and entitlements are committed, so regenerate rather
 than hand-editing them.
 
-## 3. Archive and export
+## 3. Build and upload
+
+### Option A: Codemagic (no Mac required)
+
+`codemagic.yaml` defines a manual **iOS Release (TestFlight)** workflow. It runs
+the Swift package tests, increments the build number from TestFlight, builds a
+signed IPA and uploads it to App Store Connect. It sets
+`submit_to_app_store: false`, so it never submits for App Review.
+
+One-time setup:
+
+1. Add this repository to Codemagic and select the `ios-release` workflow.
+2. In **Team settings → Developer Portal**, add an App Store Connect API key
+   named `health_assist_appstore` with **App Manager** access.
+3. In App Store Connect, open the app's **General → App Information** and copy
+   the **Apple ID** into `APP_STORE_APPLE_ID` in `codemagic.yaml` (replacing the
+   `0000000000` placeholder).
+4. Under **Code signing identities**, make sure an **App Store** distribution
+   certificate and provisioning profile exist for
+   `uk.co.thebillington.applehealthsync`. Codemagic can create or fetch them
+   with the API key.
+5. Start the workflow manually. Builds are manual-only (`triggering.events: []`).
+
+If the workflow cannot find a certificate or profile, create them once under
+**Code signing identities**, then rerun.
+
+### Option B: Manual Mac
 
 Open `ios/AppleHealthSync.xcodeproj`, select the `AppleHealthSync` scheme, set
 your team under **Signing & Capabilities**, then:

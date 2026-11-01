@@ -1,0 +1,83 @@
+# Codemagic CI/CD for Health Assist.
+#
+# Manual-only by design: a build uploads to App Store Connect, but never submits
+# the app for review. Final submission stays a manual App Store Connect action.
+#
+# One-time setup is documented in docs/release.md. In short:
+#   1. Add this repository to Codemagic.
+#   2. Add an App Store Connect API key named `health_assist_appstore` under
+#      Team settings -> Developer Portal (App Manager access).
+#   3. Put the App Store Apple ID in APP_STORE_APPLE_ID below.
+#   4. Run the "iOS Release (TestFlight)" workflow manually.
+
+workflows:
+  ios-release:
+    name: iOS Release (TestFlight)
+    instance_type: mac_mini_m2
+    max_build_duration: 90
+
+    integrations:
+      app_store_connect: health_assist_appstore
+
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: uk.co.thebillington.applehealthsync
+      vars:
+        XCODE_PROJECT: "ios/AppleHealthSync.xcodeproj"
+        XCODE_SCHEME: "AppleHealthSync"
+        # App Store Connect -> General -> App Information -> Apple ID.
+        # Replace before the first release; the placeholder falls back to the
+        # Codemagic build counter for the build number.
+        APP_STORE_APPLE_ID: "0000000000"
+      xcode: latest
+
+    triggering:
+      events: []
+
+    scripts:
+      - name: Run shared package tests
+        script: |
+          swift test --package-path ios/AppleHealthSyncCore
+
+      - name: Set up code signing
+        script: |
+          xcode-project use-profiles
+
+      - name: Increment build number
+        script: |
+          set -e
+          cd "$CM_BUILD_DIR/ios"
+
+          if [ -z "${APP_STORE_APPLE_ID:-}" ] || [ "$APP_STORE_APPLE_ID" = "0000000000" ]; then
+            NEXT_BUILD_NUMBER="$BUILD_NUMBER"
+            echo "APP_STORE_APPLE_ID is not set; using Codemagic build number $NEXT_BUILD_NUMBER."
+          else
+            LATEST_BUILD_NUMBER="$(app-store-connect get-latest-testflight-build-number "$APP_STORE_APPLE_ID" 2>/dev/null || true)"
+            if [ -z "$LATEST_BUILD_NUMBER" ]; then
+              LATEST_BUILD_NUMBER=0
+            fi
+            NEXT_BUILD_NUMBER=$((LATEST_BUILD_NUMBER + 1))
+            echo "Latest TestFlight build: $LATEST_BUILD_NUMBER; next: $NEXT_BUILD_NUMBER."
+          fi
+
+          agvtool new-version -all "$NEXT_BUILD_NUMBER"
+
+      - name: Build signed IPA
+        script: |
+          xcode-project build-ipa \
+            --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
+            --scheme "$XCODE_SCHEME" \
+            --archive-flags="-destination 'generic/platform=iOS'"
+
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
+
+    publishing:
+      app_store_connect:
+        auth: integration
+        # Upload only. Never submit automatically for App Review.
+        submit_to_testflight: false
+        submit_to_app_store: false
