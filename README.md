@@ -78,12 +78,12 @@ device and set of entities.
 
 ### Changing settings later
 
-Open the integration entry → **Configure**. You can change the shared secret
-and the metric allow-list without changing the webhook URL. The dialog also
-shows a QR code containing the current URL and secret; scan it with the app's
-**Scan QR Code** button (or the iPhone Camera) to reconfigure. Save and reopen
-the dialog after changing the secret to refresh the QR. The entry reloads after
-saving; sensors return after the app's next sync.
+Open the integration entry → **Configure**. The current webhook URL is shown as
+a read-only field, followed by the secret, QR code and metric allow-list. You can
+change the shared secret and allow-list without changing the URL. Scan the QR
+with the app's **Scan QR Code** button (or the iPhone Camera) to reconfigure.
+Save and reopen the dialog after changing the secret to refresh the QR. The entry
+reloads after saving; sensors return after the app's next sync.
 
 > Removing a metric from the allow-list stops new values from being accepted,
 > but Home Assistant may keep the old entity registry entry. Delete it manually

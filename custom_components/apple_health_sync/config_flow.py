@@ -13,6 +13,7 @@ from homeassistant.core import callback
 from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers import selector
 from homeassistant.helpers.network import NoURLAvailableError
+from homeassistant.helpers.selector import ConstantSelector, ConstantSelectorConfig
 
 try:  # QrCodeSelector was added after the integration's HA 2024.1 floor.
     from homeassistant.helpers.selector import (
@@ -29,6 +30,7 @@ from .const import (
     CONF_QR_CODE,
     CONF_SECRET,
     CONF_WEBHOOK_ID,
+    CONF_WEBHOOK_URL,
     DEFAULT_NAME,
     DOMAIN,
     METRIC_NAMES,
@@ -116,9 +118,16 @@ class AppleHealthSyncConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         webhook_url = _build_webhook_url(self.hass, webhook_id)
         secret = self._pending_data[CONF_SECRET]
 
+        schema = {
+            vol.Optional(CONF_WEBHOOK_URL): ConstantSelector(
+                ConstantSelectorConfig(label="Webhook URL", value=webhook_url)
+            )
+        }
+        schema.update(_qr_field(webhook_url, secret))
+
         return self.async_show_form(
             step_id="webhook",
-            data_schema=vol.Schema(_qr_field(webhook_url, secret)),
+            data_schema=vol.Schema(schema),
             description_placeholders={
                 "webhook_url": webhook_url,
                 "secret": secret or "Not set",
@@ -163,6 +172,9 @@ class AppleHealthSyncOptionsFlow(config_entries.OptionsFlow):
         )
 
         schema: dict = {
+            vol.Optional(CONF_WEBHOOK_URL): ConstantSelector(
+                ConstantSelectorConfig(label="Webhook URL", value=webhook_url)
+            ),
             vol.Optional(CONF_SECRET, default=secret): selector.TextSelector(
                 selector.TextSelectorConfig(
                     type=selector.TextSelectorType.PASSWORD,
