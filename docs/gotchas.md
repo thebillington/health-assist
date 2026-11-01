@@ -173,7 +173,7 @@ Accept the Xcode license and install an iOS simulator runtime. On recent Xcode,
 - OSG generates **store screenshots**, not logos. The app icon comes from
   `ios/scripts/make_icon.py`; the wordmark is a normal SVG.
 - The committed `osg/project.json` is custom-built by
-  `osg/build_project.py`: one app screenshot and four text panels.
+  `osg/build_project.py`: one app screenshot and five text panels.
 - `screenshots/01-setup.png` is an HTML mockup rendered by `osg/make_screens.py`;
   `screenshots/01-app.png` is the real simulator capture.
 - The dev container's Chrome for Testing has no proprietary codecs, so

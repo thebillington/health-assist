@@ -1,6 +1,6 @@
 # History and statistics
 
-Health Assist does more than update the latest sensor value.
+Health Sync does more than update the latest sensor value.
 
 ## First sync = full history
 
@@ -28,7 +28,7 @@ saturation) are converted from the 0–1 HealthKit representation to percent.
 ## How Home Assistant stores it
 
 Home Assistant cannot backfill normal entity *state* history through a custom
-integration. Health Assist imports historical samples as **long-term statistics**
+integration. Health Sync imports historical samples as **long-term statistics**
 under each sensor entity's `statistic_id`. They appear in:
 
 **Developer Tools → Statistics** and in Statistics/History dashboards.

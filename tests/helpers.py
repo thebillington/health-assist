@@ -1,4 +1,4 @@
-"""Helpers shared by the Health Assist tests."""
+"""Helpers shared by the Health Sync tests."""
 
 from __future__ import annotations
 

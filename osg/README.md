@@ -1,14 +1,15 @@
 # App Store screenshots
 
-The set is deliberately simple: five 1290 × 2796 boards.
+The set is deliberately simple: six 1290 × 2796 boards.
 
 | # | Board | Source |
 | --- | --- | --- |
 | 1 | App screenshot | `screenshots/01-setup.png` (`01-app.png` is the real simulator capture) |
 | 2 | How it works | text panel |
 | 3 | How the phone connects | text panel |
-| 4 | What you get | text panel |
-| 5 | Cost and privacy | text panel |
+| 4 | Installing with HACS | text panel |
+| 5 | What you get | text panel |
+| 6 | Cost and privacy | text panel |
 
 No phone frames, marketing props, App Store search panels or social card. The
 first board is the app; the rest explain a feature in plain text.
@@ -37,7 +38,7 @@ local preview, or use them directly for the App Store upload.
 
 - `osg.config.ts` pins the format (`ios-6-9`) and the output directory.
 - `project.json` is the design source of truth.
-- `build_project.py` writes the five boards and their copy.
+- `build_project.py` writes the six boards and their copy.
 - `make_screens.py` renders the setup-screen mockup.
 - `out/` is ignored.
 

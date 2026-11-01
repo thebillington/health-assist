@@ -1,1 +1,1 @@
-Health Assist
+Health Sync for Home Assistant

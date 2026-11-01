@@ -12,8 +12,8 @@ and unlocks no features.
 
 | Field | Value |
 | --- | --- |
-| App name | Health Assist |
-| Subtitle | Apple Health to Home Assistant |
+| App name | Health Sync for Home Assistant |
+| Subtitle | Read-only Apple Health sync |
 | Bundle ID | `uk.co.thebillington.applehealthsync` |
 | SKU | `healthassist-ios` (or any private SKU) |
 | Primary language | English (UK) |
@@ -65,20 +65,21 @@ Either answer must match `docs/privacy.md`, which explains the full data flow.
 
 ## Screenshots
 
-The set is five simple 1290 × 2796 boards:
+The set is six simple 1290 × 2796 boards:
 
 1. App screenshot — the setup screen.
 2. How it works — text panel.
 3. How the phone connects — text panel.
-4. What you get — text panel.
-5. Cost and privacy — text panel.
+4. Installing with HACS — text panel.
+5. What you get — text panel.
+6. Cost and privacy — text panel.
 
 They are rendered locally by `osg/build_project.py` and checked with
 `osg verify`; see `osg/README.md`. The rendered files are not committed and are
 not published on the docs site.
 
 The app is **iPhone-only** (`TARGETED_DEVICE_FAMILY = "1"`), so no iPad
-screenshots are required. Upload the five boards in order.
+screenshots are required. Upload the six boards in order.
 
 ## Reviewer access
 

@@ -3,7 +3,7 @@
 ## Home Assistant
 
 1. Go to **Settings → Devices & services → Add integration**.
-2. Choose **Health Assist**.
+2. Choose **Health Sync for Home Assistant**.
 3. Enter a device name, for example `Billy's iPhone`.
 4. Optionally set a **shared secret**. The app will send it in the
    `X-Webhook-Secret` header.
@@ -29,6 +29,13 @@ The URL is a credential. Anyone who has it can POST data to that config entry.
 
 If the QR is shown on the phone itself, use the Camera on another device or
 display the QR on a computer and scan it with the phone.
+
+## Network
+
+The app sends data directly to the webhook URL. It does not relay through a
+service. The phone must be able to open that URL itself: the same Wi-Fi, a VPN
+such as Tailscale, or a remote address such as Nabu Casa. If the phone cannot
+reach the address, the sync fails.
 
 ## Multiple phones
 

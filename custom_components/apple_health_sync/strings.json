@@ -19,7 +19,7 @@
         "title": "Webhook ready",
         "description": "Copy these values into the iOS app. The webhook URL is a credential: anyone who has it can send data to this Home Assistant instance.\n\n**Webhook URL**\n\n`{webhook_url}`\n\n**Shared secret**\n\n`{secret}`\n\nIf the URL above is only a path, prepend your Home Assistant base URL. Select **Submit** when you have copied the values.\n\n**Scan with the iOS app**\n\nThe QR code below contains the webhook URL and shared secret. Scan it with the iPhone Camera to populate the app automatically.",
         "data": {
-          "qr_code": "Health Assist QR code",
+          "qr_code": "Health Sync QR code",
           "webhook_url": "Webhook URL"
         },
         "data_description": {
@@ -35,12 +35,12 @@
   "options": {
     "step": {
       "init": {
-        "title": "Health Assist options",
+        "title": "Health Sync options",
         "description": "**Webhook URL**\n\n`{webhook_url}`\n\nThe webhook URL does not change. Update the shared secret or choose which of the {metric_count} built-in metrics become entities. Leave the allow-list empty to enable all of them.\n\nScan the QR code with the iPhone Camera to import the webhook URL and shared secret into the app.",
         "data": {
           "secret": "Shared secret (optional)",
           "metrics": "Metric allow-list",
-          "qr_code": "Health Assist QR code",
+          "qr_code": "Health Sync QR code",
           "webhook_url": "Webhook URL"
         },
         "data_description": {

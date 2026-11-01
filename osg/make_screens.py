@@ -161,7 +161,7 @@ def screen_02_sync() -> str:
     return f"""
     <!doctype html><html><head><meta charset="utf-8"><style>{BASE_CSS}</style></head><body>
       {statusbar()}
-      <div class="large-title">Health Assist</div>
+      <div class="large-title">Health Sync</div>
       <div class="subtitle">Sync and history</div>
 
       <section class="section">
@@ -236,7 +236,7 @@ def screen_03_values() -> str:
     return f"""
     <!doctype html><html><head><meta charset="utf-8"><style>{BASE_CSS}</style></head><body>
       {statusbar()}
-      <div class="nav">Health Assist</div>
+      <div class="nav">Health Sync</div>
       <div class="large-title">Latest Values</div>
       <div class="subtitle">Last sync: 2 minutes ago</div>
 
@@ -280,11 +280,11 @@ def screen_04_privacy() -> str:
       <section class="section">
         <div class="section-title">Support</div>
         <div class="card">
-          <div class="row teal"><span style="display:flex;align-items:center;gap:22px">{heart_icon()}<span>Sponsor My Work</span></span></div>
+          <div class="row teal"><span style="display:flex;align-items:center;gap:22px">{heart_icon()}<span>Support Me</span></span></div>
           <div class="row teal"><span style="display:flex;align-items:center;gap:22px">{shield_icon()}<span>Privacy Policy</span></span></div>
           <div class="row teal"><span style="display:flex;align-items:center;gap:22px">{book_icon()}<span>Documentation</span></span></div>
         </div>
-        <div class="footer">Health Assist is free and open source. Sponsorship is optional and unlocks no features.</div>
+        <div class="footer">Health Sync is free and open source. Sponsorship is optional and unlocks no features.</div>
       </section>
 
       <section class="section">
@@ -294,7 +294,7 @@ def screen_04_privacy() -> str:
           <div class="row"><span>Transport</span><span class="value">HTTPS</span></div>
           <div class="row"><span>Data stored by app</span><span class="value">None</span></div>
         </div>
-        <div class="footer">Revoke Apple Health access at any time in Settings → Privacy &amp; Security → Health → Health Assist.</div>
+        <div class="footer">Revoke Apple Health access at any time in Settings → Privacy &amp; Security → Health → Health Sync.</div>
       </section>
     </body></html>
     """
@@ -357,7 +357,7 @@ def screen_06_search() -> str:
       <div class="result">
         <img class="appicon" src="file://{ICON}">
         <div class="meta">
-          <div class="name">Health Assist</div>
+          <div class="name">Health Sync</div>
           <div class="sub">Apple Health to Home Assistant</div>
           <div class="rating"><span class="stars">★★★★★</span> 4.9 · Health &amp; Fitness</div>
         </div>
@@ -403,7 +403,7 @@ def screen_07_product() -> str:
       <div class="hero">
         <img class="appicon" src="file://{ICON}">
         <div class="meta">
-          <div class="name">Health Assist</div>
+          <div class="name">Health Sync</div>
           <div class="sub">Apple Health to Home Assistant</div>
           <div class="getrow"><span class="get">GET</span><span style="font-size:28px;color:#8E8E93">In-App<br>Purchases: No</span></div>
         </div>
@@ -422,7 +422,7 @@ def screen_07_product() -> str:
       </div>
       <div class="desc"><b>Apple Health, meet Home Assistant.</b><br>A free, local-first bridge that turns your HealthKit data into native sensors — no cloud, no account, no telemetry.</div>
       <div class="label" style="padding-top:40px">WHAT'S NEW</div>
-      <div class="desc" style="padding-top:0"><b>Version 1.2.0</b><br>Full history export, background sync, QR setup and an optional Sponsor My Work link.</div>
+      <div class="desc" style="padding-top:0"><b>Version 1.2.0</b><br>Full history export, background sync, QR setup and an optional Support Me link.</div>
       <div class="desc" style="padding-top:24px">
         • Read-only HealthKit access<br>
         • Native sensors and long-term statistics<br>
@@ -437,7 +437,7 @@ def screen_08_sponsor() -> str:
     return f"""
     <!doctype html><html><head><meta charset="utf-8"><style>{BASE_CSS}</style></head><body>
       {statusbar()}
-      <div class="large-title" style="font-size:74px">Support<br>Health Assist</div>
+      <div class="large-title" style="font-size:74px">Support<br>Health Sync</div>
       <div class="subtitle" style="padding-top:10px">Free and open source, on both sides.</div>
 
       <section class="section">
@@ -453,7 +453,7 @@ def screen_08_sponsor() -> str:
       <section class="section">
         <div class="section-title">Sponsor</div>
         <div class="card">
-          <div class="row teal" style="min-height:130px"><span style="display:flex;align-items:center;gap:22px">{heart_icon()}<span>Sponsor My Work</span></span><span style="color:#8E8E93;font-size:30px">↗</span></div>
+          <div class="row teal" style="min-height:130px"><span style="display:flex;align-items:center;gap:22px">{heart_icon()}<span>Support Me</span></span><span style="color:#8E8E93;font-size:30px">↗</span></div>
           <div class="row"><span style="font-size:28px;color:#8E8E93">github.com/sponsors/thebillington</span></div>
         </div>
         <div class="footer">MIT licensed. Sponsorship is optional and unlocks nothing — the app is complete without it.</div>
@@ -484,7 +484,7 @@ def screen_01_setup() -> str:
     return f"""
     <!doctype html><html><head><meta charset="utf-8"><style>{BASE_CSS}</style></head><body>
       {statusbar()}
-      <div class="large-title">Health Assist</div>
+      <div class="large-title">Health Sync</div>
 
       <section class="section">
         <div class="section-title">Home Assistant</div>
@@ -494,7 +494,7 @@ def screen_01_setup() -> str:
           <div class="row"><span>Sync when the app opens</span><div class="toggle"></div></div>
           <div class="row teal"><span style="display:flex;align-items:center;gap:22px">{qr_icon()}<span>Scan QR Code</span></span></div>
         </div>
-        <div class="footer">Create a webhook under Settings → Devices &amp; services → Health Assist. The full URL is a credential; keep it private.</div>
+        <div class="footer">Create a webhook under Settings → Devices &amp; services → Health Sync. The full URL is a credential; keep it private.</div>
       </section>
 
       <section class="section">
@@ -504,7 +504,7 @@ def screen_01_setup() -> str:
           <div class="row teal"><span>Request Health Access</span></div>
           <div class="row"><span>Include additional<br>HealthKit metrics</span><div class="toggle"></div></div>
         </div>
-        <div class="footer">Read-only access. The app never writes to Apple Health. If values are missing, check Settings → Privacy &amp; Security → Health → Health Assist.</div>
+        <div class="footer">Read-only access. The app never writes to Apple Health. If values are missing, check Settings → Privacy &amp; Security → Health → Health Sync.</div>
       </section>
 
       <section class="section">
@@ -576,7 +576,7 @@ def make_og(chrome: str) -> None:
     </style></head><body>
       <div class="grid"></div><div class="glow"></div>
       <div class="content">
-        <div class="brand"><img class="icon" src="file://{ICON}"><div class="name">Health Assist</div></div>
+        <div class="brand"><img class="icon" src="file://{ICON}"><div class="name">Health Sync</div></div>
         <div class="eyebrow">APPLE HEALTH → HOME ASSISTANT</div>
         <h1>Your health,<br>in your home.</h1>
         <p>A free, local-first bridge from Apple Health to your own Home Assistant. No vendor cloud, no account, no telemetry.</p>

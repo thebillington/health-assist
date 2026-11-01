@@ -1,4 +1,4 @@
-"""Shared pytest setup for the Health Assist tests."""
+"""Shared pytest setup for the Health Sync tests."""
 
 from __future__ import annotations
 

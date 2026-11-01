@@ -1,6 +1,6 @@
 {
   "domain": "apple_health_sync",
-  "name": "Health Assist",
+  "name": "Health Sync for Home Assistant",
   "after_dependencies": [
     "recorder"
   ],

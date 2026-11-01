@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the simple Health Assist App Store screenshot set.
+"""Build the simple Health Sync App Store screenshot set.
 
 Five boards: one real app screenshot, then four plain text panels explaining
 the features. No marketing props, no phone frames, no App Store mockups.
@@ -131,14 +131,14 @@ def feature_board(index: int, name: str, number: str, headline: str, body: str) 
             text("number", 90, 170, 200, 60, number, 12, "600", TEAL),
             shape("rule", 90, 270, 120, 6, TEAL),
             text("headline", 90, 330, 1110, 430, headline, 46, "700", INK, 1.04),
-            text("body", 90, 850, 1030, 700, body, 17, "400", MUTED, 1.45),
+            text("body", 90, 850, 1030, 950, body, 15, "400", MUTED, 1.45),
             text(
                 "footer",
                 90,
                 2650,
                 1110,
                 40,
-                "HEALTH ASSIST · APPLE HEALTH → HOME ASSISTANT",
+                "HEALTH SYNC · APPLE HEALTH → HOME ASSISTANT",
                 9,
                 "500",
                 "#94A3B8",
@@ -159,21 +159,31 @@ FEATURES = (
         "03 Phone connection",
         "03",
         "How the phone connects",
-        "Health Assist does not relay data through a cloud. The phone has to be able to open "
+        "Health Sync does not relay data through a cloud. The phone has to be able to open "
         "the webhook URL itself: the same Wi-Fi, a VPN such as Tailscale, or a remote address "
         "such as Nabu Casa. If the phone cannot reach that address, the sync fails.",
     ),
     (
-        "04 What you get",
+        "04 Installing with HACS",
         "04",
+        "Installing with HACS",
+        "1. Install HACS in Home Assistant.\n"
+        "2. HACS → Integrations → ⋯ → Custom repositories.\n"
+        "3. Add github.com/thebillington/health-assist as an Integration.\n"
+        "4. Install Health Sync and restart Home Assistant.\n"
+        "5. Settings → Devices & services → Add integration → Health Sync.",
+    ),
+    (
+        "05 What you get",
+        "05",
         "What you get",
         "Steps, sleep, heart rate, weight and other readings become Home Assistant sensors. "
         "The first sync sends all available history; later syncs send new data. Sensors have "
         "stable IDs and units, and history is added to long-term statistics.",
     ),
     (
-        "05 Cost and privacy",
-        "05",
+        "06 Cost and privacy",
+        "06",
         "Cost and privacy",
         "The app and the Home Assistant integration are free and MIT licensed. There is no "
         "account, no analytics, no paid tier and no in-app purchase. If you want to support "
@@ -185,8 +195,8 @@ FEATURES = (
 def main() -> None:
     project = {
         "id": "project_health_assist_simple",
-        "name": "Health Assist",
-        "description": "Simple App Store screenshots: one app screen and four feature text panels.",
+        "name": "Health Sync for Home Assistant",
+        "description": "Simple App Store screenshots: one app screen and five text panels.",
         "category": "screenshots",
         "timestamp": "2026-11-01T00:00:00.000Z",
         "projectData": [screenshot_board()]

@@ -1,11 +1,11 @@
-# Support Health Assist
+# Support Health Sync for Home Assistant
 
-Health Assist is free and open source. There is no paid tier, no account and no
+Health Sync is free and open source. There is no paid tier, no account and no
 subscription.
 
-## Sponsor My Work
+## Support My Work
 
-If Health Assist saves you time, you can sponsor ongoing maintenance through
+If Health Sync saves you time, you can support ongoing maintenance through
 [GitHub Sponsors](https://github.com/sponsors/thebillington). Sponsorship is
 optional and does not unlock any features.
 
@@ -17,7 +17,7 @@ When the source repository is public, open an issue at
 Include:
 
 - the Home Assistant version;
-- the Health Assist integration version;
+- the Health Sync integration version;
 - whether the problem happens on a manual sync, a background sync, or both;
 - the relevant Home Assistant log lines with secrets removed.
 

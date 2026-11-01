@@ -1,4 +1,4 @@
-Health Assist is a companion app for Home Assistant, the open-source home
+Health Sync for Home Assistant is a companion app for Home Assistant, the open-source home
 automation platform that the user runs themselves. The app has no account and
 no developer-operated backend. The developer receives no data.
 

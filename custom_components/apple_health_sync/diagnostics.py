@@ -1,4 +1,4 @@
-"""Diagnostics support for Health Assist."""
+"""Diagnostics support for Health Sync."""
 
 from __future__ import annotations
 

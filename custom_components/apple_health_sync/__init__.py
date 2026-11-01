@@ -1,4 +1,4 @@
-"""Set up the Health Assist integration."""
+"""Set up the Health Sync integration."""
 
 from __future__ import annotations
 

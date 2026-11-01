@@ -1,4 +1,4 @@
-# Codemagic CI/CD for Health Assist.
+# Codemagic CI/CD for Health Sync.
 #
 # Manual-only by design: a build uploads to App Store Connect, but never submits
 # the app for review. Final submission stays a manual App Store Connect action.

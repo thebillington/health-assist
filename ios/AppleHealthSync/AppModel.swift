@@ -229,7 +229,7 @@ final class AppModel: ObservableObject {
     /// Handle a QR code payload from the in-app camera scanner.
     func importConfiguration(fromCode code: String) {
         guard let url = URL(string: code) else {
-            statusMessage = "That QR code was not a valid Health Assist configuration link."
+            statusMessage = "That QR code was not a valid Health Sync configuration link."
             return
         }
         importConfiguration(from: url)
@@ -241,7 +241,7 @@ final class AppModel: ObservableObject {
               url.host?.lowercased() == "configure",
               let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
               let queryItems = components.queryItems else {
-            statusMessage = "That link was not an Health Assist configuration code."
+            statusMessage = "That link was not a Health Sync configuration code."
             return
         }
 

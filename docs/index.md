@@ -1,15 +1,15 @@
-# Health Assist
+# Health Sync for Home Assistant
 
-![Health Assist](images/logo.svg)
+![Health Sync for Home Assistant](images/logo.svg)
 
 **Apple Health → Home Assistant, without a cloud service.**
 
-Health Assist is a free, open-source Home Assistant integration and companion
+Health Sync for Home Assistant is a free, open-source Home Assistant integration and companion
 iOS app. The app reads Apple Health with HealthKit and pushes the data over a
 local webhook. Home Assistant exposes it as native sensors and long-term
 statistics.
 
-<img src="images/app.png" alt="Health Assist iOS app" style="display:block;width:100%;max-width:420px;margin:0 auto;border-radius:18px">
+<img src="images/app.png" alt="Health Sync for Home Assistant iOS app" style="display:block;width:100%;max-width:420px;margin:0 auto;border-radius:18px">
 
 ## Why
 
@@ -30,7 +30,7 @@ statistics.
 
 ## Project status
 
-Health Assist is pre-1.2 and actively developed. The webhook and long-term
+Health Sync is pre-1.2 and actively developed. The webhook and long-term
 statistics path are working end to end. Workouts, ECG and clinical records are
 not yet exported.
 
@@ -46,11 +46,11 @@ upgraded in place.
 - [MIT license](https://github.com/thebillington/health-assist/blob/main/LICENSE)
 - [Privacy policy](privacy.md)
 
-## Sponsor My Work
+## Support My Work
 
-Health Assist is free, with no paid tier or account. If it saves you time, you
-can [sponsor my work on GitHub Sponsors](https://github.com/sponsors/thebillington).
-Sponsorship is optional and does not unlock any features.
+Health Sync is free, with no paid tier or account. If it saves you time, you
+can [support my work on GitHub Sponsors](https://github.com/sponsors/thebillington).
+Support is optional and does not unlock any features.
 
-Apple Health is a trademark of Apple Inc. Health Assist is not affiliated with
+Apple Health is a trademark of Apple Inc. Health Sync is not affiliated with
 or endorsed by Apple.

@@ -1,10 +1,10 @@
-# Health Assist
+# Health Sync for Home Assistant
 
 <p align="center">
-  <img src="docs/images/logo.svg" alt="Health Assist — Apple Health to Home Assistant" width="420">
+  <img src="docs/images/logo.svg" alt="Health Sync for Home Assistant — Apple Health to Home Assistant" width="420">
 </p>
 
-[![Sponsor My Work](https://img.shields.io/badge/Sponsor%20My%20Work-GitHub%20Sponsors-ea4aaa?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/thebillington)
+[![Support Me](https://img.shields.io/badge/Support%20Me-GitHub%20Sponsors-ea4aaa?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/thebillington)
 
 A free, open-source Home Assistant custom integration (HACS) plus a SwiftUI
 iOS companion app that reads Apple Health and pushes it over a local webhook.
@@ -46,8 +46,8 @@ This integration is not in the default HACS store yet.
 2. Select the three-dot menu → **Custom repositories**.
 3. Add `https://github.com/thebillington/health-assist`
    with category **Integration**.
-4. Search for **Health Assist**, install it, and restart Home Assistant.
-5. Go to **Settings → Devices & services → Add integration → Health Assist**.
+4. Search for **Health Sync for Home Assistant**, install it, and restart Home Assistant.
+5. Go to **Settings → Devices & services → Add integration → Health Sync for Home Assistant**.
 
 ### Manual installation
 
@@ -100,7 +100,7 @@ reloads after saving; sensors return after the app's next sync.
 The companion app lives in [`ios/`](ios/) and is built from this same
 repository.
 
-![Health Assist iOS app](docs/images/app.png)
+![Health Sync for Home Assistant iOS app](docs/images/app.png)
 
 1. Open `ios/AppleHealthSync.xcodeproj` in Xcode.
 2. Select the `AppleHealthSync` scheme and an iPhone simulator or device.
@@ -377,7 +377,7 @@ sync is far below the limit.
   unknown metric).
 - Entity creation happens on the first accepted payload, not when the entry is
   added.
-- Check **Settings → Devices & services → Health Assist** and open the
+- Check **Settings → Devices & services → Health Sync** and open the
   device to see whether entities exist.
 - Enable debug logging:
 
@@ -553,14 +553,14 @@ v1 intentionally stops at push-to-sensor. Planned for later:
 - App Store release for the iOS app (listing copy, privacy policy and review
   notes are prepared in [`appstore/`](appstore/)).
 
-## Sponsor My Work
+## Support My Work
 
-Health Assist is free and open source, with no paid tier, account or
-subscription. If it saves you time, you can sponsor ongoing maintenance:
+Health Sync is free and open source, with no paid tier, account or
+subscription. If it saves you time, you can support ongoing maintenance:
 
-[![Sponsor My Work](https://img.shields.io/badge/Sponsor%20My%20Work-GitHub%20Sponsors-ea4aaa?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/thebillington)
+[![Support Me](https://img.shields.io/badge/Support%20Me-GitHub%20Sponsors-ea4aaa?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/thebillington)
 
-Sponsorship is optional and does not unlock any features.
+Support is optional and does not unlock any features.
 
 ## License
 

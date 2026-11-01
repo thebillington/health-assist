@@ -18,7 +18,7 @@ import type { OsgConfig } from 'open-screenshot-generator';
 const config: OsgConfig = {
   // Used in output filenames, in osg.manifest.json, and by the AI agent as the
   // name of the app it is writing copy for.
-  name: 'Health Assist',
+  name: 'Health Sync for Home Assistant',
 
   // The committed project file. Every command reads and writes this one file,
   // so reviewing a design change is reading a diff.

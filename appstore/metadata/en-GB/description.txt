@@ -1,4 +1,4 @@
-Health Assist reads Apple Health on your iPhone and sends the readings to a webhook in your Home Assistant.
+Health Sync for Home Assistant reads Apple Health on your iPhone and sends the readings to a webhook in your Home Assistant.
 
 The app and the integration are separate, free, MIT-licensed pieces. Install the integration in Home Assistant, create a webhook, then paste the URL (or scan its QR code) into the app. The phone must be able to reach Home Assistant directly: the same Wi-Fi, a VPN such as Tailscale, or a remote address such as Nabu Casa. If the phone cannot reach that address, the sync fails.
 
@@ -9,9 +9,9 @@ There is no account, no analytics, no telemetry and no vendor cloud. The app nev
 WHAT YOU NEED
 • Home Assistant 2024.1 or newer
 • iOS 18 or newer
-• The Health Assist integration, installed with HACS or manually
+• The Health Sync for Home Assistant integration, installed with HACS or manually
 • A webhook URL and optional shared secret
 
 The app is free. There is no paid tier and no in-app purchase. If you want to support my work, click the Support Me button in the app.
 
-Apple Health is a trademark of Apple Inc. Health Assist is not affiliated with or endorsed by Apple.
+Apple Health is a trademark of Apple Inc. Health Sync is not affiliated with or endorsed by Apple.

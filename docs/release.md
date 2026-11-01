@@ -1,7 +1,7 @@
 # Release the iOS app
 
-Health Assist ships as a **free** app with no in-app purchases. The optional
-**Sponsor My Work** link goes to GitHub Sponsors and unlocks nothing.
+Health Sync ships as a **free** app with no in-app purchases. The optional
+**Support Me** link goes to GitHub Sponsors and unlocks nothing.
 
 This page covers the manual Apple steps. The repository side — privacy policy,
 usage descriptions, listing copy and review notes — is already prepared in
@@ -28,7 +28,7 @@ usage descriptions, listing copy and review notes — is already prepared in
    app's entitlements.
 3. In App Store Connect, create the app record:
    - platform iOS;
-   - name **Health Assist**;
+   - name **Health Sync for Home Assistant**;
    - primary language **English (UK)**;
    - bundle ID `uk.co.thebillington.applehealthsync`;
    - SKU `healthassist-ios`;
@@ -132,7 +132,7 @@ iPhone. Check:
 - **Sync Now** creates sensors in Home Assistant;
 - a full history export completes or resumes;
 - background delivery and the weekly fallback are scheduled;
-- the **Sponsor My Work** link opens GitHub Sponsors in Safari;
+- the **Support Me** link opens GitHub Sponsors in Safari;
 - the **Privacy Policy** and **Documentation** links open the docs site.
 
 ## 5. Fill in the listing
@@ -144,7 +144,7 @@ the copy. In App Store Connect also complete:
   Collected*, because the developer never receives the data and the app has no
   analytics or developer backend.
 - **Age rating** — 4+.
-- **Screenshots** — render the five boards with `osg/build_project.py` and
+- **Screenshots** — render the six boards with `osg/build_project.py` and
   upload them in order: the app screenshot, then the four feature panels. The
   target is iPhone-only (`TARGETED_DEVICE_FAMILY = "1"`), so no iPad screenshots
   are required.

@@ -1,4 +1,4 @@
-"""Historical sample handling for Health Assist.
+"""Historical sample handling for Health Sync.
 
 Home Assistant cannot backfill normal entity state history through an
 integration, so historical HealthKit samples are imported as long-term

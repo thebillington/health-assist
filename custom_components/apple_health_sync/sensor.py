@@ -1,4 +1,4 @@
-"""Sensor platform for Health Assist."""
+"""Sensor platform for Health Sync."""
 
 from __future__ import annotations
 
@@ -38,7 +38,7 @@ async def async_setup_entry(
     """Set up dynamic sensors for one config entry."""
     store: HealthDataStore | None = hass.data.get(DOMAIN, {}).get(entry.entry_id)
     if store is None:
-        _LOGGER.error("No data store found for Health Assist entry %s", entry.entry_id)
+        _LOGGER.error("No data store found for Health Sync entry %s", entry.entry_id)
         return
 
     entities: dict[str, AppleHealthSensor] = {}

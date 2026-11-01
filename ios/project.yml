@@ -45,7 +45,7 @@ targets:
     info:
       path: AppleHealthSync/Info.plist
       properties:
-        CFBundleDisplayName: "Health Assist"
+        CFBundleDisplayName: "Health Sync"
         CFBundleURLTypes:
           - CFBundleURLName: uk.co.thebillington.applehealthsync
             CFBundleURLSchemes:
@@ -64,8 +64,8 @@ targets:
         BGTaskSchedulerPermittedIdentifiers:
           - uk.co.thebillington.applehealthsync.weekly-sync
         ITSAppUsesNonExemptEncryption: false
-        NSHealthShareUsageDescription: "Health Assist reads your health data so it can send it to your Home Assistant instance."
-        NSLocalNetworkUsageDescription: "Health Assist connects to your Home Assistant instance on your local network to send your health data."
+        NSHealthShareUsageDescription: "Health Sync reads your health data so it can send it to your Home Assistant instance."
+        NSLocalNetworkUsageDescription: "Health Sync connects to your Home Assistant instance on your local network to send your health data."
         NSCameraUsageDescription: "Scan the Home Assistant QR code to configure the webhook URL and shared secret."
         NSAppTransportSecurity:
           NSAllowsLocalNetworking: true
