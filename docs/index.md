@@ -9,7 +9,7 @@ iOS app. The app reads Apple Health with HealthKit and pushes the data over a
 local webhook. Home Assistant exposes it as native sensors and long-term
 statistics.
 
-<img src="images/app.png" alt="Health Assist promotion board" style="display:block;width:100%;max-width:420px;margin:0 auto;border-radius:18px">
+<img src="images/app.png" alt="Health Assist iOS app" style="display:block;width:100%;max-width:420px;margin:0 auto;border-radius:18px">
 
 ## Why
 

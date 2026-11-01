@@ -173,13 +173,13 @@ Accept the Xcode license and install an iOS simulator runtime. On recent Xcode,
 - OSG generates **store screenshots**, not logos. The app icon comes from
   `ios/scripts/make_icon.py`; the wordmark is a normal SVG.
 - The committed `osg/project.json` is custom-built by
-  `osg/build_project.py`; `osg fill` is not used.
-- The app screens are HTML mockups rendered by `osg/make_screens.py`; only
-  `screenshots/01-app.png` is a real simulator capture.
+  `osg/build_project.py`: one app screenshot and four text panels.
+- `screenshots/01-setup.png` is an HTML mockup rendered by `osg/make_screens.py`;
+  `screenshots/01-app.png` is the real simulator capture.
 - The dev container's Chrome for Testing has no proprietary codecs, so
   `osg video`/MP4 is unavailable. PNG rendering and `osg verify` work.
 - WebGL uses SwiftShader, so 3D device frames render differently from a real
   GPU.
 - Use `/usr/local/bin/osg` (pinned Node 20), not a system `npx`.
-- Render output is disposable and gitignored; commit the source project and the
-  final PNGs you want in `docs/images/store/`.
+- Render output is disposable and gitignored. Do not commit it to `docs/`; use
+  `promo/` for a local preview and the rendered files for the App Store upload.

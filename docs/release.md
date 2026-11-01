@@ -144,9 +144,10 @@ the copy. In App Store Connect also complete:
   Collected*, because the developer never receives the data and the app has no
   analytics or developer backend.
 - **Age rating** — 4+.
-- **Screenshots** — upload the eight boards from `docs/images/store/` in
-  order. The first is the most important. The target is iPhone-only
-  (`TARGETED_DEVICE_FAMILY = "1"`), so no iPad screenshots are required.
+- **Screenshots** — render the five boards with `osg/build_project.py` and
+  upload them in order: the app screenshot, then the four feature panels. The
+  target is iPhone-only (`TARGETED_DEVICE_FAMILY = "1"`), so no iPad screenshots
+  are required.
 - **Export compliance** — `ITSAppUsesNonExemptEncryption` is already `false`;
   the app only uses standard HTTPS.
 - **Review notes** — copy `appstore/review-notes.txt` and fill in the contact

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # ruff: noqa: E501
-"""Render the app-screen mockups used by the OSG promotion boards.
+"""Render the setup-screen mockup used by the App Store screenshot.
 
-The real app screenshots come from the simulator; these are matching technical
-mockups for the screens we cannot capture on this Linux box. They are plain
+The real app screenshot comes from the simulator; this is a matching mockup for
+the setup screen so the first board can show an "Authorized" state. It is plain
 HTML rendered with headless Chrome, so the copy and layout stay editable.
 
     python3 osg/make_screens.py
@@ -516,19 +516,29 @@ def screen_01_setup() -> str:
         </div>
         <div class="footer">The first sync exports your full HealthKit history, then keeps it current in the background.</div>
       </section>
+
+      <section class="section">
+        <div class="section-title">Result</div>
+        <div class="card">
+          <div class="row" style="display:block"><div style="font-size:31px;line-height:1.4;color:#8E8E93">Sync complete — 24 metrics sent, 0 ignored.</div></div>
+          <div class="row"><span>Last successful sync</span><span class="value">Today, 15:24</span></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Latest Values</div>
+        <div class="card">
+          <div class="row"><span>Steps</span><span style="font-size:42px">8,412</span></div>
+          <div class="row"><span>Resting heart rate</span><span style="font-size:42px">58 bpm</span></div>
+          <div class="row"><span>Sleep</span><span style="font-size:42px">7h 32m</span></div>
+        </div>
+      </section>
     </body></html>
     """
 
 
 SCREENS = {
     "01-setup": screen_01_setup,
-    "02-sync": screen_02_sync,
-    "03-values": screen_03_values,
-    "04-privacy": screen_04_privacy,
-    "05-qr": screen_05_qr,
-    "06-search": screen_06_search,
-    "07-product": screen_07_product,
-    "08-sponsor": screen_08_sponsor,
 }
 
 
@@ -626,7 +636,6 @@ def main() -> None:
                 stderr=subprocess.DEVNULL,
             )
             print(f"wrote {out}")
-    make_og(chrome)
 
 
 if __name__ == "__main__":
