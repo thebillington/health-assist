@@ -155,22 +155,31 @@ class AppleHealthSyncOptionsFlow(config_entries.OptionsFlow):
             )
 
         secret = get_entry_secret(entry)
+        webhook_id = entry.data.get(CONF_WEBHOOK_ID)
+        webhook_url = (
+            _build_webhook_url(self.hass, str(webhook_id))
+            if webhook_id is not None
+            else "Not available"
+        )
+
         schema: dict = {
             vol.Optional(CONF_SECRET, default=secret): selector.TextSelector(
                 selector.TextSelectorConfig(
                     type=selector.TextSelectorType.PASSWORD,
                 )
             ),
-            vol.Optional(CONF_METRICS, default=get_entry_metrics(entry)): cv.multi_select(
-                METRIC_NAMES
-            ),
         }
-        webhook_id = entry.data.get(CONF_WEBHOOK_ID)
         if webhook_id is not None:
-            schema.update(_qr_field(_build_webhook_url(self.hass, str(webhook_id)), secret))
+            schema.update(_qr_field(webhook_url, secret))
+        schema[vol.Optional(CONF_METRICS, default=get_entry_metrics(entry))] = cv.multi_select(
+            METRIC_NAMES
+        )
 
         return self.async_show_form(
             step_id="init",
             data_schema=vol.Schema(schema),
-            description_placeholders={"metric_count": str(len(METRIC_NAMES))},
+            description_placeholders={
+                "metric_count": str(len(METRIC_NAMES)),
+                "webhook_url": webhook_url,
+            },
         )

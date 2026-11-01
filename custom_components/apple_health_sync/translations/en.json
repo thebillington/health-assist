@@ -34,7 +34,7 @@
     "step": {
       "init": {
         "title": "Apple Health Sync options",
-        "description": "Update the shared secret or choose which of the {metric_count} built-in metrics become entities. Leave the allow-list empty to enable all of them. The webhook URL does not change.\n\nScan the QR code with the iPhone Camera to import the webhook URL and shared secret into the app.",
+        "description": "**Webhook URL**\n\n`{webhook_url}`\n\nThe webhook URL does not change. Update the shared secret or choose which of the {metric_count} built-in metrics become entities. Leave the allow-list empty to enable all of them.\n\nScan the QR code with the iPhone Camera to import the webhook URL and shared secret into the app.",
         "data": {
           "secret": "Shared secret (optional)",
           "metrics": "Metric allow-list",

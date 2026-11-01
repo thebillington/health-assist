@@ -5,10 +5,11 @@ struct ContentView: View {
     @StateObject private var model = AppModel()
     @Environment(\.scenePhase) private var scenePhase
     @State private var showingScanner = false
+    @State private var showingReplaceConfirmation = false
 
     var body: some View {
         NavigationStack {
-            ScrollViewReader { proxy in
+            ScrollViewReader { _ in
                 Form {
                     Section {
                         TextField("https://home.example.com/api/webhook/…", text: $model.webhookURL)
@@ -21,6 +22,12 @@ struct ContentView: View {
                             .autocorrectionDisabled()
 
                         Toggle("Sync when the app opens", isOn: $model.syncOnOpen)
+
+                        Button {
+                            requestScan()
+                        } label: {
+                            Label("Scan QR Code", systemImage: "qrcode.viewfinder")
+                        }
                     } header: {
                         Text("Home Assistant")
                     } footer: {
@@ -59,15 +66,14 @@ struct ContentView: View {
                         Button {
                             Task { await model.sync() }
                         } label: {
-                            HStack {
-                                Spacer()
+                            HStack(spacing: 8) {
                                 if model.isSyncing {
                                     ProgressView()
-                                        .padding(.trailing, 6)
+                                        .controlSize(.small)
                                 }
                                 Text(model.isSyncing ? "Syncing…" : "Sync Now")
-                                Spacer()
                             }
+                            .frame(maxWidth: .infinity, alignment: .leading)
                         }
                         .disabled(model.isSyncing)
 
@@ -154,16 +160,6 @@ struct ContentView: View {
                     }
                 }
                 .navigationTitle("Apple Health Sync")
-                .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button {
-                            showingScanner = true
-                        } label: {
-                            Label("Scan QR", systemImage: "qrcode.viewfinder")
-                        }
-                        .accessibilityLabel("Scan QR Code")
-                    }
-                }
                 .onChange(of: model.webhookURL) { _, _ in model.saveSettings() }
                 .onChange(of: model.secret) { _, _ in model.saveSettings() }
                 .onChange(of: model.syncOnOpen) { _, _ in model.saveSettings() }
@@ -171,12 +167,6 @@ struct ContentView: View {
                     model.saveSettings()
                     model.updateBackgroundDelivery()
                     Task { await model.refreshHealthStatus() }
-                }
-                .onChange(of: model.lastSync) { _, newValue in
-                    guard newValue != nil else { return }
-                    withAnimation {
-                        proxy.scrollTo("result", anchor: .top)
-                    }
                 }
                 .onOpenURL { url in
                     model.importConfiguration(from: url)
@@ -188,6 +178,17 @@ struct ContentView: View {
                     }
                     .ignoresSafeArea()
                 }
+                .alert(
+                    "Replace Home Assistant details?",
+                    isPresented: $showingReplaceConfirmation
+                ) {
+                    Button("Cancel", role: .cancel) {}
+                    Button("Replace", role: .destructive) {
+                        showingScanner = true
+                    }
+                } message: {
+                    Text("Scanning a QR code will replace the current webhook URL and shared secret.")
+                }
                 .task { await model.prepare() }
                 .onChange(of: scenePhase) { _, newPhase in
                     if newPhase == .active {
@@ -196,6 +197,16 @@ struct ContentView: View {
                     }
                 }
             }
+        }
+    }
+
+    private func requestScan() {
+        let hasDetails = !model.webhookURL.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+            || !model.secret.isEmpty
+        if hasDetails {
+            showingReplaceConfirmation = true
+        } else {
+            showingScanner = true
         }
     }
 

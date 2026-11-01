@@ -60,8 +60,9 @@ Copy `custom_components/apple_health_sync` into your Home Assistant
 4. Select **Submit**. The next screen shows the full webhook URL, the shared
    secret and a QR code.
 5. Open the app and tap **Scan QR Code**, or scan the QR with the iPhone Camera
-   from another screen. You can also copy the URL and secret manually. Trigger
-   a sync. Sensors appear within a few seconds.
+   from another screen. If the app already has details, it asks before replacing
+   them. You can also copy the URL and secret manually. Trigger a sync. Sensors
+   appear within a few seconds.
 
 The webhook URL looks like:
 

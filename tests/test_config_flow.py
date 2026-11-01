@@ -124,6 +124,8 @@ async def test_options_update_secret_and_allow_list(hass: HomeAssistant) -> None
     assert result["type"] is FlowResultType.FORM
     assert result["step_id"] == "init"
 
+    assert TEST_WEBHOOK_ID in result["description_placeholders"]["webhook_url"]
+
     qr = qr_data(result["data_schema"])
     assert qr is not None
     parsed = urlparse(qr)
