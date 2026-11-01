@@ -154,6 +154,16 @@ struct ContentView: View {
                     }
                 }
                 .navigationTitle("Apple Health Sync")
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            showingScanner = true
+                        } label: {
+                            Label("Scan QR", systemImage: "qrcode.viewfinder")
+                        }
+                        .accessibilityLabel("Scan QR Code")
+                    }
+                }
                 .onChange(of: model.webhookURL) { _, _ in model.saveSettings() }
                 .onChange(of: model.secret) { _, _ in model.saveSettings() }
                 .onChange(of: model.syncOnOpen) { _, _ in model.saveSettings() }
