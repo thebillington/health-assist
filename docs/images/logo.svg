@@ -1,6 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="180" viewBox="0 0 760 180" role="img" aria-label="Health Assist">
-  <rect x="0" y="0" width="180" height="180" rx="40" fill="#0F766E"/>
-  <path d="M90 142c-6-5-52-38-52-70 0-20 15-34 33-34 9 0 17 4 19 10 2-6 10-10 19-10 18 0 33 14 33 34 0 32-46 65-52 70z" fill="#FFFFFF"/>
-  <text x="210" y="92" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="52" font-weight="700" fill="#0F766E">Health Assist</text>
-  <text x="212" y="128" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" fill="#4B5563">Apple Health → Home Assistant</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="180" viewBox="0 0 760 180" role="img" aria-label="Health Assist — Apple Health to Home Assistant">
+  <defs>
+    <linearGradient id="mark-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#14B8A6"/>
+      <stop offset="1" stop-color="#0F766E"/>
+    </linearGradient>
+    <linearGradient id="mark-heart" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F0FDFA"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="180" height="180" rx="40" fill="url(#mark-bg)"/>
+  <circle cx="40" cy="34" r="74" fill="#FFFFFF" opacity="0.07"/>
+
+  <g transform="translate(0 0) scale(0.17578125)">
+    <path d="M512 806 C 476 776, 244 608, 244 424 C 244 322, 319 252, 411 252 C 462 252, 498 278, 512 306 C 526 278, 562 252, 613 252 C 705 252, 780 322, 780 424 C 780 608, 548 776, 512 806 Z"
+          fill="url(#mark-heart)"/>
+    <path d="M512 392 L 664 514 L 620 514 L 620 664 L 404 664 L 404 514 L 360 514 Z"
+          fill="#0F766E"/>
+    <path d="M496 556 H 528 V 588 H 560 V 620 H 528 V 652 H 496 V 620 H 464 V 588 H 496 Z"
+          fill="#FFFFFF"/>
+  </g>
+
+  <text x="210" y="91" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="52" font-weight="700" fill="#0F172A">Health Assist</text>
+  <text x="212" y="128" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" font-weight="500" fill="#475569">Apple Health → Home Assistant</text>
 </svg>

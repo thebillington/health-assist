@@ -1,4 +1,4 @@
-Health Assist connects Apple Health to your own Home Assistant — no cloud service, no account and no subscription.
+Health Assist connects Apple Health to your own Home Assistant — no vendor cloud, no account and no subscription.
 
 The app reads your Apple Health data with HealthKit and sends it straight to a webhook on your Home Assistant instance. Home Assistant creates native sensors and long-term statistics, so you can automate, chart and alert on your health data alongside the rest of your home.
 

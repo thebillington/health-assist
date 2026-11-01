@@ -9,7 +9,7 @@ iOS app. The app reads Apple Health with HealthKit and pushes the data over a
 local webhook. Home Assistant exposes it as native sensors and long-term
 statistics.
 
-![Health Assist iOS app](images/app.png)
+<img src="images/app.png" alt="Health Assist promotion board" style="display:block;width:100%;max-width:420px;margin:0 auto;border-radius:18px">
 
 ## Why
 
@@ -27,6 +27,16 @@ statistics.
 1. [Install the Home Assistant integration](install.md).
 2. [Add a device and scan the QR code](setup.md) from the iOS app.
 3. Grant Apple Health access and run the first sync.
+
+## Screenshots
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px">
+  <img src="images/store/01-setup.png" alt="Health Assist setup screen" style="width:100%;border-radius:14px">
+  <img src="images/store/03-sensors.png" alt="Health Assist latest values" style="width:100%;border-radius:14px">
+  <img src="images/store/05-sponsor.png" alt="Health Assist sponsor screen" style="width:100%;border-radius:14px">
+</div>
+
+[See all screenshots and promotion material](screenshots.md).
 
 ## Project status
 

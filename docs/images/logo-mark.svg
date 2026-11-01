@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="Health Assist mark">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#14B8A6"/>
+      <stop offset="1" stop-color="#0F766E"/>
+    </linearGradient>
+    <linearGradient id="heart" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F0FDFA"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#042F2E" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <circle cx="236" cy="196" r="420" fill="#FFFFFF" opacity="0.07"/>
+  <circle cx="860" cy="900" r="360" fill="#042F2E" opacity="0.10"/>
+
+  <!-- Heart -->
+  <path d="M512 806 C 476 776, 244 608, 244 424 C 244 322, 319 252, 411 252 C 462 252, 498 278, 512 306 C 526 278, 562 252, 613 252 C 705 252, 780 322, 780 424 C 780 608, 548 776, 512 806 Z"
+        fill="url(#heart)" filter="url(#soft)"/>
+
+  <!-- House cut out of the heart -->
+  <path d="M512 392 L 664 514 L 620 514 L 620 664 L 404 664 L 404 514 L 360 514 Z"
+        fill="#0F766E"/>
+
+  <!-- Health plus in the house -->
+  <path d="M496 556 H 528 V 588 H 560 V 620 H 528 V 652 H 496 V 620 H 464 V 588 H 496 Z"
+        fill="#FFFFFF"/>
+</svg>

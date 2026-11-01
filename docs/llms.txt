@@ -24,6 +24,7 @@
 ## Pages
 
 - [Home](https://healthassist.thebillington.co.uk/): why the project exists and how it fits together.
+- [Screenshots](https://healthassist.thebillington.co.uk/screenshots/): App Store screenshots and promotion material.
 - [Install](https://healthassist.thebillington.co.uk/install/): HACS and manual installation.
 - [Setup](https://healthassist.thebillington.co.uk/setup/): add a device and scan the QR code.
 - [Webhook contract](https://healthassist.thebillington.co.uk/webhook/): the boundary between the iOS app and Home Assistant.

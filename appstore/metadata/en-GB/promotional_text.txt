@@ -1,1 +1,1 @@
-Lightweight, local-first Apple Health sync for Home Assistant. Full history, background updates, no account and no cloud.
+Lightweight, local-first Apple Health sync for Home Assistant. Full history, background updates, no account and no vendor cloud.

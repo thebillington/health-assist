@@ -31,9 +31,9 @@ const config: OsgConfig = {
   // They are used in filename order, so name them 01-, 02-, 03-.
   screenshots: 'screenshots',
 
-  // 'auto' ranks the 101 bundled templates against your screenshots and picks
-  // one. Pin an id from "osg templates" to stop it changing between runs.
-  template: 'template_somnia-sleep',
+  // The committed project is custom-built by osg/build_project.py; fill is not
+  // used. Uncomment a template only if you switch back to a gallery template.
+  // template: 'template_somnia-sleep',
 
   // Store size presets to render. Run "osg render --help" for the full list.
   formats: ['ios-6-9'],

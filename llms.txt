@@ -20,6 +20,7 @@
 - Security: optional shared secret in the `X-Webhook-Secret` header; webhook URL and secret stored in the iOS Keychain
 - Privacy: no developer-side collection; data goes only to the user's Home Assistant
 - Privacy policy: https://healthassist.thebillington.co.uk/privacy/
+- Screenshots: https://healthassist.thebillington.co.uk/screenshots/
 - Not yet supported: workouts, ECG and clinical records as entities; default HACS store listing; App Store release
 - Sponsor My Work: https://github.com/sponsors/thebillington
 
@@ -27,6 +28,7 @@
 
 - `README.md` — installation, setup, webhook contract, metric registry and development.
 - `docs/index.md` — project overview.
+- `docs/screenshots.md` — App Store screenshots and promotion material.
 - `docs/install.md` — HACS and manual installation.
 - `docs/setup.md` — add a device and scan the QR code.
 - `docs/webhook.md` — the boundary between the app and Home Assistant.
