@@ -50,6 +50,22 @@ struct WebhookClient {
         url: URL,
         secret: String
     ) async throws -> WebhookResponse {
+        try await send(data: payload.encoded(), url: url, secret: secret)
+    }
+
+    func send(
+        history: HistoryPayload,
+        url: URL,
+        secret: String
+    ) async throws -> WebhookResponse {
+        try await send(data: history.encoded(), url: url, secret: secret)
+    }
+
+    private func send(
+        data: Data,
+        url: URL,
+        secret: String
+    ) async throws -> WebhookResponse {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.timeoutInterval = 30
@@ -61,7 +77,7 @@ struct WebhookClient {
             request.setValue(trimmedSecret, forHTTPHeaderField: "X-Webhook-Secret")
         }
 
-        request.httpBody = try payload.encoded()
+        request.httpBody = data
 
         let configuration = URLSessionConfiguration.ephemeral
         configuration.timeoutIntervalForRequest = 30

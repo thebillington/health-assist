@@ -1,9 +1,16 @@
 {
   "domain": "apple_health_sync",
   "name": "Apple Health Sync",
-  "codeowners": ["@thebillington"],
+  "after_dependencies": [
+    "recorder"
+  ],
+  "codeowners": [
+    "@thebillington"
+  ],
   "config_flow": true,
-  "dependencies": ["webhook"],
+  "dependencies": [
+    "webhook"
+  ],
   "documentation": "https://github.com/thebillington/homeassist-apple-health-importer",
   "integration_type": "service",
   "iot_class": "local_push",

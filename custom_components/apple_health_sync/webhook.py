@@ -18,6 +18,7 @@ from homeassistant.util import dt as dt_util
 from homeassistant.util import slugify
 
 from .const import (
+    MAX_HISTORY_SAMPLES,
     MAX_METRIC_KEY_LENGTH,
     MAX_METRICS_PER_PAYLOAD,
     MAX_PAYLOAD_BYTES,
@@ -28,6 +29,7 @@ from .const import (
     signal_new_data,
 )
 from .helpers import get_entry_secret, metric_is_allowed
+from .history import HistoryMetric, HistorySample, async_import_history, isoformat
 from .store import HealthDataStore, MetricValue
 
 _LOGGER = logging.getLogger(__name__)
@@ -61,7 +63,19 @@ async def async_handle_webhook(
         _LOGGER.warning("Rejected Apple Health webhook larger than %s bytes", MAX_PAYLOAD_BYTES)
         return _error(HTTPStatus.REQUEST_ENTITY_TOO_LARGE, "payload too large")
 
-    body = await request.content.read(MAX_PAYLOAD_BYTES + 1)
+    # Read in bounded chunks until EOF. A single StreamReader.read(n) can
+    # return less than n for a large/chunked request through a reverse proxy,
+    # which would otherwise truncate the JSON body.
+    chunks: list[bytes] = []
+    remaining = MAX_PAYLOAD_BYTES + 1
+    content = request.content
+    while remaining > 0:
+        chunk = await content.read(min(remaining, 64 * 1024))
+        if not chunk:
+            break
+        chunks.append(chunk)
+        remaining -= len(chunk)
+    body = b"".join(chunks)
     if len(body) > MAX_PAYLOAD_BYTES:
         _LOGGER.warning("Rejected Apple Health webhook larger than %s bytes", MAX_PAYLOAD_BYTES)
         return _error(HTTPStatus.REQUEST_ENTITY_TOO_LARGE, "payload too large")
@@ -75,12 +89,19 @@ async def async_handle_webhook(
     if not isinstance(payload, dict):
         return _error(HTTPStatus.BAD_REQUEST, "payload must be a JSON object")
 
-    raw_metrics = payload.get("metrics")
-    if not isinstance(raw_metrics, dict) or not raw_metrics:
-        return _error(HTTPStatus.BAD_REQUEST, "missing or invalid 'metrics' object")
-
+    raw_metrics = payload.get("metrics", {})
+    raw_history = payload.get("history", {})
+    if not isinstance(raw_metrics, dict) or not isinstance(raw_history, dict):
+        return _error(HTTPStatus.BAD_REQUEST, "invalid metrics or history object")
+    if not raw_metrics and not raw_history:
+        return _error(
+            HTTPStatus.BAD_REQUEST,
+            "missing metrics/history: provide 'metrics' or 'history'",
+        )
     if len(raw_metrics) > MAX_METRICS_PER_PAYLOAD:
         return _error(HTTPStatus.BAD_REQUEST, "too many metrics in payload")
+    if len(raw_history) > MAX_METRICS_PER_PAYLOAD:
+        return _error(HTTPStatus.BAD_REQUEST, "too many history metrics in payload")
 
     received_at = _utc_now_iso()
     last_sync = _parse_timestamp(payload.get("timestamp")) or received_at
@@ -96,9 +117,23 @@ async def async_handle_webhook(
             device_id=device_id,
             device_name=device_name,
         )
+        history, history_values, history_ignored = _parse_history(
+            raw_history,
+            entry=entry,
+            received_at=received_at,
+            device_id=device_id,
+            device_name=device_name,
+            existing_units={key: value.unit for key, value in values.items()},
+        )
     except InvalidPayload as err:
         _LOGGER.debug("Rejected Apple Health webhook: %s", err)
         return _error(HTTPStatus.BAD_REQUEST, str(err))
+
+    ignored += history_ignored
+    # A live metrics snapshot wins over the latest historical value; a
+    # history-only request uses the latest sample to create/update sensors.
+    for key, value in history_values.items():
+        values.setdefault(key, value)
 
     accepted = len(values)
     store.update(
@@ -110,20 +145,28 @@ async def async_handle_webhook(
 
     if values:
         async_dispatcher_send(hass, signal_new_data(entry.entry_id), set(values))
+    if history:
+        hass.async_create_task(async_import_history(hass, entry, history))
 
     _LOGGER.debug(
-        "Apple Health webhook for entry %s: %s metric(s) accepted, %s ignored",
+        "Apple Health webhook for entry %s: %s metric(s) accepted, %s ignored, "
+        "%s history metric(s)",
         entry.entry_id,
         accepted,
         ignored,
+        len(history),
     )
-    return web.json_response(
-        {
-            "status": "ok",
-            "accepted": accepted,
-            "ignored": ignored,
+    result: dict[str, Any] = {
+        "status": "ok",
+        "accepted": accepted,
+        "ignored": ignored,
+    }
+    if history:
+        result["history"] = {
+            "metrics": len(history),
+            "samples": sum(len(metric.samples) for metric in history.values()),
         }
-    )
+    return web.json_response(result)
 
 
 def _parse_metrics(
@@ -229,6 +272,15 @@ def _normalize_metric_key(raw_key: Any) -> str | None:
 
 def _parse_timestamp(raw_timestamp: Any) -> str | None:
     """Parse an ISO 8601 timestamp and normalize it to UTC, if possible."""
+    parsed = _parse_timestamp_datetime(raw_timestamp)
+    if parsed is None:
+        _LOGGER.debug("Ignoring invalid timestamp in Apple Health payload")
+        return None
+    return isoformat(parsed)
+
+
+def _parse_timestamp_datetime(raw_timestamp: Any) -> datetime | None:
+    """Parse an ISO 8601 timestamp into an aware UTC datetime."""
     if not isinstance(raw_timestamp, str) or not raw_timestamp.strip():
         return None
 
@@ -239,12 +291,11 @@ def _parse_timestamp(raw_timestamp: Any) -> str | None:
     try:
         parsed = datetime.fromisoformat(text)
     except ValueError:
-        _LOGGER.debug("Ignoring invalid timestamp in Apple Health payload")
         return None
 
     if parsed.tzinfo is None:
         parsed = parsed.replace(tzinfo=UTC)
-    return parsed.astimezone(UTC).isoformat().replace("+00:00", "Z")
+    return parsed.astimezone(UTC)
 
 
 def _clean_text(raw_value: Any, max_length: int) -> str | None:
@@ -271,3 +322,98 @@ def _utc_now_iso() -> str:
 def _error(status: HTTPStatus, message: str) -> web.Response:
     """Build a small JSON error response."""
     return web.json_response({"error": message}, status=status)
+
+
+def _parse_history(
+    raw_history: dict[str, Any],
+    *,
+    entry: ConfigEntry,
+    received_at: str,
+    device_id: str | None,
+    device_name: str | None,
+    existing_units: dict[str, str | None],
+) -> tuple[dict[str, HistoryMetric], dict[str, MetricValue], int]:
+    """Validate and normalize historical samples."""
+    history: dict[str, HistoryMetric] = {}
+    values: dict[str, MetricValue] = {}
+    ignored = 0
+    total_samples = 0
+
+    for raw_key, raw_samples in raw_history.items():
+        if not isinstance(raw_samples, list) or not raw_samples:
+            raise InvalidPayload("history entries must be non-empty arrays")
+
+        total_samples += len(raw_samples)
+        if total_samples > MAX_HISTORY_SAMPLES:
+            raise InvalidPayload("too many history samples in payload")
+
+        key = _normalize_metric_key(raw_key)
+        if key is None:
+            ignored += 1
+            _LOGGER.debug("Ignored history metric with an unusable key")
+            continue
+
+        definition = METRICS.get(key)
+        unit = existing_units.get(key)
+        if unit is None and definition is not None:
+            unit = definition.unit
+
+        samples: list[HistorySample] = []
+        for raw_sample in raw_samples:
+            parsed = _parse_history_sample(raw_sample)
+            if parsed is None:
+                raise InvalidPayload(f"invalid history sample for metric '{key}'")
+            timestamp, value, sample_unit = parsed
+            if sample_unit is not None and unit is None:
+                unit = sample_unit
+            samples.append(
+                HistorySample(
+                    timestamp=timestamp,
+                    value=value,
+                    unit=sample_unit or unit,
+                )
+            )
+
+        if not metric_is_allowed(entry, key):
+            ignored += 1
+            _LOGGER.debug(
+                "Ignored history metric '%s' because it is not in the allow-list",
+                key,
+            )
+            continue
+
+        metric = HistoryMetric(unit=unit, samples=tuple(samples))
+        history[key] = metric
+        latest = metric.latest
+
+        values[key] = MetricValue(
+            value=latest.value,
+            unit=latest.unit or unit,
+            last_sync=isoformat(latest.timestamp),
+            received_at=received_at,
+            device_id=device_id,
+            device_name=device_name,
+            generic=definition is None,
+            historical=True,
+        )
+
+    return history, values, ignored
+
+
+def _parse_history_sample(raw_sample: Any) -> tuple[datetime, float | int, str | None] | None:
+    """Return a validated (timestamp, value, unit) history sample."""
+    if not isinstance(raw_sample, dict) or "timestamp" not in raw_sample:
+        return None
+
+    timestamp = _parse_timestamp_datetime(raw_sample["timestamp"])
+    if timestamp is None:
+        return None
+
+    parsed_value = _parse_metric_value(
+        {"value": raw_sample.get("value"), "unit": raw_sample.get("unit")}
+    )
+    if parsed_value is None:
+        return None
+
+    value, unit = parsed_value
+    return timestamp, value, unit

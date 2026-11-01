@@ -74,10 +74,15 @@ struct ContentView: View {
                             Task { await model.sendTestPayload() }
                         }
                         .disabled(model.isSyncing)
+
+                        Button("Re-export All History") {
+                            Task { await model.reexportAllHistory() }
+                        }
+                        .disabled(model.isSyncing)
                     } header: {
                         Text("Sync")
                     } footer: {
-                        Text("The test payload uses fixed sample values and works without HealthKit, including in the iOS simulator. On a physical iPhone, HealthKit background delivery syncs hourly and a weekly fallback is scheduled when iOS allows it.")
+                        Text("The first sync exports your full HealthKit history in resumable chunks, then keeps it up to date. The test payload uses fixed sample values and works without HealthKit, including in the iOS simulator. On a physical iPhone, background delivery syncs hourly and a weekly fallback is scheduled when iOS allows it.")
                     }
 
                     Section {

@@ -8,6 +8,9 @@ final class SettingsStore {
     private let syncOnOpenKey = "syncOnOpen"
     private let deviceIDKey = "deviceID"
     private let lastBackgroundSyncKey = "lastBackgroundSync"
+    private let historyCompleteKey = "historyFullExportComplete"
+    private let lastHistoryExportKey = "lastHistoryExport"
+    private let historyCheckpointsKey = "historyCheckpoints"
 
     private let keychainService = "uk.rebecchi.applehealthsync"
     private let urlAccount = "webhook-url"
@@ -31,6 +34,44 @@ final class SettingsStore {
     var lastBackgroundSync: Date? {
         get { defaults.object(forKey: lastBackgroundSyncKey) as? Date }
         set { defaults.set(newValue, forKey: lastBackgroundSyncKey) }
+    }
+
+    var historyFullExportComplete: Bool {
+        get { defaults.bool(forKey: historyCompleteKey) }
+        set { defaults.set(newValue, forKey: historyCompleteKey) }
+    }
+
+    var lastHistoryExport: Date? {
+        get { defaults.object(forKey: lastHistoryExportKey) as? Date }
+        set {
+            if let newValue {
+                defaults.set(newValue, forKey: lastHistoryExportKey)
+            } else {
+                defaults.removeObject(forKey: lastHistoryExportKey)
+            }
+        }
+    }
+
+    func historyCheckpoint(for key: String) -> Date? {
+        let checkpoints = defaults.dictionary(forKey: historyCheckpointsKey) ?? [:]
+        guard let timestamp = checkpoints[key] as? Double else { return nil }
+        return Date(timeIntervalSince1970: timestamp)
+    }
+
+    func setHistoryCheckpoint(_ date: Date?, for key: String) {
+        var checkpoints = defaults.dictionary(forKey: historyCheckpointsKey) ?? [:]
+        if let date {
+            checkpoints[key] = date.timeIntervalSince1970
+        } else {
+            checkpoints.removeValue(forKey: key)
+        }
+        defaults.set(checkpoints, forKey: historyCheckpointsKey)
+    }
+
+    func resetHistoryCheckpoints() {
+        defaults.removeObject(forKey: historyCheckpointsKey)
+        defaults.removeObject(forKey: historyCompleteKey)
+        defaults.removeObject(forKey: lastHistoryExportKey)
     }
 
     var deviceID: String {

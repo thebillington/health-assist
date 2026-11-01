@@ -8,6 +8,7 @@ from homeassistant.core import HomeAssistant
 
 from custom_components.apple_health_sync.const import (
     DOMAIN,
+    MAX_HISTORY_SAMPLES,
     MAX_METRICS_PER_PAYLOAD,
     MAX_PAYLOAD_BYTES,
 )
@@ -361,3 +362,226 @@ async def test_http_endpoint_accepts_real_requests(
         },
     )
     assert oversized.status == 413
+
+
+async def test_history_only_payload_updates_latest_and_queues_import(
+    hass: HomeAssistant, monkeypatch
+) -> None:
+    """History-only payloads create sensors and queue statistics imports."""
+    entry = make_entry()
+    await setup_entry(hass, entry)
+
+    imported: dict = {}
+
+    async def fake_import(hass, entry, history):
+        imported.update(history)
+
+    monkeypatch.setattr(
+        "custom_components.apple_health_sync.webhook.async_import_history",
+        fake_import,
+    )
+
+    response = await post_payload(
+        hass,
+        TEST_WEBHOOK_ID,
+        {
+            "device_id": "iphone-abc123",
+            "history": {
+                "weight": [
+                    {"timestamp": "2026-10-30T08:00:00Z", "value": 71.9, "unit": "kg"},
+                    {"timestamp": "2026-10-31T08:00:00Z", "value": 71.5, "unit": "kg"},
+                ],
+                "steps": [
+                    {"timestamp": "2026-10-30T00:00:00Z", "value": 8000},
+                ],
+            },
+        },
+    )
+
+    assert response.status == 200
+    body = json.loads(response.body)
+    assert body["accepted"] == 2
+    assert body["history"] == {"metrics": 2, "samples": 3}
+
+    store = hass.data[DOMAIN][entry.entry_id]
+    weight = store.get("weight")
+    assert weight is not None
+    assert weight.value == 71.5
+    assert weight.last_sync == "2026-10-31T08:00:00Z"
+    assert weight.historical is True
+
+    assert set(imported) == {"weight", "steps"}
+    assert len(imported["weight"].samples) == 2
+
+    await hass.async_block_till_done()
+    state = hass.states.get("sensor.test_phone_weight")
+    assert state is not None
+    assert state.state == "71.5"
+
+
+async def test_live_metrics_win_over_history(hass: HomeAssistant, monkeypatch) -> None:
+    """A live snapshot is not regressed by an older history chunk."""
+    entry = make_entry()
+    await setup_entry(hass, entry)
+
+    async def fake_import(hass, entry, history):
+        return None
+
+    monkeypatch.setattr(
+        "custom_components.apple_health_sync.webhook.async_import_history",
+        fake_import,
+    )
+
+    await post_payload(
+        hass,
+        TEST_WEBHOOK_ID,
+        {"metrics": {"weight": {"value": 72.4, "unit": "kg"}}},
+    )
+    await post_payload(
+        hass,
+        TEST_WEBHOOK_ID,
+        {
+            "history": {
+                "weight": [
+                    {"timestamp": "2026-10-30T08:00:00Z", "value": 60.0, "unit": "kg"},
+                ]
+            }
+        },
+    )
+    await hass.async_block_till_done()
+
+    assert hass.data[DOMAIN][entry.entry_id].get("weight").value == 72.4
+    assert hass.states.get("sensor.test_phone_weight").state == "72.4"
+
+
+async def test_history_allow_list_filters_metrics(hass: HomeAssistant, monkeypatch) -> None:
+    """Known metrics outside the allow-list are not imported from history."""
+    entry = make_entry(metrics=["weight"])
+    await setup_entry(hass, entry)
+
+    imported: dict = {}
+
+    async def fake_import(hass, entry, history):
+        imported.update(history)
+
+    monkeypatch.setattr(
+        "custom_components.apple_health_sync.webhook.async_import_history",
+        fake_import,
+    )
+
+    response = await post_payload(
+        hass,
+        TEST_WEBHOOK_ID,
+        {
+            "history": {
+                "weight": [{"timestamp": "2026-10-30T08:00:00Z", "value": 71.5}],
+                "steps": [{"timestamp": "2026-10-30T00:00:00Z", "value": 8000}],
+                "custom_metric": [{"timestamp": "2026-10-30T08:00:00Z", "value": 3}],
+            }
+        },
+    )
+
+    assert response.status == 200
+    body = json.loads(response.body)
+    assert body["ignored"] == 1
+    assert set(imported) == {"weight", "custom_metric"}
+    assert hass.data[DOMAIN][entry.entry_id].get("steps") is None
+
+
+async def test_history_validates_samples(hass: HomeAssistant) -> None:
+    """History requires a timestamp and a finite numeric value."""
+    entry = make_entry()
+    await setup_entry(hass, entry)
+
+    for history in (
+        {"weight": []},
+        {"weight": [{"value": 72.4}]},
+        {"weight": [{"timestamp": "not-a-date", "value": 72.4}]},
+        {"weight": [{"timestamp": "2026-10-30T08:00:00Z", "value": "heavy"}]},
+        {"weight": [{"timestamp": "2026-10-30T08:00:00Z", "value": True}]},
+    ):
+        response = await post_payload(hass, TEST_WEBHOOK_ID, {"history": history})
+        assert response.status == 400, history
+
+
+async def test_too_many_history_samples_returns_400(hass: HomeAssistant) -> None:
+    """History requests have a sample-count cap."""
+    entry = make_entry()
+    await setup_entry(hass, entry)
+
+    samples = [
+        {"timestamp": "2026-10-30T08:00:00Z", "value": index}
+        for index in range(MAX_HISTORY_SAMPLES + 1)
+    ]
+    response = await post_payload(hass, TEST_WEBHOOK_ID, {"history": {"weight": samples}})
+
+    assert response.status == 400
+
+
+def test_build_hourly_statistics_averages_per_hour() -> None:
+    """Samples are collapsed to UTC-hour means."""
+    from datetime import UTC, datetime
+
+    from custom_components.apple_health_sync.history import (
+        HistorySample,
+        build_hourly_statistics,
+    )
+
+    samples = (
+        HistorySample(datetime(2026, 10, 30, 8, 5, tzinfo=UTC), 70, "kg"),
+        HistorySample(datetime(2026, 10, 30, 8, 55, tzinfo=UTC), 72, "kg"),
+        HistorySample(datetime(2026, 10, 30, 9, 10, tzinfo=UTC), 74, "kg"),
+        HistorySample(datetime(2026, 10, 30, 10, 10, tzinfo=UTC), 76, "kg"),
+    )
+
+    stats = build_hourly_statistics(samples)
+    assert len(stats) == 3
+    assert stats[0]["start"] == datetime(2026, 10, 30, 8, tzinfo=UTC)
+    assert stats[0]["mean"] == 71
+    assert stats[1]["mean"] == 74
+    assert stats[2]["mean"] == 76
+
+
+async def test_history_importer_builds_entity_statistics(hass: HomeAssistant, monkeypatch) -> None:
+    """The importer targets the sensor entity and passes hourly means."""
+    from datetime import UTC, datetime
+
+    from custom_components.apple_health_sync.history import (
+        HistoryMetric,
+        HistorySample,
+        async_import_history,
+    )
+
+    entry = make_entry()
+    await setup_entry(hass, entry)
+    await post_payload(hass, TEST_WEBHOOK_ID, {"metrics": {"weight": {"value": 72.4}}})
+    await hass.async_block_till_done()
+
+    captured = {}
+
+    def fake_import(hass, metadata, statistics):
+        captured["metadata"] = metadata
+        captured["statistics"] = statistics
+
+    monkeypatch.setattr(
+        "homeassistant.components.recorder.statistics.async_import_statistics",
+        fake_import,
+    )
+
+    await async_import_history(
+        hass,
+        entry,
+        {
+            "weight": HistoryMetric(
+                unit="kg",
+                samples=(HistorySample(datetime(2026, 10, 30, 8, 5, tzinfo=UTC), 71.5, "kg"),),
+            )
+        },
+    )
+
+    assert captured["metadata"]["statistic_id"] == "sensor.test_phone_weight"
+    assert captured["metadata"]["source"] == "recorder"
+    assert captured["metadata"]["unit_of_measurement"] == "kg"
+    assert captured["statistics"] == [
+        {"start": datetime(2026, 10, 30, 8, tzinfo=UTC), "mean": 71.5}
+    ]

@@ -13,6 +13,7 @@
 		2ABC034BE27916006E1A85B5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8B17068792A82D822CE96A /* ContentView.swift */; };
 		5A003487B906DE2C6D2E53E5 /* AppleHealthSyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6775F6A8407F78A02CB3FBA1 /* AppleHealthSyncApp.swift */; };
 		7CD038BF8565089C51B12588 /* WebhookClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9FDD628532CBEBDBB0288E /* WebhookClient.swift */; };
+		9037425A5A89C75E7C737A9C /* HistoryExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA953277516B7A53D4E7745 /* HistoryExporter.swift */; };
 		C81FB2A8E30A70F897717C2F /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DD0DB313AE969B01105A26 /* SettingsStore.swift */; };
 		C8F443B3006D41F1D72BD035 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB1E7F71C30CAB8B753CC958 /* Assets.xcassets */; };
 		EF96FE400441AC9C394DD024 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBCFC61B99B3FA208A4563F /* HealthKitManager.swift */; };
@@ -25,6 +26,7 @@
 		27DD0DB313AE969B01105A26 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
 		51A540BA566444F1F9771301 /* AppleHealthSync.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppleHealthSync.entitlements; sourceTree = "<group>"; };
 		5BBCFC61B99B3FA208A4563F /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		5FA953277516B7A53D4E7745 /* HistoryExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryExporter.swift; sourceTree = "<group>"; };
 		6775F6A8407F78A02CB3FBA1 /* AppleHealthSyncApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleHealthSyncApp.swift; sourceTree = "<group>"; };
 		7EEF046FD33DBD2446A5ED7B /* MetricCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricCatalog.swift; sourceTree = "<group>"; };
 		842D468A870B08480E037CBA /* AppleHealthSyncCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AppleHealthSyncCore; path = AppleHealthSyncCore; sourceTree = SOURCE_ROOT; };
@@ -57,6 +59,7 @@
 				B56ABD3DF808CACC73F334AF /* BackgroundSyncManager.swift */,
 				BB8B17068792A82D822CE96A /* ContentView.swift */,
 				5BBCFC61B99B3FA208A4563F /* HealthKitManager.swift */,
+				5FA953277516B7A53D4E7745 /* HistoryExporter.swift */,
 				208F175C8471F788197F6AFD /* Info.plist */,
 				7EEF046FD33DBD2446A5ED7B /* MetricCatalog.swift */,
 				27DD0DB313AE969B01105A26 /* SettingsStore.swift */,
@@ -170,6 +173,7 @@
 				2786662E89CA9A1B846F59D5 /* BackgroundSyncManager.swift in Sources */,
 				2ABC034BE27916006E1A85B5 /* ContentView.swift in Sources */,
 				EF96FE400441AC9C394DD024 /* HealthKitManager.swift in Sources */,
+				9037425A5A89C75E7C737A9C /* HistoryExporter.swift in Sources */,
 				226E3313E0898B77511784C2 /* MetricCatalog.swift in Sources */,
 				C81FB2A8E30A70F897717C2F /* SettingsStore.swift in Sources */,
 				7CD038BF8565089C51B12588 /* WebhookClient.swift in Sources */,

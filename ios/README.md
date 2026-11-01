@@ -10,6 +10,8 @@ webhook contract to your Home Assistant instance.
 - Webhook URL and shared secret stored in the iOS Keychain.
 - Manual sync, optional sync when the app opens, HealthKit background
   delivery, and a weekly background fallback.
+- Full historical export on first sync, with resumable per-metric checkpoints
+  and a **Re-export All History** action.
 - "Send a Test Payload" works without HealthKit, including in the iOS
   Simulator.
 
@@ -62,6 +64,29 @@ If the app is on the same LAN, an `http://homeassistant.local:8123/...` or
 `http://192.168.x.x:8123/...` URL works. `NSAllowsLocalNetworking` is enabled
 for local HTTP. For remote access, use HTTPS (Nabu Casa Cloud, a reverse proxy,
 or a VPN).
+
+## Historical export
+
+The first successful sync exports the complete HealthKit history from 2014,
+not just a snapshot. Each metric is queried with an appropriate granularity:
+
+- discrete samples (weight, body fat, blood pressure, VO2 max, …) are sent as
+  individual samples;
+- cumulative activity metrics (steps, distance, energy, water, …) are sent as
+  daily totals;
+- high-frequency metrics (heart rate, HRV, respiratory rate, oxygen, audio
+  exposure, …) are sent as hourly averages;
+- sleep is sent as one total/stage row per sleep session;
+- stand hours are sent as one count per day.
+
+Samples are uploaded in chunks of 1,000 with per-metric checkpoints stored in
+UserDefaults. If the app is interrupted, the next sync resumes where it stopped.
+Home Assistant imports the samples as long-term statistics under the
+corresponding sensor entity, so the Statistics dashboard contains the full
+history. Normal state history cannot be backfilled retroactively by an
+integration.
+
+**Re-export All History** resets every checkpoint and uploads everything again.
 
 ## Background sync
 
@@ -173,8 +198,9 @@ end-to-end checks.
   until it is opened again.
 - Background delivery needs a physical iPhone. The simulator uses the test
   payload path instead.
-- Only the latest sample is sent for point-in-time metrics; activity totals are
-  today's cumulative totals.
+- Live sensor values use the latest sample; history is imported separately as
+  long-term statistics. High-frequency history is hourly-averaged (HA
+  statistics are hourly).
 - Workouts, ECG, clinical records, symptoms and other category/event data are
   not sent in this version.
 - HealthKit read authorization is intentionally opaque: iOS does not tell apps

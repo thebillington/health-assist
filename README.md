@@ -146,22 +146,42 @@ X-Webhook-Secret: <optional shared secret>
 }
 ```
 
+Historical samples use the same endpoint with a `history` object:
+
+```json
+{
+  "device_id": "iphone-abc123",
+  "history": {
+    "weight": [
+      { "timestamp": "2026-10-29T08:00:00Z", "value": 72.0, "unit": "kg" },
+      { "timestamp": "2026-10-30T08:00:00Z", "value": 72.4, "unit": "kg" }
+    ]
+  }
+}
+```
+
 | Field | Required | Description |
 | --- | --- | --- |
-| `metrics` | Yes | Object keyed by metric name. Must not be empty. Maximum 256 metrics per request. |
+| `metrics` | No* | Live snapshot keyed by metric name. Maximum 256 metrics per request. |
 | `metrics.<key>.value` | Yes | Finite JSON number (not a string or boolean). |
 | `metrics.<key>.unit` | No | String, 1–32 characters. Falls back to the registry unit for known metrics. |
+| `history` | No* | Object keyed by metric name, each value an array of timestamped samples. Maximum 2,000 samples per request. |
+| `history.<key>[].timestamp` | Yes | ISO 8601 timestamp. |
+| `history.<key>[].value` | Yes | Finite JSON number. |
+| `history.<key>[].unit` | No | Falls back to the registry unit for known metrics. |
 | `device_id` | No | Stable app/device identifier. Stored as a sensor attribute. |
 | `device_name` | No | Human-readable device name. Stored as a sensor attribute. |
-| `timestamp` | No | ISO 8601 timestamp. Stored as the `last_sync` attribute. |
+| `timestamp` | No | ISO 8601 timestamp. Stored as the `last_sync` attribute for live metrics. |
+
+\* Provide at least one of `metrics` or `history`.
 
 Notes:
 
 - `device_id` and `device_name` are metadata only. The Home Assistant device is
   derived from the config entry, not from the payload.
-- `timestamp` does **not** backdate the Home Assistant state. The state is
-  recorded at receipt time; the app timestamp is exposed as `last_sync`. This
-  avoids writing history out of order.
+- `timestamp` does **not** backdate the live sensor state. The state is
+  recorded at receipt time; the app timestamp is exposed as `last_sync`.
+  Historical values are imported separately as long-term statistics.
 - Keys are slugified (`body fat` → `body_fat`) and bounded to 64 characters
   before they are used. Keys that cannot be slugified are ignored.
 - Unknown metric keys are accepted and create a generic sensor using the
@@ -173,19 +193,22 @@ Notes:
   update. If you need a strict allow-list, use a reverse proxy or a network
   rule to restrict the webhook.
 - The maximum request body is **256 KB**. Larger requests receive `413`.
+- Historical samples are grouped into UTC-hour buckets on the server. Repeated
+  imports of the same hour overwrite rather than duplicate.
 
 ### Responses
 
 | Status | Meaning |
 | --- | --- |
 | `200` | Accepted. Body: `{"status":"ok","accepted":2,"ignored":0}`. A payload whose metrics were all filtered is still `200`. |
-| `400` | Invalid JSON, missing/empty `metrics`, an invalid metric value, or too many metrics. |
+| `400` | Invalid JSON, no `metrics` or `history`, an invalid sample/metric value, or too many entries. |
 | `401` | The shared secret is missing or does not match. |
 | `405` | A method other than `POST` was used. |
 | `413` | The request body is larger than 256 KB. |
 
-The request is validated as a whole. If any metric is malformed, nothing from
-that request is stored.
+The request is validated as a whole. If any metric or history sample is
+malformed, nothing from that request is stored. A history-only request returns
+`{"status":"ok","accepted":N,"ignored":0,"history":{"metrics":1,"samples":123}}`.
 
 ### Example
 
@@ -267,20 +290,27 @@ Unique IDs are stable and follow `{entry_id}_{metric_key}`, for example
 
 ---
 
-## Long-term statistics and restarts
+## Long-term statistics and history
 
 Every sensor has a numeric state, a unit (where applicable) and
-`state_class: measurement`. Home Assistant records long-term statistics for
-these sensors once the recorder sees data. They appear in **Developer Tools →
-Statistics** and in the History/Statistics dashboards.
+`state_class: measurement`, so Home Assistant records long-term statistics.
 
-The integration keeps values in memory for v1:
+The iOS app’s first sync exports the complete HealthKit history from 2014 in
+resumable chunks. The integration imports those samples as long-term statistics
+under each sensor entity’s `statistic_id` — the same place the sensor’s live
+statistics live. The Statistics dashboard shows the full history.
 
-- On restart, the entity registry still knows the entities and their stable
-  unique IDs, but states are unavailable until the app syncs again.
-- The app should sync on launch and periodically in the background.
-- Health data is not persisted a second time by the integration; Home
-  Assistant's recorder remains the source of history.
+Home Assistant cannot backfill normal **state** history retroactively, so old
+samples appear as long-term statistics rather than individual historical state
+changes. High-frequency metrics (heart rate, HRV, oxygen, audio exposure, …) are
+stored as hourly means; daily activity totals and sleep sessions are stored as
+daily values. The app uses per-metric checkpoints, so an interrupted first
+export resumes on the next sync. **Re-export All History** in the app resets
+those checkpoints and imports everything again.
+
+The live store remains in memory: after a Home Assistant restart, sensor states
+are unavailable until the next sync, but previously imported statistics remain
+in the recorder database.
 
 If statistics do not appear immediately, wait for the recorder commit interval
 and confirm the entity has a numeric state with a state class.
@@ -505,7 +535,6 @@ offering updates.
 
 v1 intentionally stops at push-to-sensor. Planned for later:
 
-- backfill / historical imports;
 - event entities for workouts, ECG and other discrete records;
 - more Apple Health categories;
 - default HACS store listing;

@@ -19,6 +19,11 @@ final class BackgroundSyncManager {
     private let health = HealthKitManager()
     private let settings = SettingsStore()
     private let client = WebhookClient()
+    private lazy var historyExporter = HistoryExporter(
+        health: health,
+        settings: settings,
+        client: client
+    )
     private let logger = Logger(
         subsystem: "uk.rebecchi.applehealthsync",
         category: "background"
@@ -146,6 +151,18 @@ final class BackgroundSyncManager {
         defer {
             if backgroundTask != .invalid {
                 UIApplication.shared.endBackgroundTask(backgroundTask)
+            }
+        }
+
+        if settings.historyFullExportComplete,
+           let lastHistoryExport = settings.lastHistoryExport,
+           Date().timeIntervalSince(lastHistoryExport) > 60 * 60 {
+            do {
+                try await historyExporter.export(includeExtras: settings.includeExtras) { _ in }
+            } catch {
+                logger.error(
+                    "Background history export failed: \(error.localizedDescription, privacy: .public)"
+                )
             }
         }
 

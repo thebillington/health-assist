@@ -16,6 +16,7 @@ class MetricValue:
     device_id: str | None = None
     device_name: str | None = None
     generic: bool = False
+    historical: bool = False
 
 
 class HealthDataStore:
@@ -52,9 +53,20 @@ class HealthDataStore:
         device_name: str | None,
         received_at: str,
     ) -> set[str]:
-        """Store new values and return the keys that were updated."""
-        self._values.update(values)
+        """Store new values and return the keys that were updated.
+
+        Historical chunks can arrive out of order relative to a live sync, so a
+        value only replaces an existing one when its timestamp is not older.
+        ISO 8601 UTC strings sort lexicographically.
+        """
+        updated: set[str] = set()
+        for key, value in values.items():
+            existing = self._values.get(key)
+            if existing is None or not value.historical or value.last_sync >= existing.last_sync:
+                self._values[key] = value
+                updated.add(key)
+
         self.last_payload_at = received_at
         self.last_device_id = device_id
         self.last_device_name = device_name
-        return set(values)
+        return updated

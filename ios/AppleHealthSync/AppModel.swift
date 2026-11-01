@@ -21,6 +21,11 @@ final class AppModel: ObservableObject {
     private let settings: SettingsStore
     private let health = HealthKitManager()
     private let client = WebhookClient()
+    private lazy var historyExporter = HistoryExporter(
+        health: health,
+        settings: settings,
+        client: client
+    )
     private var lastAutoSync: Date?
     private let autoTestPayload: Bool
     private let environmentOverrides: Bool
@@ -59,6 +64,13 @@ final class AppModel: ObservableObject {
 
         BackgroundSyncManager.shared.start(includeExtras: includeExtras)
         refreshBackgroundSyncDate()
+
+        #if DEBUG
+        if ProcessInfo.processInfo.environment["AHS_AUTO_SYNC"] == "1", !autoTestPayload {
+            await sync()
+            return
+        }
+        #endif
 
         if autoTestPayload {
             healthStatus = "Simulator test mode"
@@ -144,7 +156,7 @@ final class AppModel: ObservableObject {
         await sync()
     }
 
-    func sync() async {
+    func sync(forceFullHistory: Bool = false) async {
         #if targetEnvironment(simulator)
         statusMessage = "HealthKit sync is only available on a physical iPhone. Use Send a Test Payload in the simulator."
         return
@@ -152,6 +164,10 @@ final class AppModel: ObservableObject {
 
         guard !isSyncing else { return }
         saveSettings()
+
+        if forceFullHistory {
+            settings.resetHistoryCheckpoints()
+        }
 
         guard let url = WebhookClient.validateURL(webhookURL) else {
             statusMessage = WebhookError.invalidURL.localizedDescription
@@ -166,6 +182,20 @@ final class AppModel: ObservableObject {
 
             try await health.requestAuthorization(includeExtras: includeExtras)
             await refreshHealthStatus()
+
+            let lastHistoryExport = settings.lastHistoryExport
+            let needsHistoryExport = forceFullHistory
+                || !settings.historyFullExportComplete
+                || lastHistoryExport == nil
+                || Date().timeIntervalSince(lastHistoryExport!) > 15 * 60
+
+            if needsHistoryExport {
+                statusMessage = "Starting full history export…"
+                try await historyExporter.export(includeExtras: includeExtras) {
+                    [weak self] message in
+                    self?.statusMessage = message
+                }
+            }
 
             let fetched = await health.fetchMetrics(includeExtras: includeExtras)
             guard !fetched.isEmpty else {
@@ -190,6 +220,10 @@ final class AppModel: ObservableObject {
         } catch {
             statusMessage = error.localizedDescription
         }
+    }
+
+    func reexportAllHistory() async {
+        await sync(forceFullHistory: true)
     }
 
     /// Send deterministic sample values. This works without HealthKit, which
