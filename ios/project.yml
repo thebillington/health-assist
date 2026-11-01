@@ -67,10 +67,15 @@ targets:
           - fetch
         BGTaskSchedulerPermittedIdentifiers:
           - uk.rebecchi.applehealthsync.weekly-sync
+        ITSAppUsesNonExemptEncryption: false
         NSHealthShareUsageDescription: "Health Assist reads your health data so it can send it to your Home Assistant instance."
+        NSLocalNetworkUsageDescription: "Health Assist connects to your Home Assistant instance on your local network to send your health data."
         NSCameraUsageDescription: "Scan the Home Assistant QR code to configure the webhook URL and shared secret."
         NSAppTransportSecurity:
           NSAllowsLocalNetworking: true
+        UIRequiredDeviceCapabilities:
+          - arm64
+          - healthkit
     entitlements:
       path: AppleHealthSync/AppleHealthSync.entitlements
       properties:

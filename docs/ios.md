@@ -61,10 +61,13 @@ The first sync exports full history from 2014. It may take minutes; progress is
 shown per metric and checkpoints allow resuming. Later syncs export only
 incremental history.
 
-## Signing
+## Distribution
 
 The development build is signed with the developer's team. A distribution build
 requires the same HealthKit/background entitlements and a provisioning profile
 that includes them.
 
-The app is not currently distributed through the App Store or TestFlight.
+The app is not yet distributed through the App Store or TestFlight. The release
+pack is in `appstore/` and the signing, TestFlight and listing steps are in
+[Release](release.md). The app is free, with an optional **Sponsor My Work**
+link to GitHub Sponsors that unlocks no features.

@@ -42,6 +42,7 @@ remains `uk.rebecchi.applehealthsync` so existing installs survive rebrands.
 - [Home Assistant integration + iOS app](https://github.com/thebillington/health-assist)
 - [Report an issue](https://github.com/thebillington/health-assist/issues)
 - [MIT license](https://github.com/thebillington/health-assist/blob/main/LICENSE)
+- [Privacy policy](privacy.md)
 
 ## Sponsor My Work
 

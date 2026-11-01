@@ -1,0 +1,54 @@
+Health Assist is a companion app for Home Assistant, the open-source home
+automation platform that the user runs themselves. The app has no account and
+no developer-operated backend. The developer receives no data.
+
+WHAT THE APP DOES
+The app reads Apple Health data with HealthKit, read-only, and POSTs it to a
+webhook URL the user configures on their own Home Assistant instance. Home
+Assistant creates sensors and long-term statistics from that data.
+
+HOW TO TEST WITHOUT A HOME ASSISTANT SERVER
+The app includes a "Send a Test Payload" action that sends fixed sample values
+and does not read HealthKit. Use the demo webhook below.
+
+  Demo webhook URL: <DEMO_WEBHOOK_URL>
+  Shared secret:    <DEMO_SECRET or leave blank>
+
+The demo endpoint accepts any POST, stores nothing and returns
+{"accepted":1,"ignored":0}.
+
+1. Open the app and paste the demo webhook URL into "Home Assistant".
+2. Leave the shared secret blank unless a value is given above.
+3. Tap "Send a Test Payload" and confirm the Result section reports success.
+4. On a device, tap "Request Health Access" to see the HealthKit permission
+   sheet. Read-only access is requested; the app never writes to Apple Health.
+5. Tap "Sync Now" to exercise the full HealthKit path.
+
+HEALTHKIT
+HealthKit is used read-only to read the metric types the app displays. Health
+data is not used for advertising, is not shared with third parties other than
+the user's own Home Assistant endpoint, and is not collected by the developer.
+
+BACKGROUND MODES
+UIBackgroundModes "fetch", the BGTaskScheduler weekly fallback and the HealthKit
+background-delivery entitlement keep data current while the app is closed. These
+are core functionality, not background location or audio.
+
+LOCAL NETWORK
+The app connects to the user's Home Assistant over the local network.
+NSLocalNetworkUsageDescription explains the system prompt.
+
+SPONSOR MY WORK
+The "Sponsor My Work" link in the Support section opens
+https://github.com/sponsors/thebillington in Safari. It is an optional donation
+to the individual developer. It sells no digital goods or services and unlocks
+no features; the app is fully functional without it. It is not an external
+purchase mechanism under Guideline 3.1.1.
+
+PRIVACY
+Full policy: https://healthassist.thebillington.co.uk/privacy/
+
+CONTACT
+<REVIEW_CONTACT_NAME>
+<REVIEW_CONTACT_EMAIL>
+<REVIEW_CONTACT_PHONE>

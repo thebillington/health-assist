@@ -30,8 +30,10 @@
 - [History and statistics](https://healthassist.thebillington.co.uk/history/): how long-term statistics are built.
 - [iOS app](https://healthassist.thebillington.co.uk/ios/): app behaviour and build notes.
 - [Security](https://healthassist.thebillington.co.uk/security/): credentials and threat model.
+- [Privacy](https://healthassist.thebillington.co.uk/privacy/): what the iOS app does with your data.
 - [Troubleshooting](https://healthassist.thebillington.co.uk/troubleshooting/): common failures.
 - [Support](https://healthassist.thebillington.co.uk/support/): sponsorship and reporting.
+- [Release](https://healthassist.thebillington.co.uk/release/): App Store and TestFlight steps.
 
 ## Positioning
 

@@ -1,0 +1,139 @@
+# Release the iOS app
+
+Health Assist ships as a **free** app with no in-app purchases. The optional
+**Sponsor My Work** link goes to GitHub Sponsors and unlocks nothing.
+
+This page covers the manual Apple steps. The repository side — privacy policy,
+usage descriptions, listing copy and review notes — is already prepared in
+`appstore/` and `docs/privacy.md`.
+
+!!! warning "Submitting is a manual, owner-only step"
+    Nothing in this repository submits an app for review. Do not run a final
+    submit or release action without the owner explicitly asking for it.
+
+## Before you begin
+
+- An active Apple Developer Program membership.
+- A Mac with Xcode 16 or newer (iOS 18 SDK).
+- Access to App Store Connect for the account that owns the bundle ID.
+- The docs site deployed, so the privacy policy is live at
+  <https://healthassist.thebillington.co.uk/privacy/>.
+
+## 1. App ID and capabilities
+
+1. In the Apple Developer portal, create or open the App ID
+   `uk.rebecchi.applehealthsync`.
+2. Enable **HealthKit** for that App ID. Background delivery is included in the
+   app's entitlements.
+3. In App Store Connect, create the app record:
+   - platform iOS;
+   - name **Health Assist**;
+   - primary language **English (UK)**;
+   - bundle ID `uk.rebecchi.applehealthsync`;
+   - SKU `healthassist-ios`;
+   - price **Free** (tier 0);
+   - no in-app purchases.
+
+## 2. Bump the version
+
+Edit `ios/project.yml`:
+
+```yaml
+MARKETING_VERSION: "1.2.0"
+CURRENT_PROJECT_VERSION: "1"
+```
+
+`CURRENT_PROJECT_VERSION` must increase for every upload. Then regenerate the
+project:
+
+```bash
+cd ios
+xcodegen generate
+```
+
+The generated `Info.plist` and entitlements are committed, so regenerate rather
+than hand-editing them.
+
+## 3. Archive and export
+
+Open `ios/AppleHealthSync.xcodeproj`, select the `AppleHealthSync` scheme, set
+your team under **Signing & Capabilities**, then:
+
+```bash
+cd ios
+xcodebuild \
+  -project AppleHealthSync.xcodeproj \
+  -scheme AppleHealthSync \
+  -configuration Release \
+  -destination 'generic/platform=iOS' \
+  -archivePath build/HealthAssist.xcarchive \
+  archive
+```
+
+Export with an `ExportOptions.plist` based on `ios/ExportOptions.plist.example`
+(set your `teamID`):
+
+```bash
+cp ExportOptions.plist.example ExportOptions.plist
+# edit teamID
+xcodebuild \
+  -exportArchive \
+  -archivePath build/HealthAssist.xcarchive \
+  -exportPath build/export \
+  -exportOptionsPlist ExportOptions.plist
+```
+
+Upload the exported `.ipa` with **Xcode → Window → Organizer → Distribute App →
+App Store Connect**, or with the Transporter app. Do not use `--submit` style
+automation.
+
+## 4. Test on TestFlight
+
+Add yourself as an internal tester and install from TestFlight on a physical
+iPhone. Check:
+
+- the Health permission sheet appears and the app requests read-only access;
+- the QR scanner imports a webhook URL and secret;
+- **Send a Test Payload** succeeds against a real Home Assistant webhook;
+- **Sync Now** creates sensors in Home Assistant;
+- a full history export completes or resumes;
+- background delivery and the weekly fallback are scheduled;
+- the **Sponsor My Work** link opens GitHub Sponsors in Safari;
+- the **Privacy Policy** and **Documentation** links open the docs site.
+
+## 5. Fill in the listing
+
+Use `appstore/README.md` for the field table and `appstore/metadata/en-GB/` for
+the copy. In App Store Connect also complete:
+
+- **App Privacy** — see `appstore/README.md`. Recommended answer: *Data Not
+  Collected*, because the developer never receives the data and the app has no
+  analytics or developer backend.
+- **Age rating** — 4+.
+- **Screenshots** — iPhone 6.9". If the app still supports iPad
+  (`TARGETED_DEVICE_FAMILY = "1,2"`), add iPad 13" screenshots too. To ship
+  iPhone-only, set `TARGETED_DEVICE_FAMILY: "1"` in `ios/project.yml`.
+- **Export compliance** — `ITSAppUsesNonExemptEncryption` is already `false`;
+  the app only uses standard HTTPS.
+- **Review notes** — copy `appstore/review-notes.txt` and fill in the contact
+  details and demo webhook URL.
+
+## 6. Reviewer demo endpoint
+
+App Review cannot install Home Assistant. The app includes **Send a Test
+Payload**, and `appstore/demo-webhook/` contains a tiny stateless receiver that
+returns the JSON the app expects. Deploy it, put the URL in the review notes,
+and keep it live until review finishes. It must not log or store payloads.
+
+## 7. Submit
+
+Submitting for review is a manual action for the owner. Confirm the checklist in
+`appstore/README.md`, then submit from App Store Connect yourself.
+
+## 8. After release
+
+- Tag the release, for example `ios-v1.2.0`, and publish a GitHub release.
+- Update `README.md`, `docs/index.md` and both `llms.txt` files: remove
+  "App Store release" from the not-yet-supported list.
+- Link the App Store listing from the README, docs home and iOS page.
+- Keep the sponsorship wording: free, optional, unlocks no features.

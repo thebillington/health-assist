@@ -163,7 +163,13 @@ struct ContentView: View {
                         Link(destination: URL(string: "https://github.com/sponsors/thebillington")!) {
                             Label("Sponsor My Work", systemImage: "heart")
                         }
-                        Text("Health Assist is free and open source. If it saves you time, you can sponsor ongoing development through GitHub Sponsors.")
+                        Link(destination: URL(string: "https://healthassist.thebillington.co.uk/privacy/")!) {
+                            Label("Privacy Policy", systemImage: "hand.raised")
+                        }
+                        Link(destination: URL(string: "https://healthassist.thebillington.co.uk/")!) {
+                            Label("Documentation", systemImage: "book")
+                        }
+                        Text("Health Assist is free and open source. If it saves you time, you can sponsor ongoing development through GitHub Sponsors. Sponsorship is optional and unlocks no features.")
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                     } header: {

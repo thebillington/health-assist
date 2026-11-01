@@ -35,6 +35,8 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsLocalNetworking</key>
@@ -44,6 +46,8 @@
 	<string>Scan the Home Assistant QR code to configure the webhook URL and shared secret.</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>Health Assist reads your health data so it can send it to your Home Assistant instance.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Health Assist connects to your Home Assistant instance on your local network to send your health data.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -55,6 +59,11 @@
 	</array>
 	<key>UILaunchScreen</key>
 	<dict/>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>arm64</string>
+		<string>healthkit</string>
+	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

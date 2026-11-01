@@ -18,6 +18,8 @@
 - Sensors: created dynamically after the first sync, with stable unique IDs, units and long-term statistics
 - History: full available HealthKit history exported on first sync in resumable chunks
 - Security: optional shared secret in the `X-Webhook-Secret` header; webhook URL and secret stored in the iOS Keychain
+- Privacy: no developer-side collection; data goes only to the user's Home Assistant
+- Privacy policy: https://healthassist.thebillington.co.uk/privacy/
 - Not yet supported: workouts, ECG and clinical records as entities; default HACS store listing; App Store release
 - Sponsor My Work: https://github.com/sponsors/thebillington
 
@@ -30,8 +32,10 @@
 - `docs/webhook.md` — the boundary between the app and Home Assistant.
 - `docs/history.md` — long-term statistics.
 - `docs/security.md` — credentials and threat model.
+- `docs/privacy.md` — privacy policy for the iOS app.
 - `docs/troubleshooting.md` — common failures.
 - `docs/support.md` — sponsorship and reporting.
+- `docs/release.md` — App Store and TestFlight release steps.
 
 ## Positioning
 

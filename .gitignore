@@ -15,6 +15,8 @@ ios/AppleHealthSyncCore/.swiftpm/
 ios/*.xcodeproj/xcuserdata/
 ios/*.xcodeproj/project.xcworkspace/xcuserdata/
 ios/DerivedData/
+ios/build/
+ios/ExportOptions.plist
 DerivedData/
 *.xcuserstate
 

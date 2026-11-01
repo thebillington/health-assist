@@ -49,8 +49,10 @@ To run on a physical iPhone:
    `AppleHealthSync/AppleHealthSync.entitlements`).
 5. Run on the device and grant Health access.
 
-The app has no App Store distribution configuration; signing and provisioning
-are intentionally left to whoever builds it.
+The app is free and not yet on the App Store. Signing and provisioning are left
+to whoever builds it; the release pack, privacy policy and reviewer notes are in
+`../appstore/` and `../docs/release.md`. The only store link is the optional
+**Sponsor My Work** link to GitHub Sponsors, which unlocks no features.
 
 ## Configure
 

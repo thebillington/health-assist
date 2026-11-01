@@ -548,7 +548,8 @@ v1 intentionally stops at push-to-sensor. Planned for later:
 - event entities for workouts, ECG and other discrete records;
 - more Apple Health categories;
 - default HACS store listing;
-- App Store/TestFlight packaging for the iOS app.
+- App Store release for the iOS app (listing copy, privacy policy and review
+  notes are prepared in [`appstore/`](appstore/)).
 
 ## Sponsor My Work
 
