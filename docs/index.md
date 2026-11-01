@@ -28,16 +28,6 @@ statistics.
 2. [Add a device and scan the QR code](setup.md) from the iOS app.
 3. Grant Apple Health access and run the first sync.
 
-## Screenshots
-
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px">
-  <img src="images/store/01-setup.png" alt="Health Assist setup screen" style="width:100%;border-radius:14px">
-  <img src="images/store/03-sensors.png" alt="Health Assist latest values" style="width:100%;border-radius:14px">
-  <img src="images/store/05-sponsor.png" alt="Health Assist sponsor screen" style="width:100%;border-radius:14px">
-</div>
-
-[Open the one-pager](screenshots.md).
-
 ## Project status
 
 Health Assist is pre-1.2 and actively developed. The webhook and long-term

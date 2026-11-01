@@ -25,18 +25,6 @@ between them.
 
 Documentation: <https://healthassist.thebillington.co.uk>.
 
-Screenshots and generated assets live under `docs/images/`.
-
-## Screenshots
-
-<p align="center">
-  <img src="docs/images/store/01-setup.png" width="240" alt="Health Assist setup screen">
-  <img src="docs/images/store/03-sensors.png" width="240" alt="Health Assist latest values screen">
-  <img src="docs/images/store/05-sponsor.png" width="240" alt="Health Assist sponsor screen">
-</p>
-
-[Screenshots, copy and the promotion one-pager](https://healthassist.thebillington.co.uk/screenshots/).
-
 ---
 
 ## Requirements
@@ -112,7 +100,7 @@ reloads after saving; sensors return after the app's next sync.
 The companion app lives in [`ios/`](ios/) and is built from this same
 repository.
 
-![Health Assist iOS app](screenshots/01-app.png)
+![Health Assist iOS app](docs/images/app.png)
 
 1. Open `ios/AppleHealthSync.xcodeproj` in Xcode.
 2. Select the `AppleHealthSync` scheme and an iPhone simulator or device.
