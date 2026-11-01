@@ -70,18 +70,22 @@ signed IPA and uploads it to App Store Connect. It sets
 One-time setup:
 
 1. Add this repository to Codemagic and select the `ios-release` workflow.
-2. In **Team settings → Developer Portal**, add an App Store Connect API key
-   named `health_assist_appstore` with **App Manager** access.
+2. In **Team settings → Developer Portal**, reuse the team's existing
+   **`Codemagic`** App Store Connect API key (App Manager access). No new key is
+   needed.
 3. In App Store Connect, open the app's **General → App Information** and copy
    the **Apple ID** into `APP_STORE_APPLE_ID` in `codemagic.yaml` (replacing the
    `0000000000` placeholder).
-4. Under **Code signing identities**, make sure an **App Store** distribution
-   certificate and provisioning profile exist for
-   `uk.co.thebillington.applehealthsync`. Codemagic can create or fetch them
-   with the API key.
+4. Under **Team settings → Code signing identities**:
+   - **iOS certificates** — reuse the existing **Apple Distribution**
+     certificate.
+   - **iOS provisioning profiles** — use **Fetch profiles** with the shared API
+     key to fetch an **App Store** profile for
+     `uk.co.thebillington.applehealthsync`, or upload one. Profiles are tied to
+     a bundle ID, so the Steno or Revision profile cannot be reused.
 5. Start the workflow manually. Builds are manual-only (`triggering.events: []`).
 
-If the workflow cannot find a certificate or profile, create them once under
+If the workflow cannot find a certificate or profile, add the profile once under
 **Code signing identities**, then rerun.
 
 ### Option B: Manual Mac

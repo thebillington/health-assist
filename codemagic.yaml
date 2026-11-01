@@ -5,10 +5,14 @@
 #
 # One-time setup is documented in docs/release.md. In short:
 #   1. Add this repository to Codemagic.
-#   2. Add an App Store Connect API key named `health_assist_appstore` under
-#      Team settings -> Developer Portal (App Manager access).
-#   3. Put the App Store Apple ID in APP_STORE_APPLE_ID below.
-#   4. Run the "iOS Release (TestFlight)" workflow manually.
+#   2. Reuse the team's existing App Store Connect API key, named `Codemagic`,
+#      under Team settings -> Developer Portal (App Manager access).
+#   3. Reuse the existing Apple Distribution certificate and add/fetch an App
+#      Store provisioning profile for this bundle ID under Code signing
+#      identities (profiles are per bundle ID, so another app's profile cannot
+#      be reused).
+#   4. Put the App Store Apple ID in APP_STORE_APPLE_ID below.
+#   5. Run the "iOS Release (TestFlight)" workflow manually.
 
 workflows:
   ios-release:
@@ -17,7 +21,8 @@ workflows:
     max_build_duration: 90
 
     integrations:
-      app_store_connect: health_assist_appstore
+      # Matches the existing shared App Store Connect API key in Codemagic.
+      app_store_connect: Codemagic
 
     environment:
       ios_signing:
