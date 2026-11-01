@@ -39,9 +39,9 @@ usage descriptions, listing copy and review notes — is already prepared in
 
 Create three **consumable** in-app purchases in App Store Connect:
 
-- `uk.co.thebillington.applehealthsync.tip.small` — Small tip
-- `uk.co.thebillington.applehealthsync.tip.medium` — Medium tip
-- `uk.co.thebillington.applehealthsync.tip.large` — Large tip
+- `uk.co.thebillington.applehealthsync.tip.small` — Small tip, £1.99
+- `uk.co.thebillington.applehealthsync.tip.medium` — Medium tip, £4.99
+- `uk.co.thebillington.applehealthsync.tip.large` — Large tip, £9.99
 
 Use the Tip Jar screenshot as the review screenshot for each product. Tips
 unlock nothing; the app is fully functional without them.

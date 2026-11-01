@@ -99,9 +99,9 @@ Create three **consumable** in-app purchases in App Store Connect:
 
 | Product ID | Display name | Suggested price |
 | --- | --- | --- |
-| `uk.co.thebillington.applehealthsync.tip.small` | Small tip | Lowest tier |
-| `uk.co.thebillington.applehealthsync.tip.medium` | Medium tip | Middle tier |
-| `uk.co.thebillington.applehealthsync.tip.large` | Large tip | Higher tier |
+| `uk.co.thebillington.applehealthsync.tip.small` | Small tip | £1.99 |
+| `uk.co.thebillington.applehealthsync.tip.medium` | Medium tip | £4.99 |
+| `uk.co.thebillington.applehealthsync.tip.large` | Large tip | £9.99 |
 
 Tips unlock nothing. The app has no paid tier and no locked features. Use the
 Tip Jar screenshot as the review screenshot for each product. `review-notes.txt`
