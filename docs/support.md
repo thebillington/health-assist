@@ -3,9 +3,9 @@
 Health Assist is free and open source. There is no paid tier, no account and no
 subscription.
 
-## Sponsor the project
+## Sponsor My Work
 
-If Health Assist saves you time, you can support ongoing maintenance through
+If Health Assist saves you time, you can sponsor ongoing maintenance through
 [GitHub Sponsors](https://github.com/sponsors/thebillington). Sponsorship is
 optional and does not unlock any features.
 

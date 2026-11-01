@@ -37,7 +37,7 @@
 
 Health Assist is local-first and free on both sides: the Home Assistant integration and the iOS app are open source. It does not require a paid proprietary companion app. It is not affiliated with Apple or with any third-party Health Auto Export product. Apple Health is a trademark of Apple Inc.
 
-## Support
+## Sponsor My Work
 
 Optional sponsorship: https://github.com/sponsors/thebillington
 

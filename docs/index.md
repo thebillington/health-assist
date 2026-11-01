@@ -43,5 +43,11 @@ remains `uk.rebecchi.applehealthsync` so existing installs survive rebrands.
 - [Report an issue](https://github.com/thebillington/health-assist/issues)
 - [MIT license](https://github.com/thebillington/health-assist/blob/main/LICENSE)
 
+## Sponsor My Work
+
+Health Assist is free, with no paid tier or account. If it saves you time, you
+can [sponsor my work on GitHub Sponsors](https://github.com/sponsors/thebillington).
+Sponsorship is optional and does not unlock any features.
+
 Apple Health is a trademark of Apple Inc. Health Assist is not affiliated with
 or endorsed by Apple.

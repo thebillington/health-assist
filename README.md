@@ -1,6 +1,6 @@
 # Health Assist
 
-[![Sponsor on GitHub](https://img.shields.io/badge/Sponsor-GitHub%20Sponsors-ea4aaa?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/thebillington)
+[![Sponsor My Work](https://img.shields.io/badge/Sponsor%20My%20Work-GitHub%20Sponsors-ea4aaa?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/thebillington)
 
 A free, open-source Home Assistant custom integration (HACS) plus a SwiftUI
 iOS companion app that reads Apple Health and pushes it over a local webhook.
@@ -550,10 +550,14 @@ v1 intentionally stops at push-to-sensor. Planned for later:
 - default HACS store listing;
 - App Store/TestFlight packaging for the iOS app.
 
-## Support
+## Sponsor My Work
 
-This project is free and open source. If it saves you time, you can support
-ongoing maintenance through [GitHub Sponsors](https://github.com/sponsors/thebillington).
+Health Assist is free and open source, with no paid tier, account or
+subscription. If it saves you time, you can sponsor ongoing maintenance:
+
+[![Sponsor My Work](https://img.shields.io/badge/Sponsor%20My%20Work-GitHub%20Sponsors-ea4aaa?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/thebillington)
+
+Sponsorship is optional and does not unlock any features.
 
 ## License
 
