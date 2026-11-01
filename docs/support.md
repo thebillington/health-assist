@@ -5,9 +5,10 @@ subscription.
 
 ## Support My Work
 
-If Health Sync saves you time, you can support ongoing maintenance through
-[GitHub Sponsors](https://github.com/sponsors/thebillington). Sponsorship is
-optional and does not unlock any features.
+The iOS app has an optional **Tip Jar** using Apple's in-app purchase. Tips are
+optional and unlock nothing. You can also support ongoing maintenance through
+[GitHub Sponsors](https://github.com/sponsors/thebillington) from this page.
+Support is optional and does not unlock any features.
 
 ## Report a problem
 

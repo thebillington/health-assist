@@ -69,5 +69,5 @@ that includes them.
 
 The app is not yet distributed through the App Store or TestFlight. The release
 pack is in `appstore/` and the signing, TestFlight and listing steps are in
-[Release](release.md). The app is free, with an optional **Support Me**
-link to GitHub Sponsors that unlocks no features.
+[Release](release.md). The app is free, with an optional **Tip Jar**
+using in-app purchase. Tips unlock nothing.

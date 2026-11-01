@@ -1,7 +1,7 @@
 # Release the iOS app
 
-Health Sync ships as a **free** app with no in-app purchases. The optional
-**Support Me** link goes to GitHub Sponsors and unlocks nothing.
+Health Sync ships as a **free** app. The optional Tip Jar uses in-app purchase
+and unlocks nothing.
 
 This page covers the manual Apple steps. The repository side — privacy policy,
 usage descriptions, listing copy and review notes — is already prepared in
@@ -33,7 +33,18 @@ usage descriptions, listing copy and review notes — is already prepared in
    - bundle ID `uk.co.thebillington.applehealthsync`;
    - SKU `healthassist-ios`;
    - price **Free** (tier 0);
-   - no in-app purchases.
+   - Tip Jar: three consumables (see `appstore/README.md`).
+
+## 1a. Tip Jar products
+
+Create three **consumable** in-app purchases in App Store Connect:
+
+- `uk.co.thebillington.applehealthsync.tip.small` — Small tip
+- `uk.co.thebillington.applehealthsync.tip.medium` — Medium tip
+- `uk.co.thebillington.applehealthsync.tip.large` — Large tip
+
+Use the Tip Jar screenshot as the review screenshot for each product. Tips
+unlock nothing; the app is fully functional without them.
 
 ## 2. Bump the version
 
@@ -132,7 +143,7 @@ iPhone. Check:
 - **Sync Now** creates sensors in Home Assistant;
 - a full history export completes or resumes;
 - background delivery and the weekly fallback are scheduled;
-- the **Support Me** link opens GitHub Sponsors in Safari;
+- the Tip Jar loads its products and a sandbox purchase completes;
 - the **Privacy Policy** and **Documentation** links open the docs site.
 
 ## 5. Fill in the listing
@@ -144,10 +155,10 @@ the copy. In App Store Connect also complete:
   Collected*, because the developer never receives the data and the app has no
   analytics or developer backend.
 - **Age rating** — 4+.
-- **Screenshots** — render the six boards with `osg/build_project.py` and
-  upload them in order: the app screenshot, then the four feature panels. The
-  target is iPhone-only (`TARGETED_DEVICE_FAMILY = "1"`), so no iPad screenshots
-  are required.
+- **Screenshots** — render the five section screenshots with
+  `osg/make_sections.py` and upload them in order: Setup, Sync, Latest Values,
+  Privacy, Tip Jar. The target is iPhone-only (`TARGETED_DEVICE_FAMILY = "1"`),
+  so no iPad screenshots are required.
 - **Export compliance** — `ITSAppUsesNonExemptEncryption` is already `false`;
   the app only uses standard HTTPS.
 - **Review notes** — copy `appstore/review-notes.txt` and fill in the contact
@@ -171,4 +182,4 @@ Submitting for review is a manual action for the owner. Confirm the checklist in
 - Update `README.md`, `docs/index.md` and both `llms.txt` files: remove
   "App Store release" from the not-yet-supported list.
 - Link the App Store listing from the README, docs home and iOS page.
-- Keep the sponsorship wording: free, optional, unlocks no features.
+- Keep the Tip Jar wording: free, optional, unlocks no features.

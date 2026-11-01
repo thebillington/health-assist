@@ -556,7 +556,11 @@ v1 intentionally stops at push-to-sensor. Planned for later:
 ## Support My Work
 
 Health Sync is free and open source, with no paid tier, account or
-subscription. If it saves you time, you can support ongoing maintenance:
+subscription. The iOS app has an optional **Tip Jar** using Apple's in-app
+purchase. Tips are optional and unlock nothing.
+
+You can also support ongoing maintenance through
+[GitHub Sponsors](https://github.com/sponsors/thebillington):
 
 [![Support Me](https://img.shields.io/badge/Support%20Me-GitHub%20Sponsors-ea4aaa?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/thebillington)
 

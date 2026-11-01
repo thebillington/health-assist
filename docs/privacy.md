@@ -64,12 +64,12 @@ data and it is not linked to your identity by me.
 
 ## Third parties
 
-- **Apple** — HealthKit and App Store distribution.
+- **Apple** — HealthKit, App Store distribution and the optional Tip Jar in-app purchase. Apple handles the payment; I never receive your name, email or payment details.
 - **Your Home Assistant instance**, and any network or remote-access provider
   you use to reach it.
-- **GitHub Sponsors** — if you tap **Support Me**, the link opens in your
-  browser and GitHub's privacy policy applies. Support is optional and does
-  not unlock any features.
+- **GitHub Sponsors** — the project website and README link to GitHub Sponsors.
+  The iOS app does not open GitHub Sponsors. GitHub's privacy policy applies if
+  you use that link. Support is optional and does not unlock any features.
 
 I do not sell data and I do not share it with advertisers or data brokers.
 
@@ -95,5 +95,6 @@ Open an issue at
 [thebillington/health-assist](https://github.com/thebillington/health-assist/issues).
 Do not include health data, webhook URLs or shared secrets in an issue.
 
-Apple Health is a trademark of Apple Inc. Health Sync is not affiliated with
-or endorsed by Apple.
+Apple Health is a trademark of Apple Inc. Home Assistant is a trademark of
+Nabu Casa. Health Sync is not affiliated with Apple, Nabu Casa or the Home
+Assistant project.

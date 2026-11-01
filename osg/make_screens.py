@@ -280,7 +280,7 @@ def screen_04_privacy() -> str:
       <section class="section">
         <div class="section-title">Support</div>
         <div class="card">
-          <div class="row teal"><span style="display:flex;align-items:center;gap:22px">{heart_icon()}<span>Support Me</span></span></div>
+          <div class="row teal"><span style="display:flex;align-items:center;gap:22px">{heart_icon()}<span>Tip Jar</span></span></div>
           <div class="row teal"><span style="display:flex;align-items:center;gap:22px">{shield_icon()}<span>Privacy Policy</span></span></div>
           <div class="row teal"><span style="display:flex;align-items:center;gap:22px">{book_icon()}<span>Documentation</span></span></div>
         </div>
@@ -422,7 +422,7 @@ def screen_07_product() -> str:
       </div>
       <div class="desc"><b>Apple Health, meet Home Assistant.</b><br>A free, local-first bridge that turns your HealthKit data into native sensors — no cloud, no account, no telemetry.</div>
       <div class="label" style="padding-top:40px">WHAT'S NEW</div>
-      <div class="desc" style="padding-top:0"><b>Version 1.2.0</b><br>Full history export, background sync, QR setup and an optional Support Me link.</div>
+      <div class="desc" style="padding-top:0"><b>Version 1.2.0</b><br>Full history export, background sync, QR setup and an optional Tip Jar link.</div>
       <div class="desc" style="padding-top:24px">
         • Read-only HealthKit access<br>
         • Native sensors and long-term statistics<br>
@@ -453,7 +453,7 @@ def screen_08_sponsor() -> str:
       <section class="section">
         <div class="section-title">Sponsor</div>
         <div class="card">
-          <div class="row teal" style="min-height:130px"><span style="display:flex;align-items:center;gap:22px">{heart_icon()}<span>Support Me</span></span><span style="color:#8E8E93;font-size:30px">↗</span></div>
+          <div class="row teal" style="min-height:130px"><span style="display:flex;align-items:center;gap:22px">{heart_icon()}<span>Tip Jar</span></span><span style="color:#8E8E93;font-size:30px">↗</span></div>
           <div class="row"><span style="font-size:28px;color:#8E8E93">github.com/sponsors/thebillington</span></div>
         </div>
         <div class="footer">MIT licensed. Sponsorship is optional and unlocks nothing — the app is complete without it.</div>

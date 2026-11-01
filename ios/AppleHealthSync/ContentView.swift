@@ -3,6 +3,7 @@ import AppleHealthSyncCore
 
 struct ContentView: View {
     @StateObject private var model = AppModel()
+    @StateObject private var tipJar = TipJarStore()
     @Environment(\.scenePhase) private var scenePhase
     @State private var showingScanner = false
     @State private var showingReplaceConfirmation = false
@@ -160,9 +161,44 @@ struct ContentView: View {
                     }
 
                     Section {
-                        Link(destination: URL(string: "https://github.com/sponsors/thebillington")!) {
-                            Label("Support Me", systemImage: "heart")
+                        if tipJar.isLoading {
+                            HStack(spacing: 12) {
+                                ProgressView()
+                                    .controlSize(.small)
+                                Text("Loading tip jar…")
+                                    .foregroundStyle(.secondary)
+                            }
+                        } else if tipJar.products.isEmpty {
+                            Text("The tip jar is not available right now.")
+                                .foregroundStyle(.secondary)
+                        } else {
+                            ForEach(tipJar.products, id: \.id) { product in
+                                Button {
+                                    Task { await tipJar.purchase(product) }
+                                } label: {
+                                    HStack {
+                                        Text(product.displayName)
+                                        Spacer()
+                                        Text(product.displayPrice)
+                                            .foregroundStyle(.secondary)
+                                    }
+                                }
+                                .disabled(tipJar.isPurchasing)
+                            }
                         }
+
+                        if let message = tipJar.message {
+                            Text(message)
+                                .font(.footnote)
+                                .foregroundStyle(.secondary)
+                        }
+                    } header: {
+                        Text("Tip Jar")
+                    } footer: {
+                        Text("Tips are optional and unlock nothing. The app is complete without them.")
+                    }
+
+                    Section {
                         Link(destination: URL(string: "https://healthassist.thebillington.co.uk/privacy/")!) {
                             Label("Privacy Policy", systemImage: "hand.raised")
                         }
@@ -172,11 +208,8 @@ struct ContentView: View {
                         Link(destination: URL(string: "https://healthassist.thebillington.co.uk/install/")!) {
                             Label("HACS setup guide", systemImage: "wrench.and.screwdriver")
                         }
-                        Text("If you want to support my work, click the Support Me button. It opens GitHub Sponsors and unlocks no features.")
-                            .font(.footnote)
-                            .foregroundStyle(.secondary)
                     } header: {
-                        Text("Support")
+                        Text("Links")
                     }
                 }
                 .navigationTitle("Health Sync")

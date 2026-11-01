@@ -1,1 +1,1 @@
-Read-only Apple Health sync
+Read-only health data sync

@@ -52,9 +52,8 @@ To run on a physical iPhone:
 The app is free and not yet on the App Store. Signing and provisioning are left
 to whoever builds it; the release pack, privacy policy and reviewer notes are in
 `../appstore/` and `../docs/release.md`. `../codemagic.yaml` builds and uploads
-to TestFlight manually, without submitting for review. The only store link is
-the optional **Support Me** link to GitHub Sponsors, which unlocks no
-features.
+to TestFlight manually, without submitting for review. The app has an optional
+StoreKit **Tip Jar**; tips unlock nothing.
 
 ## Configure
 

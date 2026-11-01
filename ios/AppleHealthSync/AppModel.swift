@@ -1,5 +1,6 @@
 import Foundation
 import HealthKit
+import StoreKit
 import UIKit
 import AppleHealthSyncCore
 
@@ -313,4 +314,79 @@ final class AppModel: ObservableObject {
         let name = UIDevice.current.name.trimmingCharacters(in: .whitespacesAndNewlines)
         return name.isEmpty ? "iPhone" : name
     }
+}
+
+@MainActor
+final class TipJarStore: ObservableObject {
+    static let productIDs = [
+        "uk.co.thebillington.applehealthsync.tip.small",
+        "uk.co.thebillington.applehealthsync.tip.medium",
+        "uk.co.thebillington.applehealthsync.tip.large",
+    ]
+
+    @Published private(set) var products: [Product] = []
+    @Published private(set) var isLoading = false
+    @Published private(set) var isPurchasing = false
+    @Published private(set) var message: String?
+
+    init() {
+        Task { await loadProducts() }
+        Task {
+            for await update in Transaction.updates {
+                await handle(update)
+            }
+        }
+    }
+
+    func loadProducts() async {
+        isLoading = true
+        defer { isLoading = false }
+        do {
+            products = try await Product.products(for: Self.productIDs)
+                .sorted { $0.price < $1.price }
+        } catch {
+            message = "The tip jar could not be loaded."
+        }
+    }
+
+    func purchase(_ product: Product) async {
+        guard !isPurchasing else { return }
+        isPurchasing = true
+        defer { isPurchasing = false }
+
+        do {
+            switch try await product.purchase() {
+            case .success(let verification):
+                let transaction = try verified(verification)
+                await transaction.finish()
+                message = "Thank you. Tips are optional and unlock nothing."
+            case .userCancelled:
+                break
+            case .pending:
+                message = "The tip is pending approval."
+            @unknown default:
+                break
+            }
+        } catch {
+            message = "The tip could not be completed."
+        }
+    }
+
+    private func handle(_ update: VerificationResult<Transaction>) async {
+        guard let transaction = try? verified(update) else { return }
+        await transaction.finish()
+    }
+
+    private func verified<T>(_ result: VerificationResult<T>) throws -> T {
+        switch result {
+        case .unverified:
+            throw TipJarError.failedVerification
+        case .verified(let value):
+            return value
+        }
+    }
+}
+
+enum TipJarError: Error {
+    case failedVerification
 }

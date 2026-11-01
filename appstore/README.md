@@ -4,23 +4,22 @@ Status: **prepared, not submitted.** Nothing in this directory publishes or
 submits anything. Use it to fill in App Store Connect, then submit manually when
 you are ready.
 
-The app is distributed **free** (price tier 0, no in-app purchases). The optional
-**Support Me** link opens <https://github.com/sponsors/thebillington> in Safari
-and unlocks no features.
+The app is distributed **free** (price tier 0). The optional **Tip Jar** uses
+three consumable in-app purchases handled by Apple and unlocks no features.
 
 ## App Store Connect fields
 
 | Field | Value |
 | --- | --- |
 | App name | Health Sync for Home Assistant |
-| Subtitle | Read-only Apple Health sync |
+| Subtitle | Read-only health data sync |
 | Bundle ID | `uk.co.thebillington.applehealthsync` |
 | SKU | `healthassist-ios` (or any private SKU) |
 | Primary language | English (UK) |
 | Primary category | Health & Fitness |
 | Secondary category | Utilities |
 | Price | Free (tier 0) |
-| In-app purchases | None |
+| In-app purchases | Yes — Tip Jar (3 consumables) |
 | Age rating | 4+ |
 | Copyright | 2026 Billy Rebecchi |
 | Support URL | <https://healthassist.thebillington.co.uk/support/> |
@@ -65,21 +64,21 @@ Either answer must match `docs/privacy.md`, which explains the full data flow.
 
 ## Screenshots
 
-The set is six simple 1290 × 2796 boards:
+The set is five 1290 × 2796 screenshots: one full app screen, then four
+individual app sections.
 
-1. App screenshot — the setup screen.
-2. How it works — text panel.
-3. How the phone connects — text panel.
-4. Installing with HACS — text panel.
-5. What you get — text panel.
-6. Cost and privacy — text panel.
+1. Setup — the full app screen.
+2. Sync — the Sync and Result sections.
+3. Latest Values — the metric list.
+4. Privacy — the data flow and security rows.
+5. Tip Jar — the optional in-app purchases and links.
 
-They are rendered locally by `osg/build_project.py` and checked with
-`osg verify`; see `osg/README.md`. The rendered files are not committed and are
-not published on the docs site.
+They are rendered locally by `osg/make_sections.py`; see `osg/README.md`. The
+files are not committed and are not published on the docs site. Upload them in
+this order.
 
 The app is **iPhone-only** (`TARGETED_DEVICE_FAMILY = "1"`), so no iPad
-screenshots are required. Upload the six boards in order.
+screenshots are required.
 
 ## Reviewer access
 
@@ -94,13 +93,20 @@ The mock endpoint must:
 - return HTTP 200 with `{"accepted":1,"ignored":0}`;
 - store and log nothing.
 
-## Sponsor link and App Review
+## Tip Jar in-app purchases
 
-The **Support Me** row is an optional donation to the individual developer,
-not a purchase. It is placed in the Support section, opens in Safari, and no
-feature is locked behind it. `review-notes.txt` states this explicitly. Do not
-add any wording that suggests sponsorship buys features, data access or
-priority support.
+Create three **consumable** in-app purchases in App Store Connect:
+
+| Product ID | Display name | Suggested price |
+| --- | --- | --- |
+| `uk.co.thebillington.applehealthsync.tip.small` | Small tip | Lowest tier |
+| `uk.co.thebillington.applehealthsync.tip.medium` | Medium tip | Middle tier |
+| `uk.co.thebillington.applehealthsync.tip.large` | Large tip | Higher tier |
+
+Tips unlock nothing. The app has no paid tier and no locked features. Use the
+Tip Jar screenshot as the review screenshot for each product. `review-notes.txt`
+states this explicitly. Do not add wording that suggests a tip buys features,
+data access or support.
 
 ## Submission checklist
 
@@ -116,7 +122,9 @@ priority support.
       `ios-release` workflow, or manual Option B).
 - [ ] Tested from TestFlight on a physical iPhone and a clean install.
 - [ ] Review notes filled in, including the demo webhook URL if used.
-- [ ] Price set to Free; no in-app purchases configured.
+- [ ] Price set to Free.
+- [ ] Three Tip Jar consumables created with the product IDs above.
+- [ ] Tip Jar tested in TestFlight; tips unlock nothing.
 - [ ] Submitted manually by the owner.
 
 See `docs/release.md` for the build and signing commands.

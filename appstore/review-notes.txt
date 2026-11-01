@@ -38,15 +38,23 @@ LOCAL NETWORK
 The app connects to the user's Home Assistant over the local network.
 NSLocalNetworkUsageDescription explains the system prompt.
 
-SUPPORT ME
-The "Support Me" link in the Support section opens
-https://github.com/sponsors/thebillington in Safari. It is an optional donation
-to the individual developer. It sells no digital goods or services and unlocks
-no features; the app is fully functional without it. It is not an external
-purchase mechanism under Guideline 3.1.1.
+TIP JAR
+The Tip Jar section contains three optional consumable in-app purchases:
+
+  uk.co.thebillington.applehealthsync.tip.small
+  uk.co.thebillington.applehealthsync.tip.medium
+  uk.co.thebillington.applehealthsync.tip.large
+
+Tips unlock no features, data or support. The app is fully functional without a
+tip. There are no external payment links in the app.
 
 PRIVACY
 Full policy: https://healthassist.thebillington.co.uk/privacy/
+
+TRADEMARKS
+Health Sync for Home Assistant is independent. Apple Health is a trademark of
+Apple Inc. Home Assistant and Nabu Casa are trademarks of Nabu Casa. HACS is a
+separate open-source project.
 
 CONTACT
 <REVIEW_CONTACT_NAME>

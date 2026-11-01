@@ -48,9 +48,11 @@ upgraded in place.
 
 ## Support My Work
 
-Health Sync is free, with no paid tier or account. If it saves you time, you
-can [support my work on GitHub Sponsors](https://github.com/sponsors/thebillington).
+Health Sync is free, with no paid tier or account. The iOS app has an optional
+**Tip Jar** using Apple's in-app purchase. Tips unlock nothing. You can also
+[support my work on GitHub Sponsors](https://github.com/sponsors/thebillington).
 Support is optional and does not unlock any features.
 
-Apple Health is a trademark of Apple Inc. Health Sync is not affiliated with
-or endorsed by Apple.
+Apple Health is a trademark of Apple Inc. Home Assistant is a trademark of
+Nabu Casa. Health Sync is not affiliated with Apple, Nabu Casa or the Home
+Assistant project.

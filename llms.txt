@@ -22,7 +22,8 @@
 - Privacy policy: https://healthassist.thebillington.co.uk/privacy/
 - Screenshots: https://healthassist.thebillington.co.uk/screenshots/
 - Not yet supported: workouts, ECG and clinical records as entities; default HACS store listing; App Store release
-- Support Me: https://github.com/sponsors/thebillington
+- Tip Jar: optional in-app purchase in the iOS app, unlocks nothing
+- GitHub Sponsors: https://github.com/sponsors/thebillington
 
 ## Pages
 
@@ -40,7 +41,7 @@
 
 ## Positioning
 
-Health Sync is local-first and free on both sides: the Home Assistant integration and the iOS app are open source. It does not require a paid proprietary companion app. Apple Health is a trademark of Apple Inc.; Health Sync is not affiliated with Apple.
+Health Sync is local-first and free on both sides: the Home Assistant integration and the iOS app are open source. It does not require a paid proprietary companion app. Apple Health is a trademark of Apple Inc. Home Assistant is a trademark of Nabu Casa. Health Sync is not affiliated with Apple, Nabu Casa or the Home Assistant project.
 
 ## Attribution
 
