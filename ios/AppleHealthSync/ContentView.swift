@@ -4,6 +4,7 @@ import AppleHealthSyncCore
 struct ContentView: View {
     @StateObject private var model = AppModel()
     @Environment(\.scenePhase) private var scenePhase
+    @State private var showingScanner = false
 
     var body: some View {
         NavigationStack {
@@ -169,6 +170,13 @@ struct ContentView: View {
                 }
                 .onOpenURL { url in
                     model.importConfiguration(from: url)
+                }
+                .sheet(isPresented: $showingScanner) {
+                    QRScannerView { code in
+                        showingScanner = false
+                        model.importConfiguration(fromCode: code)
+                    }
+                    .ignoresSafeArea()
                 }
                 .task { await model.prepare() }
                 .onChange(of: scenePhase) { _, newPhase in

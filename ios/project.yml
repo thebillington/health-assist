@@ -68,6 +68,7 @@ targets:
         BGTaskSchedulerPermittedIdentifiers:
           - uk.rebecchi.applehealthsync.weekly-sync
         NSHealthShareUsageDescription: "Apple Health Sync reads your health data so it can send it to your Home Assistant instance."
+        NSCameraUsageDescription: "Scan the Home Assistant QR code to configure the webhook URL and shared secret."
         NSAppTransportSecurity:
           NSAllowsLocalNetworking: true
     entitlements:

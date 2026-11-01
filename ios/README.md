@@ -96,9 +96,11 @@ The integration's Configure dialog generates a QR code containing a deep link:
 applehealthsync://configure?url=<webhook URL>&secret=<shared secret>
 ```
 
-Scan it with the iPhone Camera. iOS opens **Apple Health Sync** and imports the
-URL and secret. The QR reflects the saved secret, so save and reopen Configure
-after changing it. Treat the QR/screenshot as a credential.
+Scan it with the app's **Scan QR Code** button, or with the iPhone Camera; iOS
+opens **Apple Health Sync** and imports the URL and secret. The in-app scanner
+uses the rear camera and requires camera permission. The QR reflects the saved
+secret, so save and reopen Configure after changing it. Treat the QR/screenshot
+as a credential.
 
 This requires a Home Assistant version whose frontend includes the QR selector;
 older versions still show the URL and secret as copyable text.

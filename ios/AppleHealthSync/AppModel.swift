@@ -226,6 +226,15 @@ final class AppModel: ObservableObject {
         await sync(forceFullHistory: true)
     }
 
+    /// Handle a QR code payload from the in-app camera scanner.
+    func importConfiguration(fromCode code: String) {
+        guard let url = URL(string: code) else {
+            statusMessage = "That QR code was not a valid Apple Health Sync configuration link."
+            return
+        }
+        importConfiguration(from: url)
+    }
+
     /// Handle `applehealthsync://configure?url=...&secret=...` from a QR code.
     func importConfiguration(from url: URL) {
         guard url.scheme?.lowercased() == "applehealthsync",

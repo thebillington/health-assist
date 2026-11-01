@@ -12,6 +12,7 @@
 		2786662E89CA9A1B846F59D5 /* BackgroundSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56ABD3DF808CACC73F334AF /* BackgroundSyncManager.swift */; };
 		2ABC034BE27916006E1A85B5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8B17068792A82D822CE96A /* ContentView.swift */; };
 		5A003487B906DE2C6D2E53E5 /* AppleHealthSyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6775F6A8407F78A02CB3FBA1 /* AppleHealthSyncApp.swift */; };
+		7CAEB7A447CFBC46CFBE7CB1 /* QRScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA62893588D84700EF983977 /* QRScannerView.swift */; };
 		7CD038BF8565089C51B12588 /* WebhookClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9FDD628532CBEBDBB0288E /* WebhookClient.swift */; };
 		9037425A5A89C75E7C737A9C /* HistoryExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA953277516B7A53D4E7745 /* HistoryExporter.swift */; };
 		C81FB2A8E30A70F897717C2F /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DD0DB313AE969B01105A26 /* SettingsStore.swift */; };
@@ -35,6 +36,7 @@
 		AB1E7F71C30CAB8B753CC958 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B56ABD3DF808CACC73F334AF /* BackgroundSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSyncManager.swift; sourceTree = "<group>"; };
 		BB8B17068792A82D822CE96A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		DA62893588D84700EF983977 /* QRScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				5FA953277516B7A53D4E7745 /* HistoryExporter.swift */,
 				208F175C8471F788197F6AFD /* Info.plist */,
 				7EEF046FD33DBD2446A5ED7B /* MetricCatalog.swift */,
+				DA62893588D84700EF983977 /* QRScannerView.swift */,
 				27DD0DB313AE969B01105A26 /* SettingsStore.swift */,
 				1F9FDD628532CBEBDBB0288E /* WebhookClient.swift */,
 			);
@@ -175,6 +178,7 @@
 				EF96FE400441AC9C394DD024 /* HealthKitManager.swift in Sources */,
 				9037425A5A89C75E7C737A9C /* HistoryExporter.swift in Sources */,
 				226E3313E0898B77511784C2 /* MetricCatalog.swift in Sources */,
+				7CAEB7A447CFBC46CFBE7CB1 /* QRScannerView.swift in Sources */,
 				C81FB2A8E30A70F897717C2F /* SettingsStore.swift in Sources */,
 				7CD038BF8565089C51B12588 /* WebhookClient.swift in Sources */,
 			);

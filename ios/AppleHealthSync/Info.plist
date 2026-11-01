@@ -40,6 +40,8 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Scan the Home Assistant QR code to configure the webhook URL and shared secret.</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>Apple Health Sync reads your health data so it can send it to your Home Assistant instance.</string>
 	<key>UIApplicationSceneManifest</key>
