@@ -1,0 +1,40 @@
+name: Codemagic dispatch
+
+# Starts the Codemagic iOS release workflow. Codemagic does the signing and
+# TestFlight upload; this repository only needs the webhook URL as a secret.
+#
+# One-time setup:
+#   gh secret set CODEMAGIC_WEBHOOK_URL --repo thebillington/health-assist \
+#     --body "https://api.codemagic.io/hooks/..."
+#
+# The webhook is a build trigger, not a public link. Rotate it in Codemagic if
+# it leaks.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: codemagic-dispatch
+  cancel-in-progress: false
+
+jobs:
+  dispatch:
+    name: Start Codemagic
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Trigger Codemagic
+        env:
+          CODEMAGIC_WEBHOOK_URL: ${{ secrets.CODEMAGIC_WEBHOOK_URL }}
+        run: |
+          set -euo pipefail
+          if [ -z "$CODEMAGIC_WEBHOOK_URL" ]; then
+            echo "CODEMAGIC_WEBHOOK_URL is not set" >&2
+            exit 1
+          fi
+          response="$(curl --fail --silent --show-error --request POST "$CODEMAGIC_WEBHOOK_URL")"
+          printf '%s\n' "$response"
+          echo "Codemagic build requested."

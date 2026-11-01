@@ -34,7 +34,7 @@ workflows:
         # App Store Connect -> General -> App Information -> Apple ID.
         # Replace before the first release; the placeholder falls back to the
         # Codemagic build counter for the build number.
-        APP_STORE_APPLE_ID: "0000000000"
+        APP_STORE_APPLE_ID: "6829539548"
       xcode: latest
 
     triggering:
