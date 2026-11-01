@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="180" viewBox="0 0 760 180" role="img" aria-label="Health Assist">
+  <rect x="0" y="0" width="180" height="180" rx="40" fill="#0F766E"/>
+  <path d="M90 142c-6-5-52-38-52-70 0-20 15-34 33-34 9 0 17 4 19 10 2-6 10-10 19-10 18 0 33 14 33 34 0 32-46 65-52 70z" fill="#FFFFFF"/>
+  <text x="210" y="92" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="52" font-weight="700" fill="#0F766E">Health Assist</text>
+  <text x="212" y="128" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" fill="#4B5563">Apple Health → Home Assistant</text>
+</svg>

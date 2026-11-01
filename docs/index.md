@@ -1,5 +1,7 @@
 # Health Assist
 
+![Health Assist](images/logo.svg)
+
 **Apple Health → Home Assistant, without a cloud service.**
 
 Health Assist is a free, open-source Home Assistant integration and companion
@@ -40,7 +42,6 @@ remains `uk.rebecchi.applehealthsync` so existing installs survive rebrands.
 - [Home Assistant integration + iOS app](https://github.com/thebillington/health-assist)
 - [Report an issue](https://github.com/thebillington/health-assist/issues)
 - [MIT license](https://github.com/thebillington/health-assist/blob/main/LICENSE)
-- [Support the project](https://github.com/sponsors/thebillington)
 
 Apple Health is a trademark of Apple Inc. Health Assist is not affiliated with
 or endorsed by Apple.

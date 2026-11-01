@@ -167,3 +167,18 @@ Accept the Xcode license and install an iOS simulator runtime. On recent Xcode,
 - The docs site is published from `main` via GitHub Pages at
   `healthassist.thebillington.co.uk`.
 - Apple Health is an Apple trademark; the project is not affiliated with Apple.
+
+## OSG and marketing assets
+
+- OSG generates **store screenshots**, not logos. The app icon comes from
+  `ios/scripts/make_icon.py`; the wordmark is a normal SVG.
+- `osg fill` will not replace an existing `osg/project.json` unless you pass
+  `--force`.
+- One input screenshot produces one board; add more screenshots for more boards.
+- The dev container's Chrome for Testing has no proprietary codecs, so
+  `osg video`/MP4 is unavailable. PNG rendering and `osg verify` work.
+- WebGL uses SwiftShader, so 3D device frames render differently from a real
+  GPU.
+- Use `/usr/local/bin/osg` (pinned Node 20), not a system `npx`.
+- Render output is disposable and gitignored; commit the source project and the
+  final PNGs you want in `docs/images/store/`.
