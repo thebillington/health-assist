@@ -35,6 +35,10 @@ jobs:
             echo "CODEMAGIC_WEBHOOK_URL is not set" >&2
             exit 1
           fi
-          response="$(curl --fail --silent --show-error --request POST "$CODEMAGIC_WEBHOOK_URL")"
+          response="$(curl --fail --silent --show-error \
+            --request POST \
+            --header "Content-Type: application/json" \
+            --data '{}' \
+            "$CODEMAGIC_WEBHOOK_URL")"
           printf '%s\n' "$response"
           echo "Codemagic build requested."
