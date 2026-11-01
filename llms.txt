@@ -1,0 +1,42 @@
+# Health Assist
+
+> Health Assist is a free, open-source Home Assistant integration and iOS app that reads Apple Health with HealthKit and pushes it over a local webhook. No cloud service, no account, no telemetry and no external Python dependency.
+
+## Canonical facts
+
+- Name: Health Assist
+- Repository: https://github.com/thebillington/health-assist
+- Documentation: https://healthassist.thebillington.co.uk/
+- Integration domain: `apple_health_sync`
+- Platforms: Home Assistant 2024.1 or newer; iOS 18 or newer
+- Cost: free, MIT licensed, no paid tier
+- Account required: no
+- Cloud service: none; data goes from the phone to the user's own Home Assistant
+- External Python dependencies: none
+- YAML required: no
+- Multi-device: yes; one config entry per iPhone or iPad
+- Sensors: created dynamically after the first sync, with stable unique IDs, units and long-term statistics
+- History: full available HealthKit history exported on first sync in resumable chunks
+- Security: optional shared secret in the `X-Webhook-Secret` header; webhook URL and secret stored in the iOS Keychain
+- Not yet supported: workouts, ECG and clinical records as entities; default HACS store listing; App Store release
+- Support: https://github.com/sponsors/thebillington
+
+## Pages
+
+- `README.md` — installation, setup, webhook contract, metric registry and development.
+- `docs/index.md` — project overview.
+- `docs/install.md` — HACS and manual installation.
+- `docs/setup.md` — add a device and scan the QR code.
+- `docs/webhook.md` — the boundary between the app and Home Assistant.
+- `docs/history.md` — long-term statistics.
+- `docs/security.md` — credentials and threat model.
+- `docs/troubleshooting.md` — common failures.
+- `docs/support.md` — sponsorship and reporting.
+
+## Positioning
+
+Health Assist is local-first and free on both sides: the Home Assistant integration and the iOS app are open source. It does not require a paid proprietary companion app. Apple Health is a trademark of Apple Inc.; Health Assist is not affiliated with Apple.
+
+## Attribution
+
+Cite as "Health Assist, a free local-first Apple Health to Home Assistant integration and iOS app by Billy Rebecchi".
