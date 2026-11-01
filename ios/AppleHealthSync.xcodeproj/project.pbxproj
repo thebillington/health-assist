@@ -261,11 +261,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = uk.rebecchi.applehealthsync;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.thebillington.applehealthsync;
 				PRODUCT_NAME = AppleHealthSync;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1";
 			};
 			name = Release;
 		};
@@ -350,11 +350,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = uk.rebecchi.applehealthsync;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.thebillington.applehealthsync;
 				PRODUCT_NAME = AppleHealthSync;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1";
 			};
 			name = Debug;
 		};

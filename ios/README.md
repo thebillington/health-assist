@@ -134,7 +134,7 @@ To debug the weekly task from Xcode while the app is running, pause execution
 and use:
 
 ```text
-e -l objc -- (void)[[BGTaskScheduler sharedScheduler] _simulateLaunchForTaskWithIdentifier:@"uk.rebecchi.applehealthsync.weekly-sync"]
+e -l objc -- (void)[[BGTaskScheduler sharedScheduler] _simulateLaunchForTaskWithIdentifier:@"uk.co.thebillington.applehealthsync.weekly-sync"]
 ```
 
 ## What is read
@@ -205,7 +205,7 @@ app with these environment variables through `simctl`:
 SIMCTL_CHILD_AHS_WEBHOOK_URL="http://127.0.0.1:8124/api/webhook/<id>" \
 SIMCTL_CHILD_AHS_SECRET="<secret>" \
 SIMCTL_CHILD_AHS_AUTO_TEST_PAYLOAD="1" \
-xcrun simctl launch "iPhone 18 Pro" uk.rebecchi.applehealthsync
+xcrun simctl launch "iPhone 18 Pro" uk.co.thebillington.applehealthsync
 ```
 
 This sends the test payload automatically on launch and is useful for CI or

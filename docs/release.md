@@ -22,14 +22,14 @@ usage descriptions, listing copy and review notes — is already prepared in
 ## 1. App ID and capabilities
 
 1. In the Apple Developer portal, create or open the App ID
-   `uk.rebecchi.applehealthsync`.
+   `uk.co.thebillington.applehealthsync`.
 2. Enable **HealthKit** for that App ID. Background delivery is included in the
    app's entitlements.
 3. In App Store Connect, create the app record:
    - platform iOS;
    - name **Health Assist**;
    - primary language **English (UK)**;
-   - bundle ID `uk.rebecchi.applehealthsync`;
+   - bundle ID `uk.co.thebillington.applehealthsync`;
    - SKU `healthassist-ios`;
    - price **Free** (tier 0);
    - no in-app purchases.
@@ -110,9 +110,8 @@ the copy. In App Store Connect also complete:
   Collected*, because the developer never receives the data and the app has no
   analytics or developer backend.
 - **Age rating** — 4+.
-- **Screenshots** — iPhone 6.9". If the app still supports iPad
-  (`TARGETED_DEVICE_FAMILY = "1,2"`), add iPad 13" screenshots too. To ship
-  iPhone-only, set `TARGETED_DEVICE_FAMILY: "1"` in `ios/project.yml`.
+- **Screenshots** — iPhone 6.9". The target is iPhone-only
+  (`TARGETED_DEVICE_FAMILY = "1"`), so no iPad screenshots are required.
 - **Export compliance** — `ITSAppUsesNonExemptEncryption` is already `false`;
   the app only uses standard HTTPS.
 - **Review notes** — copy `appstore/review-notes.txt` and fill in the contact

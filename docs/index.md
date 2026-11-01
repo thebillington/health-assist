@@ -34,8 +34,10 @@ Health Assist is pre-1.2 and actively developed. The webhook and long-term
 statistics path are working end to end. Workouts, ECG and clinical records are
 not yet exported.
 
-The integration domain remains `apple_health_sync` and the iOS bundle identifier
-remains `uk.rebecchi.applehealthsync` so existing installs survive rebrands.
+The integration domain remains `apple_health_sync`. The iOS app now uses the
+bundle identifier `uk.co.thebillington.applehealthsync`; builds signed with the
+old `uk.rebecchi.applehealthsync` identifier are development builds and are not
+upgraded in place.
 
 ## Repository
 

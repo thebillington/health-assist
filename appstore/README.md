@@ -14,7 +14,7 @@ Safari and unlocks no features.
 | --- | --- |
 | App name | Health Assist |
 | Subtitle | Apple Health to Home Assistant |
-| Bundle ID | `uk.rebecchi.applehealthsync` |
+| Bundle ID | `uk.co.thebillington.applehealthsync` |
 | SKU | `healthassist-ios` (or any private SKU) |
 | Primary language | English (UK) |
 | Primary category | Health & Fitness |
@@ -69,10 +69,8 @@ Apple requires at least one screenshot for each supported device family.
 
 - iPhone 6.9" (1290 × 2796): `docs/images/store/01-health-assist.png` exists.
 - Add 3–5 boards for a better listing. The OSG project is in `osg/`.
-- The target supports iPhone and iPad (`TARGETED_DEVICE_FAMILY = 1,2`), so an
-  iPad 13" screenshot is also required. **Decide before submission:** either add
-  iPad screenshots, or ship v1 as iPhone-only by setting
-  `TARGETED_DEVICE_FAMILY: "1"` in `ios/project.yml`.
+- The app is **iPhone-only** (`TARGETED_DEVICE_FAMILY = "1"`), so no iPad
+  screenshots are required.
 
 ## Reviewer access
 
@@ -98,11 +96,11 @@ priority support.
 ## Submission checklist
 
 - [ ] Apple Developer Program membership is active.
-- [ ] App ID `uk.rebecchi.applehealthsync` exists with **HealthKit** enabled.
+- [ ] App ID `uk.co.thebillington.applehealthsync` exists with **HealthKit** enabled.
 - [ ] App Store Connect app record created with the fields above.
 - [ ] Privacy policy live at <https://healthassist.thebillington.co.uk/privacy/>.
 - [ ] App Privacy answers completed and consistent with the policy.
-- [ ] iPhone 6.9" screenshots uploaded; iPad decision made.
+- [ ] iPhone 6.9" screenshots uploaded (iPhone-only; no iPad screenshots needed).
 - [ ] `MARKETING_VERSION` and `CURRENT_PROJECT_VERSION` bumped in
       `ios/project.yml`.
 - [ ] Archive built, exported and uploaded to TestFlight.

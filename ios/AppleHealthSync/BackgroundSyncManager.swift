@@ -14,7 +14,7 @@ import AppleHealthSyncCore
 @MainActor
 final class BackgroundSyncManager {
     static let shared = BackgroundSyncManager()
-    static let weeklyTaskIdentifier = "uk.rebecchi.applehealthsync.weekly-sync"
+    static let weeklyTaskIdentifier = "uk.co.thebillington.applehealthsync.weekly-sync"
 
     private let health = HealthKitManager()
     private let settings = SettingsStore()
@@ -25,7 +25,7 @@ final class BackgroundSyncManager {
         client: client
     )
     private let logger = Logger(
-        subsystem: "uk.rebecchi.applehealthsync",
+        subsystem: "uk.co.thebillington.applehealthsync",
         category: "background"
     )
     private let store = HKHealthStore()

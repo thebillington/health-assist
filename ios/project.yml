@@ -1,7 +1,7 @@
 name: AppleHealthSync
 
 options:
-  bundleIdPrefix: uk.rebecchi
+  bundleIdPrefix: uk.co.thebillington
   deploymentTarget:
     iOS: "18.0"
   createIntermediateGroups: true
@@ -31,13 +31,13 @@ targets:
         product: AppleHealthSyncCore
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: uk.rebecchi.applehealthsync
+        PRODUCT_BUNDLE_IDENTIFIER: uk.co.thebillington.applehealthsync
         PRODUCT_NAME: AppleHealthSync
         INFOPLIST_FILE: AppleHealthSync/Info.plist
         CODE_SIGN_ENTITLEMENTS: AppleHealthSync/AppleHealthSync.entitlements
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
-        TARGETED_DEVICE_FAMILY: "1,2"
+        TARGETED_DEVICE_FAMILY: "1"
         SUPPORTS_MACCATALYST: NO
         ENABLE_PREVIEWS: YES
         ENABLE_USER_SCRIPT_SANDBOXING: YES
@@ -46,7 +46,7 @@ targets:
       properties:
         CFBundleDisplayName: "Health Assist"
         CFBundleURLTypes:
-          - CFBundleURLName: uk.rebecchi.applehealthsync
+          - CFBundleURLName: uk.co.thebillington.applehealthsync
             CFBundleURLSchemes:
               - applehealthsync
         CFBundleShortVersionString: "$(MARKETING_VERSION)"
@@ -58,15 +58,10 @@ targets:
           - UIInterfaceOrientationPortrait
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
-        UISupportedInterfaceOrientations~ipad:
-          - UIInterfaceOrientationPortrait
-          - UIInterfaceOrientationPortraitUpsideDown
-          - UIInterfaceOrientationLandscapeLeft
-          - UIInterfaceOrientationLandscapeRight
         UIBackgroundModes:
           - fetch
         BGTaskSchedulerPermittedIdentifiers:
-          - uk.rebecchi.applehealthsync.weekly-sync
+          - uk.co.thebillington.applehealthsync.weekly-sync
         ITSAppUsesNonExemptEncryption: false
         NSHealthShareUsageDescription: "Health Assist reads your health data so it can send it to your Home Assistant instance."
         NSLocalNetworkUsageDescription: "Health Assist connects to your Home Assistant instance on your local network to send your health data."

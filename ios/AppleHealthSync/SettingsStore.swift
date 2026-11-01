@@ -12,7 +12,7 @@ final class SettingsStore {
     private let lastHistoryExportKey = "lastHistoryExport"
     private let historyCheckpointsKey = "historyCheckpoints"
 
-    private let keychainService = "uk.rebecchi.applehealthsync"
+    private let keychainService = "uk.co.thebillington.applehealthsync"
     private let urlAccount = "webhook-url"
     private let secretAccount = "webhook-secret"
 

@@ -12,7 +12,8 @@ scripts/                              payload simulator
 ```
 
 The integration domain stays `apple_health_sync`; Health Assist is the product
-name. The iOS bundle identifier stays `uk.rebecchi.applehealthsync`.
+name. The iOS bundle identifier is `uk.co.thebillington.applehealthsync`, and the
+app targets iPhone.
 
 ## Home Assistant tests
 
