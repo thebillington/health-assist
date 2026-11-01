@@ -99,6 +99,29 @@ def page(title: str, body: str, phone: str) -> str:
 </div></body></html>"""
 
 
+def board_free() -> str:
+    phone = f"""
+    <div class="shot-card"><div class="screen">
+      <div class="section-title">Sync</div>
+      <div class="card">
+        {row("Sync Now", teal=True)}
+        {row("Send a Test Payload")}
+        {row("Re-export All History")}
+      </div>
+      <div class="section-title">Result</div>
+      <div class="card">
+        {row("Sync complete — 24 metrics sent, 0 ignored.", small=True)}
+        {row("Last successful sync", "Today, 15:24", muted=True, small=True)}
+        {row("Last background sync", "Today, 14:00", muted=True, small=True)}
+      </div>
+    </div></div>"""
+    return page(
+        "Free.",
+        "Scheduled Apple Health sync to your Home Assistant. No subscription. No account.",
+        phone,
+    )
+
+
 def board_01() -> str:
     return page(
         "Set up once.",
@@ -203,11 +226,12 @@ def board_05() -> str:
 
 
 BOARDS = {
-    "01": board_01,
-    "02": board_02,
-    "03": board_03,
-    "04": board_04,
-    "05": board_05,
+    "01": board_free,
+    "02": board_01,
+    "03": board_02,
+    "04": board_03,
+    "05": board_04,
+    "06": board_05,
 }
 
 

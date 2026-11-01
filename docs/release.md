@@ -157,9 +157,9 @@ the copy. In App Store Connect also complete:
   Collected*, because the developer never receives the data and the app has no
   analytics or developer backend.
 - **Age rating** — 4+.
-- **Screenshots** — render the five section screenshots with
-  `osg/make_appstore.py` and upload them in order: Setup, Sync, Latest Values,
-  Privacy, Tip Jar. The target is iPhone-only (`TARGETED_DEVICE_FAMILY = "1"`),
+- **Screenshots** — render the six section screenshots with
+  `osg/make_appstore.py` and upload them in order: Free, Setup, Sync, Latest
+  Values, Privacy, Tip Jar. The target is iPhone-only (`TARGETED_DEVICE_FAMILY = "1"`),
   so no iPad screenshots are required.
 - **Export compliance** — `ITSAppUsesNonExemptEncryption` is already `false`;
   the app only uses standard HTTPS.

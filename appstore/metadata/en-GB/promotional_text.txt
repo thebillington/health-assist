@@ -1,1 +1,1 @@
-Reads Apple Health on your iPhone and sends it to a webhook in your Home Assistant. The phone must be able to reach Home Assistant directly.
+Free. Scheduled Apple Health sync to your Home Assistant. No subscription, no account.

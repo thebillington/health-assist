@@ -172,8 +172,8 @@ Accept the Xcode license and install an iOS simulator runtime. On recent Xcode,
 
 - OSG generates **store screenshots**, not logos. The app icon comes from
   `ios/scripts/make_icon.py`; the wordmark is a normal SVG.
-- The App Store set is built by `osg/make_appstore.py`: the full setup screen,
-  then the Sync, Latest Values, Privacy and Tip Jar sections.
+- The App Store set is built by `osg/make_appstore.py`: a free banner, then the
+  setup screen, Sync, Latest Values, Privacy and Tip Jar sections.
 - `screenshots/01-setup.png` is an HTML mockup rendered by `osg/make_screens.py`;
   `screenshots/01-app.png` is the real simulator capture.
 - The screenshots are local-only and gitignored. Do not commit them to `docs/`;

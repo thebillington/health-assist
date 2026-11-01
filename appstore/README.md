@@ -64,18 +64,18 @@ Either answer must match `docs/privacy.md`, which explains the full data flow.
 
 ## Screenshots
 
-The set is five 1290 × 2796 screenshots: a large explanation on each board,
+The set is six 1290 × 2796 screenshots: a large explanation on each board,
 with a smaller screenshot of the relevant app section.
 
-1. Setup — the full app screen.
-2. Sync — the Sync and Result sections.
-3. Latest Values — the metric list.
-4. Privacy — the data flow and security rows.
-5. Tip Jar — the optional in-app purchases and links.
+1. Free — the free scheduled-sync banner.
+2. Setup — the full app screen.
+3. Sync — the Sync and Result sections.
+4. Latest Values — the metric list.
+5. Privacy — the data flow and security rows.
+6. Tip Jar — the optional in-app purchases and links.
 
 They are rendered locally by `osg/make_appstore.py`; see `osg/README.md`. The
-files are not committed and are not published on the docs site. Upload them in
-this order.
+files are not committed and are not published on the docs site. Upload them in this order.
 
 The app is **iPhone-only** (`TARGETED_DEVICE_FAMILY = "1"`), so no iPad
 screenshots are required.
