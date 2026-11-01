@@ -45,6 +45,7 @@ nav:
   - Troubleshooting: troubleshooting.md
   - Gotchas: gotchas.md
   - Development: development.md
+  - Support: support.md
 
 markdown_extensions:
   - admonition
