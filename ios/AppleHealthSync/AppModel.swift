@@ -39,7 +39,11 @@ final class AppModel: ObservableObject {
     }
 
     func saveSettings() {
+        #if targetEnvironment(simulator)
+        // Simulator automation uses throwaway settings; never overwrite the
+        // developer's real configuration from an env-driven test run.
         guard !environmentOverrides else { return }
+        #endif
         settings.webhookURL = webhookURL
         settings.secret = secret
         settings.includeExtras = includeExtras
@@ -47,6 +51,12 @@ final class AppModel: ObservableObject {
     }
 
     func prepare() async {
+        #if !targetEnvironment(simulator)
+        if environmentOverrides, !autoTestPayload {
+            saveSettings()
+        }
+        #endif
+
         BackgroundSyncManager.shared.start(includeExtras: includeExtras)
         refreshBackgroundSyncDate()
 
