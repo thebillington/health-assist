@@ -28,7 +28,7 @@
 
 - `README.md` — installation, setup, webhook contract, metric registry and development.
 - `docs/index.md` — project overview.
-- `docs/screenshots.md` — App Store screenshots and promotion material.
+- `docs/screenshots.md` — the one-pager: App Store screenshots, listing copy and social copy.
 - `docs/install.md` — HACS and manual installation.
 - `docs/setup.md` — add a device and scan the QR code.
 - `docs/webhook.md` — the boundary between the app and Home Assistant.

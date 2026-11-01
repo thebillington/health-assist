@@ -36,7 +36,7 @@ statistics.
   <img src="images/store/05-sponsor.png" alt="Health Assist sponsor screen" style="width:100%;border-radius:14px">
 </div>
 
-[See all screenshots and promotion material](screenshots.md).
+[Open the one-pager](screenshots.md).
 
 ## Project status
 

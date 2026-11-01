@@ -35,7 +35,7 @@ Screenshots and generated assets live under `docs/images/`.
   <img src="docs/images/store/05-sponsor.png" width="240" alt="Health Assist sponsor screen">
 </p>
 
-[All screenshots and promotion material](https://healthassist.thebillington.co.uk/screenshots/).
+[Screenshots, copy and the promotion one-pager](https://healthassist.thebillington.co.uk/screenshots/).
 
 ---
 

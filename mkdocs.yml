@@ -36,7 +36,7 @@ theme:
 
 nav:
   - Home: index.md
-  - Screenshots: screenshots.md
+  - One-pager: screenshots.md
   - Install: install.md
   - Setup: setup.md
   - Webhook contract: webhook.md
