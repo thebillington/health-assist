@@ -68,10 +68,10 @@ Either answer must match `docs/privacy.md`, which explains the full data flow.
 The set is five simple 1290 × 2796 boards:
 
 1. App screenshot — the setup screen.
-2. Full history — text panel.
-3. Native sensors — text panel.
-4. Local-first — text panel.
-5. Free and open source — text panel.
+2. How it works — text panel.
+3. How the phone connects — text panel.
+4. What you get — text panel.
+5. Cost and privacy — text panel.
 
 They are rendered locally by `osg/build_project.py` and checked with
 `osg verify`; see `osg/README.md`. The rendered files are not committed and are

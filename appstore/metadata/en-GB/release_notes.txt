@@ -1,1 +1,1 @@
-First App Store release. Read-only Apple Health sync to your own Home Assistant, full history export, background delivery, QR setup and an optional Sponsor My Work link.
+First App Store release. Reads Apple Health and sends it to a webhook in your Home Assistant. The phone must be able to reach Home Assistant directly.

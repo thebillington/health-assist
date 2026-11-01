@@ -66,7 +66,7 @@
     },
     {
       "id": "ab_02",
-      "name": "02 Full history",
+      "name": "02 How it works",
       "position": {
         "x": 417,
         "y": 15
@@ -140,7 +140,7 @@
           },
           "rotation": 0,
           "scale": 1,
-          "content": "Full history,\nnot just today.",
+          "content": "How it works",
           "fontSize": 46,
           "color": "#0B1220",
           "fontFamily": "Space Grotesk",
@@ -158,12 +158,12 @@
           },
           "size": {
             "width": 1030,
-            "height": 470
+            "height": 700
           },
           "rotation": 0,
           "scale": 1,
-          "content": "The first sync exports all available HealthKit history in resumable chunks. Later syncs only send what is new, and you can re-export everything from the app.",
-          "fontSize": 18,
+          "content": "The app reads Apple Health on your iPhone and sends the readings to a webhook in your Home Assistant. There is no account and no service in the middle.",
+          "fontSize": 17,
           "color": "#475569",
           "fontFamily": "Space Grotesk",
           "fontWeight": "400",
@@ -196,7 +196,7 @@
     },
     {
       "id": "ab_03",
-      "name": "03 Native sensors",
+      "name": "03 Phone connection",
       "position": {
         "x": 819,
         "y": 15
@@ -270,7 +270,7 @@
           },
           "rotation": 0,
           "scale": 1,
-          "content": "Native sensors,\nreal statistics.",
+          "content": "How the phone connects",
           "fontSize": 46,
           "color": "#0B1220",
           "fontFamily": "Space Grotesk",
@@ -288,12 +288,12 @@
           },
           "size": {
             "width": 1030,
-            "height": 470
+            "height": 700
           },
           "rotation": 0,
           "scale": 1,
-          "content": "Steps, sleep, heart rate, weight, blood oxygen and more become Home Assistant sensors with stable IDs, correct units and long-term statistics.",
-          "fontSize": 18,
+          "content": "Health Assist does not relay data through a cloud. The phone has to be able to open the webhook URL itself: the same Wi-Fi, a VPN such as Tailscale, or a remote address such as Nabu Casa. If the phone cannot reach that address, the sync fails.",
+          "fontSize": 17,
           "color": "#475569",
           "fontFamily": "Space Grotesk",
           "fontWeight": "400",
@@ -326,7 +326,7 @@
     },
     {
       "id": "ab_04",
-      "name": "04 Local-first",
+      "name": "04 What you get",
       "position": {
         "x": 1221,
         "y": 15
@@ -400,7 +400,7 @@
           },
           "rotation": 0,
           "scale": 1,
-          "content": "Local-first,\nby design.",
+          "content": "What you get",
           "fontSize": 46,
           "color": "#0B1220",
           "fontFamily": "Space Grotesk",
@@ -418,12 +418,12 @@
           },
           "size": {
             "width": 1030,
-            "height": 470
+            "height": 700
           },
           "rotation": 0,
           "scale": 1,
-          "content": "Data goes from your iPhone to your own Home Assistant. No account, no analytics, no telemetry and no vendor cloud. The webhook and secret stay in the iOS Keychain.",
-          "fontSize": 18,
+          "content": "Steps, sleep, heart rate, weight and other readings become Home Assistant sensors. The first sync sends all available history; later syncs send new data. Sensors have stable IDs and units, and history is added to long-term statistics.",
+          "fontSize": 17,
           "color": "#475569",
           "fontFamily": "Space Grotesk",
           "fontWeight": "400",
@@ -456,7 +456,7 @@
     },
     {
       "id": "ab_05",
-      "name": "05 Free and open source",
+      "name": "05 Cost and privacy",
       "position": {
         "x": 1623,
         "y": 15
@@ -530,7 +530,7 @@
           },
           "rotation": 0,
           "scale": 1,
-          "content": "Free and\nopen source.",
+          "content": "Cost and privacy",
           "fontSize": 46,
           "color": "#0B1220",
           "fontFamily": "Space Grotesk",
@@ -548,12 +548,12 @@
           },
           "size": {
             "width": 1030,
-            "height": 470
+            "height": 700
           },
           "rotation": 0,
           "scale": 1,
-          "content": "The app and the integration are MIT licensed. There is no paid tier and no in-app purchase. Sponsor My Work is optional and unlocks nothing.",
-          "fontSize": 18,
+          "content": "The app and the integration are free and MIT licensed. There is no account, no analytics, no paid tier and no in-app purchase. If you want to support it, Sponsor My Work is optional and unlocks nothing.",
+          "fontSize": 17,
           "color": "#475569",
           "fontFamily": "Space Grotesk",
           "fontWeight": "400",

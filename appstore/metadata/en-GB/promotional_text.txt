@@ -1,1 +1,1 @@
-Lightweight, local-first Apple Health sync for Home Assistant. Full history, background updates, no account and no vendor cloud.
+Reads Apple Health on your iPhone and sends it to a webhook in your Home Assistant. The phone must be able to reach Home Assistant directly.

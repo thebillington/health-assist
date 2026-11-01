@@ -131,7 +131,7 @@ def feature_board(index: int, name: str, number: str, headline: str, body: str) 
             text("number", 90, 170, 200, 60, number, 12, "600", TEAL),
             shape("rule", 90, 270, 120, 6, TEAL),
             text("headline", 90, 330, 1110, 430, headline, 46, "700", INK, 1.04),
-            text("body", 90, 850, 1030, 470, body, 18, "400", MUTED, 1.45),
+            text("body", 90, 850, 1030, 700, body, 17, "400", MUTED, 1.45),
             text(
                 "footer",
                 90,
@@ -149,32 +149,35 @@ def feature_board(index: int, name: str, number: str, headline: str, body: str) 
 
 FEATURES = (
     (
-        "02 Full history",
+        "02 How it works",
         "02",
-        "Full history,\nnot just today.",
-        "The first sync exports all available HealthKit history in resumable chunks. "
-        "Later syncs only send what is new, and you can re-export everything from the app.",
+        "How it works",
+        "The app reads Apple Health on your iPhone and sends the readings to a webhook in "
+        "your Home Assistant. There is no account and no service in the middle.",
     ),
     (
-        "03 Native sensors",
+        "03 Phone connection",
         "03",
-        "Native sensors,\nreal statistics.",
-        "Steps, sleep, heart rate, weight, blood oxygen and more become Home Assistant "
-        "sensors with stable IDs, correct units and long-term statistics.",
+        "How the phone connects",
+        "Health Assist does not relay data through a cloud. The phone has to be able to open "
+        "the webhook URL itself: the same Wi-Fi, a VPN such as Tailscale, or a remote address "
+        "such as Nabu Casa. If the phone cannot reach that address, the sync fails.",
     ),
     (
-        "04 Local-first",
+        "04 What you get",
         "04",
-        "Local-first,\nby design.",
-        "Data goes from your iPhone to your own Home Assistant. No account, no analytics, "
-        "no telemetry and no vendor cloud. The webhook and secret stay in the iOS Keychain.",
+        "What you get",
+        "Steps, sleep, heart rate, weight and other readings become Home Assistant sensors. "
+        "The first sync sends all available history; later syncs send new data. Sensors have "
+        "stable IDs and units, and history is added to long-term statistics.",
     ),
     (
-        "05 Free and open source",
+        "05 Cost and privacy",
         "05",
-        "Free and\nopen source.",
-        "The app and the integration are MIT licensed. There is no paid tier and no in-app "
-        "purchase. Sponsor My Work is optional and unlocks nothing.",
+        "Cost and privacy",
+        "The app and the integration are free and MIT licensed. There is no account, no "
+        "analytics, no paid tier and no in-app purchase. If you want to support it, Sponsor "
+        "My Work is optional and unlocks nothing.",
     ),
 )
 

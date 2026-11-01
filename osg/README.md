@@ -5,10 +5,10 @@ The set is deliberately simple: five 1290 × 2796 boards.
 | # | Board | Source |
 | --- | --- | --- |
 | 1 | App screenshot | `screenshots/01-setup.png` (`01-app.png` is the real simulator capture) |
-| 2 | Full history | text panel |
-| 3 | Native sensors | text panel |
-| 4 | Local-first | text panel |
-| 5 | Free and open source | text panel |
+| 2 | How it works | text panel |
+| 3 | How the phone connects | text panel |
+| 4 | What you get | text panel |
+| 5 | Cost and privacy | text panel |
 
 No phone frames, marketing props, App Store search panels or social card. The
 first board is the app; the rest explain a feature in plain text.

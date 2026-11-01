@@ -1,31 +1,17 @@
-Health Assist connects Apple Health to your own Home Assistant — no vendor cloud, no account and no subscription.
+Health Assist reads Apple Health on your iPhone and sends the readings to a webhook in your Home Assistant.
 
-The app reads your Apple Health data with HealthKit and sends it straight to a webhook on your Home Assistant instance. Home Assistant creates native sensors and long-term statistics, so you can automate, chart and alert on your health data alongside the rest of your home.
+The app and the integration are separate, free, MIT-licensed pieces. Install the integration in Home Assistant, create a webhook, then paste the URL (or scan its QR code) into the app. The phone must be able to reach Home Assistant directly: the same Wi-Fi, a VPN such as Tailscale, or a remote address such as Nabu Casa. If the phone cannot reach that address, the sync fails.
 
-WHY HEALTH ASSIST
-• Local-first: data goes from your iPhone to your Home Assistant, not to a vendor cloud.
-• Free and open source: the iOS app and the Home Assistant integration are MIT licensed.
-• No account: nothing to sign up for.
-• No analytics or telemetry: the app contains no tracking SDKs.
-• Full history: the first sync exports your available Apple Health history in resumable chunks, then keeps it up to date.
-• Multi-device: add one integration entry per iPhone or iPad.
+With read-only Apple Health access, the app sends steps, sleep, heart rate, weight and other readings. They appear as Home Assistant sensors with units and long-term statistics. The first sync sends all available history; later syncs send new data, and you can re-export everything from the app.
+
+There is no account, no analytics, no telemetry and no vendor cloud. The app never writes to Apple Health. The webhook URL and optional shared secret are stored in the iOS Keychain.
 
 WHAT YOU NEED
-• Home Assistant 2024.1 or newer.
-• The free Health Assist integration, installed with HACS or manually from the project repository.
-• iOS 18 or newer.
-• A webhook URL and optional shared secret from the integration.
+• Home Assistant 2024.1 or newer
+• iOS 18 or newer
+• The Health Assist integration, installed with HACS or manually
+• A webhook URL and optional shared secret
 
-SETUP
-1. Install the Health Assist integration in Home Assistant.
-2. Add the integration and copy the webhook URL (and optional secret), or scan its QR code with the app.
-3. Grant read-only Apple Health access.
-4. Run a sync. Sensors appear in Home Assistant automatically.
-
-PRIVACY
-Health Assist reads Apple Health only with your permission and never writes to it. Your data is sent only to the Home Assistant address you configure. The developer receives no health data. Read the full policy at https://healthassist.thebillington.co.uk/privacy/
-
-SUPPORT
-Health Assist is free. If it saves you time, an optional Sponsor My Work link supports ongoing development. Sponsorship unlocks no features.
+The app is free. There is no paid tier and no in-app purchase. If you want to support it, Sponsor My Work is optional and unlocks nothing.
 
 Apple Health is a trademark of Apple Inc. Health Assist is not affiliated with or endorsed by Apple.
