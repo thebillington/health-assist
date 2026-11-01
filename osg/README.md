@@ -1,43 +1,43 @@
 # App Store screenshots
 
-Five 1290 × 2796 screenshots: one full app screen and four individual app
-sections.
+Five 1290 × 2796 boards. Each board has a large explanation and a smaller
+screenshot of the relevant app section.
 
-| # | Screenshot | What it shows |
+| # | Board | Screenshot |
 | --- | --- | --- |
-| 1 | Setup | The full app screen: webhook, secret, Health access and sync. |
-| 2 | Sync | Sync Now, test payload, re-export and the result card. |
-| 3 | Latest Values | The metrics the app has sent. |
-| 4 | Privacy | The iPhone → HTTPS → Home Assistant flow and Keychain storage. |
-| 5 | Tip Jar | The optional StoreKit tips and the docs links. |
+| 1 | Setup | The full setup screen. |
+| 2 | Sync | The Sync and Result sections. |
+| 3 | Latest Values | The metric list. |
+| 4 | Privacy | The data flow, Keychain and transport rows. |
+| 5 | Tip Jar | The optional StoreKit tips and the links. |
 
-Screenshots 2–5 are individual app sections rendered from HTML mockups, not full
-device captures. The first is the full setup screen. No marketing panels or
-App Store walkthroughs.
+Boards 2–5 use cropped app sections rather than a full phone screen. The text is
+an overlay; every board still shows the app's own UI.
 
-The rendered files are **not committed and not published** on the docs site.
-They are written to `promo/images/sections/` for the local preview and for the
-App Store upload.
+The files are written to `promo/images/appstore/` for the local preview and the
+App Store upload. They are **not committed and not published** on the docs site.
 
 ## Rebuild
 
 ```bash
-# Setup screen used by screenshot 1 (set CHROME if the default path is wrong)
+# Setup screen, only needed if the app UI changes
 python3 osg/make_screens.py
 
-# Screenshots 1-5
-python3 osg/make_sections.py
+# All five App Store boards
+python3 osg/make_appstore.py
 ```
 
 ## Files
 
 - `make_screens.py` renders `screenshots/01-setup.png`.
-- `make_sections.py` renders the five App Store screenshots.
+- `make_appstore.py` renders the five final screenshots.
 - `../screenshots/01-app.png` is the real simulator capture, kept for reference.
 
 ## Notes
 
-- The container has no Xcode, so the screenshots are HTML mockups of the app's
-  own sections. They must still match the shipped UI before upload.
-- The first screenshot is a full app screen; the rest are sections, so every
-  image shows actual app UI rather than a text-only marketing panel.
+- The container has no Xcode, so the app sections are HTML mockups of the real
+  UI. They must match the shipped app before upload.
+- Keep the large explanation text short enough to stay readable in the App
+  Store carousel.
+- The HACS walkthrough lives in the app's **HACS setup guide** and in the docs,
+  not in the App Store screenshots.

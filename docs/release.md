@@ -156,7 +156,7 @@ the copy. In App Store Connect also complete:
   analytics or developer backend.
 - **Age rating** — 4+.
 - **Screenshots** — render the five section screenshots with
-  `osg/make_sections.py` and upload them in order: Setup, Sync, Latest Values,
+  `osg/make_appstore.py` and upload them in order: Setup, Sync, Latest Values,
   Privacy, Tip Jar. The target is iPhone-only (`TARGETED_DEVICE_FAMILY = "1"`),
   so no iPad screenshots are required.
 - **Export compliance** — `ITSAppUsesNonExemptEncryption` is already `false`;

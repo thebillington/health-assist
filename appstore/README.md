@@ -64,8 +64,8 @@ Either answer must match `docs/privacy.md`, which explains the full data flow.
 
 ## Screenshots
 
-The set is five 1290 × 2796 screenshots: one full app screen, then four
-individual app sections.
+The set is five 1290 × 2796 screenshots: a large explanation on each board,
+with a smaller screenshot of the relevant app section.
 
 1. Setup — the full app screen.
 2. Sync — the Sync and Result sections.
@@ -73,7 +73,7 @@ individual app sections.
 4. Privacy — the data flow and security rows.
 5. Tip Jar — the optional in-app purchases and links.
 
-They are rendered locally by `osg/make_sections.py`; see `osg/README.md`. The
+They are rendered locally by `osg/make_appstore.py`; see `osg/README.md`. The
 files are not committed and are not published on the docs site. Upload them in
 this order.
 
