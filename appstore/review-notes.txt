@@ -38,8 +38,8 @@ LOCAL NETWORK
 The app connects to the user's Home Assistant over the local network.
 NSLocalNetworkUsageDescription explains the system prompt.
 
-SPONSOR MY WORK
-The "Sponsor My Work" link in the Support section opens
+SUPPORT ME
+The "Support Me" link in the Support section opens
 https://github.com/sponsors/thebillington in Safari. It is an optional donation
 to the individual developer. It sells no digital goods or services and unlocks
 no features; the app is fully functional without it. It is not an external

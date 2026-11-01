@@ -12,6 +12,6 @@ WHAT YOU NEED
 • The Health Assist integration, installed with HACS or manually
 • A webhook URL and optional shared secret
 
-The app is free. There is no paid tier and no in-app purchase. If you want to support it, Sponsor My Work is optional and unlocks nothing.
+The app is free. There is no paid tier and no in-app purchase. If you want to support my work, click the Support Me button in the app.
 
 Apple Health is a trademark of Apple Inc. Health Assist is not affiliated with or endorsed by Apple.

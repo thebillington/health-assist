@@ -175,9 +175,9 @@ FEATURES = (
         "05 Cost and privacy",
         "05",
         "Cost and privacy",
-        "The app and the integration are free and MIT licensed. There is no account, no "
-        "analytics, no paid tier and no in-app purchase. If you want to support it, Sponsor "
-        "My Work is optional and unlocks nothing.",
+        "The app and the Home Assistant integration are free and MIT licensed. There is no "
+        "account, no analytics, no paid tier and no in-app purchase. If you want to support "
+        "my work, click the Support Me button in the app.",
     ),
 )
 

@@ -5,8 +5,8 @@ submits anything. Use it to fill in App Store Connect, then submit manually when
 you are ready.
 
 The app is distributed **free** (price tier 0, no in-app purchases). The optional
-**Sponsor My Work** link opens <https://github.com/sponsors/thebillington> in
-Safari and unlocks no features.
+**Support Me** link opens <https://github.com/sponsors/thebillington> in Safari
+and unlocks no features.
 
 ## App Store Connect fields
 
@@ -95,7 +95,7 @@ The mock endpoint must:
 
 ## Sponsor link and App Review
 
-The **Sponsor My Work** row is an optional donation to the individual developer,
+The **Support Me** row is an optional donation to the individual developer,
 not a purchase. It is placed in the Support section, opens in Safari, and no
 feature is locked behind it. `review-notes.txt` states this explicitly. Do not
 add any wording that suggests sponsorship buys features, data access or
