@@ -1,14 +1,14 @@
 name: Codemagic dispatch
 
-# Starts the Codemagic iOS release workflow. Codemagic does the signing and
-# TestFlight upload; this repository only needs the webhook URL as a secret.
+# Starts the Codemagic iOS release workflow through the REST API.
+# The webhook URL is for git-provider events, not for build dispatch; POSTing
+# an arbitrary JSON body to it fails with "Unrecognized payload".
 #
 # One-time setup:
-#   gh secret set CODEMAGIC_WEBHOOK_URL --repo thebillington/health-assist \
-#     --body "https://api.codemagic.io/hooks/..."
-#
-# The webhook is a build trigger, not a public link. Rotate it in Codemagic if
-# it leaks.
+#   gh secret set CODEMAGIC_API_TOKEN --repo thebillington/health-assist \
+#     --body "<token from Codemagic > Account settings > API token>"
+#   gh variable set CODEMAGIC_APP_ID --repo thebillington/health-assist \
+#     --body "<app id from the Codemagic app URL>"
 
 on:
   workflow_dispatch:
@@ -26,19 +26,28 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Trigger Codemagic
+      - name: Start build
         env:
-          CODEMAGIC_WEBHOOK_URL: ${{ secrets.CODEMAGIC_WEBHOOK_URL }}
+          CODEMAGIC_API_TOKEN: ${{ secrets.CODEMAGIC_API_TOKEN }}
+          CODEMAGIC_APP_ID: ${{ vars.CODEMAGIC_APP_ID }}
         run: |
           set -euo pipefail
-          if [ -z "$CODEMAGIC_WEBHOOK_URL" ]; then
-            echo "CODEMAGIC_WEBHOOK_URL is not set" >&2
+
+          if [ -z "$CODEMAGIC_API_TOKEN" ]; then
+            echo "CODEMAGIC_API_TOKEN is not set" >&2
             exit 1
           fi
+          if [ -z "$CODEMAGIC_APP_ID" ]; then
+            echo "CODEMAGIC_APP_ID is not set" >&2
+            exit 1
+          fi
+
           response="$(curl --fail --silent --show-error \
             --request POST \
             --header "Content-Type: application/json" \
-            --data '{}' \
-            "$CODEMAGIC_WEBHOOK_URL")"
+            --header "x-auth-token: $CODEMAGIC_API_TOKEN" \
+            --data "{\"appId\":\"$CODEMAGIC_APP_ID\",\"workflowId\":\"ios-release\",\"branch\":\"main\"}" \
+            https://api.codemagic.io/builds)"
+
           printf '%s\n' "$response"
           echo "Codemagic build requested."

@@ -95,8 +95,9 @@ One-time setup:
      `uk.co.thebillington.applehealthsync`, or upload one. Profiles are tied to
      a bundle ID, so the Steno or Revision profile cannot be reused.
 5. Start the workflow manually in Codemagic, or run the **Codemagic dispatch**
-   GitHub Action. The action needs `CODEMAGIC_WEBHOOK_URL` as a repository
-   secret. Builds are manual-only (`triggering.events: []`).
+   GitHub Action. The action uses the `CODEMAGIC_API_TOKEN` repository secret
+   and the `CODEMAGIC_APP_ID` repository variable. Builds are manual-only
+   (`triggering.events: []`).
 
 If the workflow cannot find a certificate or profile, add the profile once under
 **Code signing identities**, then rerun.
