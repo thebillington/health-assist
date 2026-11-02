@@ -38,7 +38,17 @@ workflows:
       xcode: latest
 
     triggering:
-      events: []
+      events:
+        - push
+        - tag
+      branch_patterns:
+        - pattern: "ci/*"
+          include: true
+      tag_patterns:
+        - pattern: "v*"
+          include: true
+        - pattern: "ios-v*"
+          include: true
 
     scripts:
       - name: Run shared package tests
