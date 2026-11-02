@@ -127,4 +127,4 @@ data access or support.
 - [ ] Tip Jar tested in TestFlight; tips unlock nothing.
 - [ ] Submitted manually by the owner.
 
-See `docs/release.md` for the build and signing commands.
+See `contributing/release.md` for the build and signing commands.

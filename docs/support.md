@@ -12,7 +12,7 @@ Support is optional and does not unlock any features.
 
 ## Report a problem
 
-When the source repository is public, open an issue at
+Open an issue at
 [thebillington/health-assist](https://github.com/thebillington/health-assist/issues).
 
 Include:
@@ -27,9 +27,9 @@ credentials.
 
 ## Before you report
 
-- Check [Troubleshooting](troubleshooting.md) and [Gotchas](gotchas.md).
+- Check [Troubleshooting](troubleshooting.md).
 - Confirm the webhook URL is the full URL shown in the integration, not just the
   path.
 - Try a manual **Sync Now** from the iOS app and check the app's result message.
-- Send a test payload with `scripts/send_sample_payload.py` to separate an app
-  problem from a Home Assistant problem.
+- Use **Send a Test Payload** in the app to separate an app problem from a Home
+  Assistant problem.

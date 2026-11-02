@@ -3,7 +3,7 @@
 # Manual-only by design: a build uploads to App Store Connect, but never submits
 # the app for review. Final submission stays a manual App Store Connect action.
 #
-# One-time setup is documented in docs/release.md. In short:
+# One-time setup is documented in contributing/release.md. In short:
 #   1. Add this repository to Codemagic.
 #   2. Reuse the team's existing App Store Connect API key, named `Codemagic`,
 #      under Team settings -> Developer Portal (App Manager access).

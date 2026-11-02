@@ -463,6 +463,11 @@ hacs.json
 .github/workflows/   pytest, hassfest, ruff, iOS build/tests
 ```
 
+Maintainer-only notes live in [`contributing/`](contributing/): the
+[webhook contract](contributing/webhook.md), [development setup](contributing/development.md),
+[iOS release steps](contributing/release.md) and [gotchas](contributing/gotchas.md).
+They are deliberately not published on the documentation site.
+
 ### iOS tests and build
 
 The payload encoder, percentage conversion and sleep interval merging are in a
