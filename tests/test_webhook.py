@@ -568,6 +568,16 @@ async def test_history_importer_builds_entity_statistics(hass: HomeAssistant, mo
         fake_import,
     )
 
+    # No recorder database in the test harness, so stand in for the query that
+    # reports which hours the recorder already holds.
+    async def fake_existing_hours(hass, statistic_ids, *, since, cutoff):
+        return set()
+
+    monkeypatch.setattr(
+        "custom_components.apple_health_sync.history._existing_hours",
+        fake_existing_hours,
+    )
+
     await async_import_history(
         hass,
         entry,
@@ -585,3 +595,51 @@ async def test_history_importer_builds_entity_statistics(hass: HomeAssistant, mo
     assert captured["statistics"] == [
         {"start": datetime(2026, 10, 30, 8, tzinfo=UTC), "mean": 71.5}
     ]
+
+
+async def test_history_importer_skips_when_recorder_unavailable(
+    hass: HomeAssistant, monkeypatch
+) -> None:
+    """Nothing is imported when the recorder cannot report its existing hours."""
+    from datetime import UTC, datetime
+
+    from custom_components.apple_health_sync.history import (
+        HistoryMetric,
+        HistorySample,
+        async_import_history,
+    )
+
+    entry = make_entry()
+    await setup_entry(hass, entry)
+    await post_payload(hass, TEST_WEBHOOK_ID, {"metrics": {"weight": {"value": 72.4}}})
+    await hass.async_block_till_done()
+
+    calls = []
+
+    def fake_import(hass, metadata, statistics):
+        calls.append(statistics)
+
+    async def fake_existing_hours(hass, statistic_ids, *, since, cutoff):
+        return None
+
+    monkeypatch.setattr(
+        "homeassistant.components.recorder.statistics.async_import_statistics",
+        fake_import,
+    )
+    monkeypatch.setattr(
+        "custom_components.apple_health_sync.history._existing_hours",
+        fake_existing_hours,
+    )
+
+    await async_import_history(
+        hass,
+        entry,
+        {
+            "weight": HistoryMetric(
+                unit="kg",
+                samples=(HistorySample(datetime(2026, 10, 30, 8, 5, tzinfo=UTC), 71.5, "kg"),),
+            )
+        },
+    )
+
+    assert calls == []
