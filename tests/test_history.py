@@ -53,3 +53,21 @@ def test_ignores_rows_belonging_to_another_entity() -> None:
         )
         == statistics
     )
+
+
+def test_age_alone_never_protects_an_hour() -> None:
+    cutoff = datetime(2026, 11, 2, 10, 0, tzinfo=UTC)
+    hour = cutoff - timedelta(days=400)
+    statistics = [_row(hour)]
+    assert (
+        _importable_hours(statistics, set(), statistic_id="sensor.x", cutoff=cutoff) == statistics
+    )
+    assert (
+        _importable_hours(
+            statistics,
+            {("sensor.x", hour.timestamp())},
+            statistic_id="sensor.x",
+            cutoff=cutoff,
+        )
+        == []
+    )

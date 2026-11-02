@@ -570,7 +570,7 @@ async def test_history_importer_builds_entity_statistics(hass: HomeAssistant, mo
 
     # No recorder database in the test harness, so stand in for the query that
     # reports which hours the recorder already holds.
-    async def fake_existing_hours(hass, statistic_ids, cutoff):
+    async def fake_existing_hours(hass, statistic_ids, *, since, cutoff):
         return set()
 
     monkeypatch.setattr(
@@ -619,7 +619,7 @@ async def test_history_importer_skips_when_recorder_unavailable(
     def fake_import(hass, metadata, statistics):
         calls.append(statistics)
 
-    async def fake_existing_hours(hass, statistic_ids, cutoff):
+    async def fake_existing_hours(hass, statistic_ids, *, since, cutoff):
         return None
 
     monkeypatch.setattr(

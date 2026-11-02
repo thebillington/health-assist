@@ -33,7 +33,6 @@ _ENTITY_WAIT_SECONDS = 0.1
 # every statistic, not just this integration's. Only import hours the recorder
 # has certainly finished with.
 _STATISTICS_SETTLE_TIME = timedelta(hours=2)
-_EXISTING_STATISTICS_LOOKBACK = timedelta(days=35)
 
 
 @dataclass(frozen=True, slots=True)
@@ -100,9 +99,17 @@ def _importable_hours(
 
 
 async def _existing_hours(
-    hass: HomeAssistant, statistic_ids: set[str], cutoff: datetime
+    hass: HomeAssistant,
+    statistic_ids: set[str],
+    *,
+    since: datetime,
+    cutoff: datetime,
 ) -> set[tuple[str, float]] | None:
     """Return the (statistic_id, start_ts) rows the recorder already holds.
+
+    ``since`` is the oldest hour in the payload and ``cutoff`` the newest hour
+    that may be imported, so the query stays bounded without guessing how far
+    back a payload can reach.
 
     Returns None when the recorder is unavailable, in which case the caller must
     not import anything.
@@ -122,7 +129,7 @@ async def _existing_hours(
             .join(Statistics, Statistics.metadata_id == StatisticsMeta.id)
             .filter(
                 StatisticsMeta.statistic_id.in_(sorted(statistic_ids)),
-                Statistics.start_ts >= (cutoff - _EXISTING_STATISTICS_LOOKBACK).timestamp(),
+                Statistics.start_ts >= since.timestamp(),
                 Statistics.start_ts <= cutoff.timestamp(),
             )
         )
@@ -189,7 +196,27 @@ async def async_import_history(
         StatisticMeanType = None  # type: ignore[assignment,misc]
 
     cutoff = datetime.now(UTC) - _STATISTICS_SETTLE_TIME
-    existing = await _existing_hours(hass, set(entity_ids.values()), cutoff)
+
+    # Build every metric's hourly buckets once, so the recorder query can be
+    # bounded by the oldest hour actually present in the payload.
+    candidates: dict[str, list[dict[str, Any]]] = {}
+    oldest: datetime | None = None
+    for key, metric in history.items():
+        if entity_ids.get(key) is None:
+            continue
+        rows = build_hourly_statistics(metric.samples)
+        if not rows:
+            continue
+        candidates[key] = rows
+        first = min(row["start"] for row in rows)
+        if oldest is None or first < oldest:
+            oldest = first
+
+    if not candidates:
+        return
+
+    assert oldest is not None
+    existing = await _existing_hours(hass, set(entity_ids.values()), since=oldest, cutoff=cutoff)
     if existing is None:
         _LOGGER.debug(
             "Recorder statistics unavailable; skipping historical import for %s",
@@ -203,7 +230,7 @@ async def async_import_history(
             continue
 
         statistics = _importable_hours(
-            build_hourly_statistics(metric.samples),
+            candidates.get(key, []),
             existing,
             statistic_id=entity_id,
             cutoff=cutoff,
