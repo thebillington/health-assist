@@ -38,16 +38,12 @@ nav:
   - Home: index.md
   - Install: install.md
   - Setup: setup.md
-  - Webhook contract: webhook.md
   - History and statistics: history.md
   - iOS app: ios.md
   - Security: security.md
   - Privacy: privacy.md
   - Troubleshooting: troubleshooting.md
-  - Gotchas: gotchas.md
   - Support: support.md
-  - Development: development.md
-  - Release: release.md
 
 markdown_extensions:
   - admonition

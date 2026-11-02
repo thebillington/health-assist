@@ -3,24 +3,20 @@
 The companion app is SwiftUI + HealthKit, with no third-party runtime
 dependencies.
 
-## Build and run
+## Get the app
+
+The app is not on the App Store yet, so build it from the open-source project:
 
 ```bash
 open ios/AppleHealthSync.xcodeproj
 ```
 
-Select the `AppleHealthSync` scheme and an iPhone simulator or device.
+Select the `AppleHealthSync` scheme, pick your development team under
+**Signing & Capabilities**, then run on an iPhone simulator or a device. A
+physical iPhone needs an Apple ID team for signing and Health access.
 
-For a physical iPhone:
-
-1. Open the target → **Signing & Capabilities**.
-2. Choose your development team.
-3. Keep the HealthKit capability (background delivery is included in the
-   entitlements).
-4. Run on the device.
-
-The HealthKit capability must include **Background Delivery** and the app needs
-the **Background Modes → Background fetch** capability for the weekly fallback.
+The simulator has no HealthKit data. Use **Send a Test Payload** to check the
+webhook and Home Assistant entities without a phone.
 
 ## Configuration
 
@@ -43,8 +39,8 @@ granted. If values are missing, check:
 
 **Settings → Privacy & Security → Health → Health Bridge → Turn On All**
 
-The simulator intentionally disables HealthKit. Use **Send a Test Payload** to
-verify the webhook and HA entities there.
+The simulator has no HealthKit. Use **Send a Test Payload** to verify the
+webhook and Home Assistant entities there.
 
 ## Background behavior
 
@@ -61,13 +57,7 @@ The first sync exports full history from 2014. It may take minutes; progress is
 shown per metric and checkpoints allow resuming. Later syncs export only
 incremental history.
 
-## Distribution
+## Availability
 
-The development build is signed with the developer's team. A distribution build
-requires the same HealthKit/background entitlements and a provisioning profile
-that includes them.
-
-The app is not yet distributed through the App Store or TestFlight. The release
-pack is in `appstore/` and the signing, TestFlight and listing steps are in
-[Release](release.md). The app is free, with an optional **Tip Jar**
-using in-app purchase. Tips unlock nothing.
+The app is not on the App Store or TestFlight yet. It is free, with an optional
+**Tip Jar** using in-app purchase. Tips unlock nothing.

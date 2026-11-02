@@ -6,7 +6,8 @@
 custom_components/apple_health_sync/   Home Assistant integration
 ios/                                  SwiftUI app, Xcode project, Swift package
 tests/                                pytest + iOS contract tests
-docs/                                 this site and screenshots
+docs/                                 the published documentation site
+contributing/                         maintainer notes (not published)
 scripts/                              payload simulator
 .github/workflows/                    tests, lint, hassfest, iOS, docs
 ```
