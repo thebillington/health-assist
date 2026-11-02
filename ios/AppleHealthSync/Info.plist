@@ -46,6 +46,8 @@
 	<string>Scan the Home Assistant QR code to configure the webhook URL and shared secret.</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>Health Bridge reads your health data so it can send it to your Home Assistant instance.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Health Bridge only reads your Apple Health data to send it to your Home Assistant. It never writes or updates your health data.</string>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>Health Bridge connects to your Home Assistant instance on your local network to send your health data.</string>
 	<key>UIApplicationSceneManifest</key>
@@ -62,7 +64,6 @@
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>arm64</string>
-		<string>healthkit</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
