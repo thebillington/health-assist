@@ -578,4 +578,6 @@ Support is optional and does not unlock any features.
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE). The published terms, including the warranty
+disclaimer for self-installed and self-built copies, are at
+<https://healthassist.thebillington.co.uk/terms/>.

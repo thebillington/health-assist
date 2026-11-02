@@ -46,6 +46,7 @@ yet exported.
 - [Report an issue](https://github.com/thebillington/health-assist/issues)
 - [MIT license](https://github.com/thebillington/health-assist/blob/main/LICENSE)
 - [Privacy policy](privacy.md)
+- [Terms of use](terms.md)
 
 ## Support My Work
 

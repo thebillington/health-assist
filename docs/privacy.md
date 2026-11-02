@@ -1,11 +1,13 @@
 # Privacy policy
 
-**Effective date: 1 November 2026**
+**Effective date: 2 November 2026**
 
-Home Assistant Health Bridge is a free, open-source Home Assistant integration and iOS app by
-Billy Rebecchi ("I", "me"). This policy explains what the iOS app does with your
-data. The Home Assistant integration runs on your own Home Assistant server,
-under your control.
+**Applies to:** the Home Assistant Health Bridge iOS app distributed by Billy
+Rebecchi ("I", "me") through TestFlight and the App Store, and this
+documentation site. See [Scope](#scope) for what is not covered.
+
+The Home Assistant integration runs on your own Home Assistant server, under
+your control.
 
 ## Summary
 
@@ -15,6 +17,26 @@ under your control.
 - There is no account, no analytics, no advertising, no tracking and no
   telemetry.
 - Support is optional and unlocks no features.
+
+## Scope
+
+This policy covers the iOS app I distribute through TestFlight and the App
+Store, and this documentation site. It describes the data that build sends and
+what I do with it.
+
+It does not cover:
+
+- **copies you build yourself** from the open-source repository — they come from
+  the same source and behave the same way with your data, but I do not
+  distribute or run them and cannot verify or support that build;
+- **the Home Assistant integration**, whether installed through HACS as a custom
+  repository or copied in manually — it runs on your hardware, inside your Home
+  Assistant, and I receive nothing from it.
+
+Installing or building the software yourself is your own responsibility, on the
+terms in the [Terms of use](terms.md). In every case the data flow is the same:
+the app talks directly to the Home Assistant address you configure, and I do not
+operate a server that receives it.
 
 ## Data the app reads
 

@@ -25,9 +25,13 @@ three consumable in-app purchases handled by Apple and unlocks no features.
 | Support URL | <https://healthassist.thebillington.co.uk/support/> |
 | Marketing URL | <https://healthassist.thebillington.co.uk/> |
 | Privacy policy URL | <https://healthassist.thebillington.co.uk/privacy/> |
+| Terms of use | <https://healthassist.thebillington.co.uk/terms/> |
 
 The privacy policy must be live at that URL before you submit. It is committed
-at `docs/privacy.md` and deploys with the docs site.
+at `docs/privacy.md` and deploys with the docs site, and the Terms of use are at
+`docs/terms.md`. Leave App Store Connect's licence agreement on Apple's standard
+EULA; the site terms are a plain-English summary that repeats the MIT warranty
+disclaimer and covers self-built copies.
 
 ## Metadata
 

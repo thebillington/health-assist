@@ -202,6 +202,9 @@ struct ContentView: View {
                         Link(destination: URL(string: "https://healthassist.thebillington.co.uk/privacy/")!) {
                             Label("Privacy Policy", systemImage: "hand.raised")
                         }
+                        Link(destination: URL(string: "https://healthassist.thebillington.co.uk/terms/")!) {
+                            Label("Terms of Use", systemImage: "doc.text")
+                        }
                         Link(destination: URL(string: "https://healthassist.thebillington.co.uk/")!) {
                             Label("Documentation", systemImage: "book")
                         }

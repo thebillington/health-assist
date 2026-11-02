@@ -51,6 +51,11 @@ tip. There are no external payment links in the app.
 PRIVACY
 Full policy: https://healthassist.thebillington.co.uk/privacy/
 
+TERMS
+App Store copies use Apple's standard EULA. Plain-English terms, including the
+MIT warranty disclaimer for self-built copies:
+https://healthassist.thebillington.co.uk/terms/
+
 TRADEMARKS
 Home Assistant Health Bridge is independent. Apple Health is a trademark of
 Apple Inc. Home Assistant and Nabu Casa are trademarks of Nabu Casa. HACS is a
