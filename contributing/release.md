@@ -146,7 +146,7 @@ iPhone. Check:
 - a full history export completes or resumes;
 - background delivery and the weekly fallback are scheduled;
 - the Tip Jar loads its products and a sandbox purchase completes;
-- the **Privacy Policy** and **Documentation** links open the docs site.
+- the **Privacy Policy** and **Terms of Use** links open the docs site.
 
 ## 5. Fill in the listing
 
