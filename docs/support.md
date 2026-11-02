@@ -14,6 +14,7 @@ Support is optional and does not unlock any features.
 
 Open an issue at
 [thebillington/health-assist](https://github.com/thebillington/health-assist/issues).
+On TestFlight you can also send feedback straight from the TestFlight app.
 
 Include:
 

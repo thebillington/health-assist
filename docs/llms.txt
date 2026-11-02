@@ -8,7 +8,7 @@
 - Documentation: https://healthassist.thebillington.co.uk/
 - Integration domain: `apple_health_sync`
 - Platforms: Home Assistant 2024.1 or newer, plus iOS 18 or newer
-- Distribution: HACS custom repository or manual copy into `custom_components/`
+- Distribution: HACS custom repository or manual copy into `custom_components/`; the iOS app is in TestFlight now, with the App Store release coming soon
 - Cost: free, MIT licensed, no paid tier
 - Account required: no
 - Cloud service: none; data goes from the phone to the user's own Home Assistant
@@ -19,7 +19,7 @@
 - History: the first sync exports all available HealthKit history in resumable chunks
 - Background sync: HealthKit background delivery, hourly where iOS allows it, plus a weekly fallback
 - Security: optional shared secret in the `X-Webhook-Secret` header; webhook URL and secret stored in the iOS Keychain
-- Not yet supported: workouts, ECG and clinical records as entities; default HACS store listing; App Store release
+- Not yet supported: workouts, ECG and clinical records as entities; default HACS store listing
 
 ## Pages
 

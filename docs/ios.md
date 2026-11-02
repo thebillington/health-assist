@@ -5,7 +5,12 @@ dependencies.
 
 ## Get the app
 
-The app is not on the App Store yet, so build it from the open-source project:
+The app is in TestFlight now, with the App Store release coming shortly. Both
+are free, and the optional **Tip Jar** unlocks nothing.
+
+### Build from source (optional)
+
+The app is open source, so you can also build it yourself:
 
 ```bash
 open ios/AppleHealthSync.xcodeproj
@@ -59,5 +64,5 @@ incremental history.
 
 ## Availability
 
-The app is not on the App Store or TestFlight yet. It is free, with an optional
+The app runs on iOS 18 or newer and targets iPhone. It is free, with an optional
 **Tip Jar** using in-app purchase. Tips unlock nothing.

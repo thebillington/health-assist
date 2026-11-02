@@ -181,7 +181,7 @@ Submitting for review is a manual action for the owner. Confirm the checklist in
 ## 8. After release
 
 - Tag the release, for example `ios-v1.2.0`, and publish a GitHub release.
-- Update `README.md`, `docs/index.md` and both `llms.txt` files: remove
-  "App Store release" from the not-yet-supported list.
+- Update `README.md`, `docs/index.md`, `docs/ios.md` and both `llms.txt` files:
+  switch the TestFlight wording to the live App Store listing.
 - Link the App Store listing from the README, docs home and iOS page.
 - Keep the Tip Jar wording: free, optional, unlocks no features.

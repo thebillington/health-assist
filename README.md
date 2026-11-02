@@ -31,7 +31,8 @@ Documentation: <https://healthassist.thebillington.co.uk>.
 
 - Home Assistant 2024.1 or newer (tested against 2026.2 and 2026.10).
 - HACS (recommended) or manual installation.
-- iOS 18 or newer and Xcode 16 or newer to build the app.
+- iOS 18 or newer and an iPhone. The app is in TestFlight now; the App Store
+  release follows shortly. Building from source needs Xcode 16 or newer.
 - An HTTPS-reachable Home Assistant URL if the phone is not on the same LAN.
   The webhook can be used over plain HTTP on a trusted LAN, but HTTPS is
   strongly recommended because the webhook URL is a credential.
@@ -97,8 +98,10 @@ reloads after saving; sensors return after the app's next sync.
 
 ## iOS app
 
-The companion app lives in [`ios/`](ios/) and is built from this same
-repository.
+The companion app is in TestFlight now, with the App Store release coming
+shortly. Both are free, and the optional **Tip Jar** unlocks nothing. It lives
+in [`ios/`](ios/) and is built from this same repository, so you can also build
+it yourself:
 
 ![Home Assistant Health Bridge iOS app](docs/images/app.png)
 
@@ -554,9 +557,11 @@ v1 intentionally stops at push-to-sensor. Planned for later:
 
 - event entities for workouts, ECG and other discrete records;
 - more Apple Health categories;
-- default HACS store listing;
-- App Store release for the iOS app (listing copy, privacy policy and review
-  notes are prepared in [`appstore/`](appstore/)).
+- default HACS store listing.
+
+The iOS app is already in TestFlight; the App Store release is in progress
+(listing copy, privacy policy and review notes are prepared in
+[`appstore/`](appstore/)).
 
 ## Support My Work
 
