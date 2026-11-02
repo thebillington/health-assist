@@ -28,6 +28,12 @@ statistics.
 2. [Add a device and scan the QR code](setup.md) from the iOS app.
 3. Grant Apple Health access and run the first sync.
 
+## Get the app
+
+The iOS app is in TestFlight now, with the App Store release coming shortly.
+Both are free, and the optional **Tip Jar** unlocks nothing. Building from
+source is still available for developers; see [iOS app](ios.md).
+
 ## Project status
 
 Health Bridge is under active development. The webhook sync and long-term

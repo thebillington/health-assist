@@ -4,7 +4,9 @@
 
 - Home Assistant 2024.1 or newer.
 - HACS, or manual installation.
-- For the iOS app: iOS 18+, Xcode 16+ and a development team for signing.
+- For the iOS app: iOS 18+ and an iPhone. The app is in TestFlight now; the
+  App Store release follows shortly. Building from source needs Xcode 16+ and a
+  development team.
 - HTTPS if the phone is outside the LAN. Plain HTTP works on a trusted LAN.
 
 ## HACS custom repository
@@ -34,8 +36,9 @@ HACS: update from the integration page as usual.
 
 Manual: replace the component directory and restart Home Assistant.
 
-The iOS app is built from source; see [iOS app](ios.md). Reinstall after pulling
-a new version.
+The iOS app updates itself through TestFlight or the App Store. If you build it
+from source instead, reinstall after pulling a new version; see
+[iOS app](ios.md).
 
 ## Uninstall
 
