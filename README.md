@@ -41,7 +41,8 @@ Documentation: <https://healthassist.thebillington.co.uk>.
 
 ### HACS (custom repository)
 
-This integration is not in the default HACS store yet.
+This integration is distributed as a HACS custom repository. It is not in the
+default HACS store and there is no plan to submit it there.
 
 1. Open **HACS → Integrations**.
 2. Select the three-dot menu → **Custom repositories**.
@@ -556,8 +557,7 @@ offering updates.
 v1 intentionally stops at push-to-sensor. Planned for later:
 
 - event entities for workouts, ECG and other discrete records;
-- more Apple Health categories;
-- default HACS store listing.
+- more Apple Health categories.
 
 The iOS app is already in TestFlight; the App Store release is in progress
 (listing copy, privacy policy and review notes are prepared in

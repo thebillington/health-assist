@@ -3,7 +3,7 @@
 ## Requirements
 
 - Home Assistant 2024.1 or newer.
-- HACS, or manual installation.
+- HACS (as a custom repository) or manual installation.
 - For the iOS app: iOS 18+ and an iPhone. The app is in TestFlight now; the
   App Store release follows shortly. Building from source needs Xcode 16+ and a
   development team.
@@ -11,7 +11,8 @@
 
 ## HACS custom repository
 
-Health Bridge is not in the default HACS store yet.
+Health Bridge is distributed as a HACS custom repository. It is not in the
+default HACS store and there is no plan to submit it there, so add it yourself:
 
 1. Open **HACS → Integrations**.
 2. Open the three-dot menu → **Custom repositories**.
