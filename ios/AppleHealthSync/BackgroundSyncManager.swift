@@ -33,7 +33,6 @@ final class BackgroundSyncManager {
     private var observerQueries: [HKObserverQuery] = []
     private var observedTypes: [HKSampleType] = []
     private var configuredSignature: String?
-    private var syncing = false
 
     private init() {}
 
@@ -133,8 +132,6 @@ final class BackgroundSyncManager {
     }
 
     private func syncFromBackground(reason: String) async {
-        guard !syncing else { return }
-
         guard let url = WebhookClient.validateURL(settings.webhookURL) else {
             logger.debug("Background sync skipped: no webhook URL configured")
             return
@@ -142,8 +139,10 @@ final class BackgroundSyncManager {
 
         guard health.isAvailable else { return }
 
-        syncing = true
-        defer { syncing = false }
+        // Foreground and background syncs share checkpoints and statistics
+        // imports, so only one may run at a time.
+        guard SyncGate.begin() else { return }
+        defer { SyncGate.end() }
 
         let backgroundTask = UIApplication.shared.beginBackgroundTask(
             withName: "AppleHealthSyncBackgroundSync"
@@ -191,7 +190,7 @@ final class BackgroundSyncManager {
             )
         } catch {
             logger.error(
-                "Background sync failed: \(error.localizedDescription, privacy: .public)"
+                "Background sync failed: \(error.localizedDescription, privacy: .private)"
             )
         }
     }
@@ -209,8 +208,27 @@ final class BackgroundSyncManager {
             logger.info("Weekly background sync scheduled")
         } catch {
             logger.error(
-                "Could not schedule weekly background sync: \(error.localizedDescription, privacy: .public)"
+                "Could not schedule weekly background sync: \(error.localizedDescription, privacy: .private)"
             )
         }
+    }
+}
+
+/// A single gate shared by the foreground app and background delivery.
+///
+/// Both paths write the same history checkpoints and POST the same webhook, so
+/// they must never run together. All callers are `@MainActor`.
+@MainActor
+enum SyncGate {
+    private(set) static var isSyncing = false
+
+    static func begin() -> Bool {
+        guard !isSyncing else { return false }
+        isSyncing = true
+        return true
+    }
+
+    static func end() {
+        isSyncing = false
     }
 }

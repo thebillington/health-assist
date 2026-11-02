@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import asyncio
 from dataclasses import dataclass
+from datetime import UTC, datetime
 
 
 @dataclass(frozen=True, slots=True)
@@ -35,6 +37,9 @@ class HealthDataStore:
         self.last_payload_at: str | None = None
         self.last_device_id: str | None = None
         self.last_device_name: str | None = None
+        # History chunks can arrive from foreground and background syncs at the
+        # same time. Only one statistics import may run per entry.
+        self.history_lock = asyncio.Lock()
 
     @property
     def values(self) -> dict[str, MetricValue]:
@@ -57,12 +62,15 @@ class HealthDataStore:
 
         Historical chunks can arrive out of order relative to a live sync, so a
         value only replaces an existing one when its timestamp is not older.
-        ISO 8601 UTC strings sort lexicographically.
         """
         updated: set[str] = set()
         for key, value in values.items():
             existing = self._values.get(key)
-            if existing is None or not value.historical or value.last_sync >= existing.last_sync:
+            if (
+                existing is None
+                or not value.historical
+                or _timestamp(value.last_sync) >= _timestamp(existing.last_sync)
+            ):
                 self._values[key] = value
                 updated.add(key)
 
@@ -70,3 +78,11 @@ class HealthDataStore:
         self.last_device_id = device_id
         self.last_device_name = device_name
         return updated
+
+
+def _timestamp(value: str) -> datetime:
+    """Parse one of our normalized ISO 8601 timestamps for comparison."""
+    try:
+        return datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return datetime.min.replace(tzinfo=UTC)

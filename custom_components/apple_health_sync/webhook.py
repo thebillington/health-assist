@@ -6,7 +6,7 @@ import hmac
 import json
 import logging
 import math
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from http import HTTPStatus
 from typing import Any
 
@@ -82,7 +82,9 @@ async def async_handle_webhook(
 
     try:
         payload = json.loads(body)
-    except (json.JSONDecodeError, UnicodeDecodeError):
+    except (ValueError, RecursionError):
+        # ValueError covers JSONDecodeError, invalid UTF-8 and integers that
+        # exceed Python's digit limit; RecursionError covers deeply nested JSON.
         _LOGGER.debug("Rejected Apple Health webhook with invalid JSON")
         return _error(HTTPStatus.BAD_REQUEST, "invalid JSON")
 
@@ -135,18 +137,25 @@ async def async_handle_webhook(
     for key, value in history_values.items():
         values.setdefault(key, value)
 
-    accepted = len(values)
-    store.update(
+    updated = store.update(
         values,
         device_id=device_id,
         device_name=device_name,
         received_at=received_at,
     )
+    accepted = len(updated)
 
-    if values:
-        async_dispatcher_send(hass, signal_new_data(entry.entry_id), set(values))
+    if updated:
+        async_dispatcher_send(hass, signal_new_data(entry.entry_id), updated)
     if history:
-        hass.async_create_task(async_import_history(hass, entry, history))
+
+        async def _import() -> None:
+            # Serialise history imports for this entry. Two overlapping
+            # exports must not write the same hours at the same time.
+            async with store.history_lock:
+                await async_import_history(hass, entry, history)
+
+        entry.async_create_task(hass, _import(), "apple_health_sync history")
 
     _LOGGER.debug(
         "Apple Health webhook for entry %s: %s metric(s) accepted, %s ignored, "
@@ -295,7 +304,13 @@ def _parse_timestamp_datetime(raw_timestamp: Any) -> datetime | None:
 
     if parsed.tzinfo is None:
         parsed = parsed.replace(tzinfo=UTC)
-    return parsed.astimezone(UTC)
+    parsed = parsed.astimezone(UTC)
+    # Reject timestamps that are clearly wrong. A far-future timestamp would
+    # otherwise make the store ignore every later historical sample for that
+    # metric until that date arrives.
+    if parsed > datetime.now(UTC) + timedelta(days=1):
+        return None
+    return parsed
 
 
 def _clean_text(raw_value: Any, max_length: int) -> str | None:
@@ -364,8 +379,12 @@ def _parse_history(
             if parsed is None:
                 raise InvalidPayload(f"invalid history sample for metric '{key}'")
             timestamp, value, sample_unit = parsed
-            if sample_unit is not None and unit is None:
+            if unit is None:
                 unit = sample_unit
+            elif sample_unit is not None and sample_unit != unit:
+                # Averaging values in different units would silently corrupt
+                # the statistic, so reject the request instead.
+                raise InvalidPayload(f"mixed units for history metric '{key}'")
             samples.append(
                 HistorySample(
                     timestamp=timestamp,

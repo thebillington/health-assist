@@ -21,7 +21,7 @@ from .const import (
     signal_new_data,
 )
 from .helpers import metric_is_allowed
-from .store import HealthDataStore, MetricValue
+from .store import HealthDataStore
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -66,7 +66,6 @@ async def async_setup_entry(
                 store=store,
                 entry=entry,
                 metric_key=key,
-                initial_value=value,
             )
             entities[key] = entity
             new_entities.append(entity)
@@ -98,7 +97,6 @@ class AppleHealthSensor(SensorEntity):
         store: HealthDataStore,
         entry: ConfigEntry,
         metric_key: str,
-        initial_value: MetricValue,
     ) -> None:
         """Initialize a sensor for a metric."""
         self._store = store
@@ -109,7 +107,6 @@ class AppleHealthSensor(SensorEntity):
         self._attr_name = (
             self._definition.name if self._definition is not None else _display_name(metric_key)
         )
-        self._attr_native_unit_of_measurement = initial_value.unit
         self._attr_device_class = (
             self._definition.device_class if self._definition is not None else None
         )
@@ -130,6 +127,19 @@ class AppleHealthSensor(SensorEntity):
     def available(self) -> bool:
         """Return whether a value has been received."""
         return self._store.get(self._metric_key) is not None
+
+    @property
+    def native_unit_of_measurement(self) -> str | None:
+        """Return the unit that belongs to the currently stored value.
+
+        The unit is read from the store rather than fixed at entity creation so
+        a payload that changes units cannot leave an old unit attached to a new
+        value.
+        """
+        value = self._store.get(self._metric_key)
+        if value is not None:
+            return value.unit
+        return self._definition.unit if self._definition is not None else None
 
     @property
     def native_value(self) -> float | int | None:

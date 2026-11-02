@@ -232,6 +232,37 @@ async def test_payload_unit_is_reflected_in_entity(hass: HomeAssistant) -> None:
     assert state.attributes["device_class"] == "weight"
 
 
+async def test_unit_change_updates_the_entity_unit(hass: HomeAssistant) -> None:
+    """A later payload cannot leave an old unit attached to a new value."""
+    entry = make_entry()
+    await setup_entry(hass, entry)
+
+    await post_payload(
+        hass,
+        TEST_WEBHOOK_ID,
+        {
+            "timestamp": "2026-10-30T08:00:00Z",
+            "metrics": {"weight": {"value": 72.4, "unit": "kg"}},
+        },
+    )
+    await hass.async_block_till_done()
+    assert hass.states.get("sensor.test_phone_weight").attributes["unit_of_measurement"] == "kg"
+
+    await post_payload(
+        hass,
+        TEST_WEBHOOK_ID,
+        {
+            "timestamp": "2026-10-31T08:00:00Z",
+            "metrics": {"weight": {"value": 160.0, "unit": "lb"}},
+        },
+    )
+    await hass.async_block_till_done()
+
+    state = hass.states.get("sensor.test_phone_weight")
+    assert state.state == "160.0"
+    assert state.attributes["unit_of_measurement"] == "lb"
+
+
 async def test_store_is_cleared_on_unload(hass: HomeAssistant) -> None:
     """Unloading removes the entry store so stale data is not exposed."""
     entry = make_entry()

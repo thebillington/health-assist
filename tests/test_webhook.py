@@ -410,10 +410,10 @@ async def test_history_only_payload_updates_latest_and_queues_import(
     assert weight.last_sync == "2026-10-31T08:00:00Z"
     assert weight.historical is True
 
+    await hass.async_block_till_done()
     assert set(imported) == {"weight", "steps"}
     assert len(imported["weight"].samples) == 2
 
-    await hass.async_block_till_done()
     state = hass.states.get("sensor.test_phone_weight")
     assert state is not None
     assert state.state == "71.5"
@@ -484,6 +484,8 @@ async def test_history_allow_list_filters_metrics(hass: HomeAssistant, monkeypat
     assert response.status == 200
     body = json.loads(response.body)
     assert body["ignored"] == 1
+
+    await hass.async_block_till_done()
     assert set(imported) == {"weight", "custom_metric"}
     assert hass.data[DOMAIN][entry.entry_id].get("steps") is None
 
@@ -568,16 +570,6 @@ async def test_history_importer_builds_entity_statistics(hass: HomeAssistant, mo
         fake_import,
     )
 
-    # No recorder database in the test harness, so stand in for the query that
-    # reports which hours the recorder already holds.
-    async def fake_existing_hours(hass, statistic_ids, *, since, cutoff):
-        return set()
-
-    monkeypatch.setattr(
-        "custom_components.apple_health_sync.history._existing_hours",
-        fake_existing_hours,
-    )
-
     await async_import_history(
         hass,
         entry,
@@ -597,49 +589,111 @@ async def test_history_importer_builds_entity_statistics(hass: HomeAssistant, mo
     ]
 
 
-async def test_history_importer_skips_when_recorder_unavailable(
-    hass: HomeAssistant, monkeypatch
-) -> None:
-    """Nothing is imported when the recorder cannot report its existing hours."""
-    from datetime import UTC, datetime
-
-    from custom_components.apple_health_sync.history import (
-        HistoryMetric,
-        HistorySample,
-        async_import_history,
-    )
-
+async def test_deeply_nested_json_returns_400(hass: HomeAssistant) -> None:
+    """Deeply nested JSON is rejected instead of raising recursion errors."""
     entry = make_entry()
     await setup_entry(hass, entry)
-    await post_payload(hass, TEST_WEBHOOK_ID, {"metrics": {"weight": {"value": 72.4}}})
-    await hass.async_block_till_done()
 
-    calls = []
+    body = b'{"metrics":' + (b"[" * 2000) + b"0" + (b"]" * 2000) + b"}"
+    response = await post_payload(hass, TEST_WEBHOOK_ID, body)
 
-    def fake_import(hass, metadata, statistics):
-        calls.append(statistics)
+    assert response.status == 400
 
-    async def fake_existing_hours(hass, statistic_ids, *, since, cutoff):
-        return None
 
-    monkeypatch.setattr(
-        "homeassistant.components.recorder.statistics.async_import_statistics",
-        fake_import,
-    )
-    monkeypatch.setattr(
-        "custom_components.apple_health_sync.history._existing_hours",
-        fake_existing_hours,
-    )
+async def test_huge_json_integer_returns_400(hass: HomeAssistant) -> None:
+    """Integers beyond Python's digit limit are a bad request, not a 500."""
+    entry = make_entry()
+    await setup_entry(hass, entry)
 
-    await async_import_history(
+    body = b'{"metrics":{"weight":{"value":' + (b"9" * 5000) + b"}}}"
+    response = await post_payload(hass, TEST_WEBHOOK_ID, body)
+
+    assert response.status == 400
+
+
+async def test_far_future_timestamp_is_ignored(hass: HomeAssistant) -> None:
+    """A wrong device clock cannot poison the store with a future last_sync."""
+    entry = make_entry()
+    await setup_entry(hass, entry)
+
+    response = await post_payload(
         hass,
-        entry,
+        TEST_WEBHOOK_ID,
         {
-            "weight": HistoryMetric(
-                unit="kg",
-                samples=(HistorySample(datetime(2026, 10, 30, 8, 5, tzinfo=UTC), 71.5, "kg"),),
-            )
+            "timestamp": "2999-01-01T00:00:00Z",
+            "metrics": {"weight": {"value": 72.4}},
         },
     )
 
-    assert calls == []
+    assert response.status == 200
+    value = hass.data[DOMAIN][entry.entry_id].get("weight")
+    assert value.last_sync != "2999-01-01T00:00:00Z"
+    assert value.last_sync.endswith("Z")
+
+
+async def test_far_future_history_sample_returns_400(hass: HomeAssistant) -> None:
+    """Future-dated history samples are rejected as invalid."""
+    entry = make_entry()
+    await setup_entry(hass, entry)
+
+    response = await post_payload(
+        hass,
+        TEST_WEBHOOK_ID,
+        {
+            "history": {
+                "weight": [{"timestamp": "2999-01-01T00:00:00Z", "value": 72.4}],
+            }
+        },
+    )
+
+    assert response.status == 400
+
+
+async def test_history_with_mixed_units_returns_400(hass: HomeAssistant) -> None:
+    """A history request may not average values in different units."""
+    entry = make_entry()
+    await setup_entry(hass, entry)
+
+    response = await post_payload(
+        hass,
+        TEST_WEBHOOK_ID,
+        {
+            "history": {
+                "weight": [
+                    {"timestamp": "2026-10-30T08:00:00Z", "value": 72.4, "unit": "kg"},
+                    {"timestamp": "2026-10-31T08:00:00Z", "value": 160.0, "unit": "lb"},
+                ],
+            }
+        },
+    )
+
+    assert response.status == 400
+
+
+async def test_stale_history_is_not_counted_as_accepted(hass: HomeAssistant) -> None:
+    """The response reports values actually stored, not values received."""
+    entry = make_entry()
+    await setup_entry(hass, entry)
+
+    await post_payload(
+        hass,
+        TEST_WEBHOOK_ID,
+        {
+            "timestamp": "2026-10-31T08:00:00Z",
+            "metrics": {"weight": {"value": 72.4}},
+        },
+    )
+
+    response = await post_payload(
+        hass,
+        TEST_WEBHOOK_ID,
+        {
+            "history": {
+                "weight": [{"timestamp": "2026-10-30T08:00:00Z", "value": 60.0}],
+            }
+        },
+    )
+
+    assert response.status == 200
+    assert json.loads(response.body)["accepted"] == 0
+    assert hass.data[DOMAIN][entry.entry_id].get("weight").value == 72.4

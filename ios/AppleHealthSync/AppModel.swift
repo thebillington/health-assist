@@ -58,9 +58,11 @@ final class AppModel: ObservableObject {
 
     func prepare() async {
         #if !targetEnvironment(simulator)
+        #if DEBUG
         if environmentOverrides, !autoTestPayload {
             saveSettings()
         }
+        #endif
         #endif
 
         BackgroundSyncManager.shared.start(includeExtras: includeExtras)
@@ -163,7 +165,13 @@ final class AppModel: ObservableObject {
         return
         #endif
 
-        guard !isSyncing else { return }
+        guard !isSyncing, SyncGate.begin() else { return }
+        isSyncing = true
+        defer {
+            isSyncing = false
+            SyncGate.end()
+        }
+
         saveSettings()
 
         if forceFullHistory {
@@ -174,9 +182,6 @@ final class AppModel: ObservableObject {
             statusMessage = WebhookError.invalidURL.localizedDescription
             return
         }
-
-        isSyncing = true
-        defer { isSyncing = false }
 
         do {
             guard health.isAvailable else { throw HealthKitError.unavailable }
@@ -246,34 +251,48 @@ final class AppModel: ObservableObject {
             return
         }
 
-        let values = Dictionary(
-            uniqueKeysWithValues: queryItems.map { ($0.name, $0.value ?? "") }
-        )
+        // A malformed QR code can repeat a key; last one wins instead of
+        // trapping with Dictionary(uniqueKeysWithValues:).
+        var values: [String: String] = [:]
+        for item in queryItems {
+            values[item.name] = item.value ?? ""
+        }
         guard let rawURL = values["url"],
               WebhookClient.validateURL(rawURL) != nil else {
             statusMessage = "The QR code did not contain a valid webhook URL."
             return
         }
 
+        let previousURL = webhookURL.trimmingCharacters(in: .whitespacesAndNewlines)
         webhookURL = rawURL
         secret = values["secret"] ?? ""
         saveSettings()
+
+        if previousURL != rawURL.trimmingCharacters(in: .whitespacesAndNewlines) {
+            // Checkpoints belong to the old Home Assistant entry. Start the
+            // history export again so the new endpoint receives it too.
+            settings.resetHistoryCheckpoints()
+        }
+
         statusMessage = "Imported the webhook URL and secret from the QR code. Tap Request Health Access, then Sync Now."
     }
 
     /// Send deterministic sample values. This works without HealthKit, which
     /// makes it useful for testing the integration from the iOS simulator.
     func sendTestPayload() async {
-        guard !isSyncing else { return }
+        guard !isSyncing, SyncGate.begin() else { return }
+        isSyncing = true
+        defer {
+            isSyncing = false
+            SyncGate.end()
+        }
+
         saveSettings()
 
         guard let url = WebhookClient.validateURL(webhookURL) else {
             statusMessage = WebhookError.invalidURL.localizedDescription
             return
         }
-
-        isSyncing = true
-        defer { isSyncing = false }
 
         let testReadings = [
             MetricReading(key: "weight", name: "Weight", value: 72.4, unit: "kg", canonical: true),

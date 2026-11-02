@@ -209,6 +209,8 @@ Notes:
 - The maximum request body is **256 KB**. Larger requests receive `413`.
 - Historical samples are grouped into UTC-hour buckets on the server. Repeated
   imports of the same hour overwrite rather than duplicate.
+- One history request must use a single unit per metric; mixed units return
+  `400` instead of being averaged together.
 
 ### Responses
 

@@ -68,6 +68,8 @@ Provide at least one of `metrics` or `history`.
 - The request body limit is **256 KB**; larger requests return `413`.
 - Historical samples are grouped into UTC-hour means. Re-importing an hour
   overwrites it.
+- A single history request must use one unit per metric. Samples with different
+  units are rejected with `400` rather than averaged together.
 - `timestamp` does not backdate live state. Historical data is imported
   separately as long-term statistics.
 

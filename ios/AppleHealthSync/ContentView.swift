@@ -7,11 +7,17 @@ struct ContentView: View {
         case secret
     }
 
+    private enum Replacement {
+        case scan
+        case link(URL)
+    }
+
     @StateObject private var model = AppModel()
     @StateObject private var tipJar = TipJarStore()
     @Environment(\.scenePhase) private var scenePhase
     @State private var showingScanner = false
     @State private var showingReplaceConfirmation = false
+    @State private var pendingReplacement: Replacement?
     @FocusState private var focusedField: Field?
 
     var body: some View {
@@ -247,7 +253,14 @@ struct ContentView: View {
                     Task { await model.refreshHealthStatus() }
                 }
                 .onOpenURL { url in
-                    model.importConfiguration(from: url)
+                    // A link from another app or the Camera must never replace
+                    // credentials silently. Ask first if anything is set.
+                    if hasDetails {
+                        pendingReplacement = .link(url)
+                        showingReplaceConfirmation = true
+                    } else {
+                        model.importConfiguration(from: url)
+                    }
                 }
                 .sheet(isPresented: $showingScanner) {
                     QRScannerView { code in
@@ -260,12 +273,23 @@ struct ContentView: View {
                     "Replace Home Assistant details?",
                     isPresented: $showingReplaceConfirmation
                 ) {
-                    Button("Cancel", role: .cancel) {}
+                    Button("Cancel", role: .cancel) {
+                        pendingReplacement = nil
+                    }
                     Button("Replace", role: .destructive) {
-                        showingScanner = true
+                        let replacement = pendingReplacement
+                        pendingReplacement = nil
+                        switch replacement {
+                        case .some(.scan):
+                            showingScanner = true
+                        case .some(.link(let url)):
+                            model.importConfiguration(from: url)
+                        case .none:
+                            break
+                        }
                     }
                 } message: {
-                    Text("Scanning a QR code will replace the current webhook URL and shared secret.")
+                    Text("Importing new details will replace the current webhook URL and shared secret.")
                 }
                 .task { await model.prepare() }
                 .onChange(of: scenePhase) { _, newPhase in
@@ -278,10 +302,14 @@ struct ContentView: View {
         }
     }
 
-    private func requestScan() {
-        let hasDetails = !model.webhookURL.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    private var hasDetails: Bool {
+        !model.webhookURL.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
             || !model.secret.isEmpty
+    }
+
+    private func requestScan() {
         if hasDetails {
+            pendingReplacement = .scan
             showingReplaceConfirmation = true
         } else {
             showingScanner = true

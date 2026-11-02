@@ -113,14 +113,27 @@ final class SettingsStore {
 
     private func writeKeychain(_ value: String, account: String) {
         let query = keychainQuery(account: account)
-        SecItemDelete(query as CFDictionary)
-
         let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else { return }
 
-        var attributes = query
-        attributes[kSecValueData as String] = Data(trimmed.utf8)
-        attributes[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
-        SecItemAdd(attributes as CFDictionary, nil)
+        guard !trimmed.isEmpty else {
+            SecItemDelete(query as CFDictionary)
+            return
+        }
+
+        let attributes: [String: Any] = [
+            kSecValueData as String: Data(trimmed.utf8),
+            // Do not let the credential migrate to another device through an
+            // encrypted backup.
+            kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly,
+        ]
+
+        let status = SecItemUpdate(query as CFDictionary, attributes as CFDictionary)
+        if status == errSecItemNotFound {
+            var newItem = query
+            for (key, value) in attributes {
+                newItem[key] = value
+            }
+            SecItemAdd(newItem as CFDictionary, nil)
+        }
     }
 }
