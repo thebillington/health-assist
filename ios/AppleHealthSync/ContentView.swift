@@ -2,11 +2,17 @@ import SwiftUI
 import AppleHealthSyncCore
 
 struct ContentView: View {
+    private enum Field: Hashable {
+        case webhook
+        case secret
+    }
+
     @StateObject private var model = AppModel()
     @StateObject private var tipJar = TipJarStore()
     @Environment(\.scenePhase) private var scenePhase
     @State private var showingScanner = false
     @State private var showingReplaceConfirmation = false
+    @FocusState private var focusedField: Field?
 
     var body: some View {
         NavigationStack {
@@ -17,10 +23,16 @@ struct ContentView: View {
                             .keyboardType(.URL)
                             .textInputAutocapitalization(.never)
                             .autocorrectionDisabled()
+                            .focused($focusedField, equals: .webhook)
+                            .submitLabel(.done)
+                            .onSubmit { focusedField = nil }
 
                         SecureField("Optional shared secret", text: $model.secret)
                             .textContentType(.password)
                             .autocorrectionDisabled()
+                            .focused($focusedField, equals: .secret)
+                            .submitLabel(.done)
+                            .onSubmit { focusedField = nil }
 
                         Toggle("Sync when the app opens", isOn: $model.syncOnOpen)
 
@@ -213,6 +225,16 @@ struct ContentView: View {
                         }
                     } header: {
                         Text("Links")
+                    }
+                }
+                .scrollDismissesKeyboard(.interactively)
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+                        Button("Done") {
+                            focusedField = nil
+                        }
+                        .fontWeight(.semibold)
                     }
                 }
                 .navigationTitle("Health Bridge")
