@@ -2,7 +2,7 @@
 #
 # A build uploads to App Store Connect but never submits the app for review.
 # Final submission stays a manual App Store Connect action. Builds run from a
-# ci/* branch or a v*/ios-v* tag via the Codemagic GitHub webhook.
+# ci/* branch or an ios-v* tag via the Codemagic GitHub webhook.
 #
 # One-time setup is documented in contributing/release.md. In short:
 #   1. Add this repository to Codemagic.
@@ -13,7 +13,7 @@
 #      identities (profiles are per bundle ID, so another app's profile cannot
 #      be reused).
 #   4. Put the App Store Apple ID in APP_STORE_APPLE_ID below.
-#   5. Push a ci/* branch or a v*/ios-v* tag, or start the "iOS Release
+#   5. Push a ci/* branch or an ios-v* tag, or start the "iOS Release
 #      (TestFlight)" workflow manually.
 
 workflows:
@@ -47,8 +47,8 @@ workflows:
         - pattern: "ci/*"
           include: true
       tag_patterns:
-        - pattern: "v*"
-          include: true
+        # Integration releases use plain semver tags (for example 1.1.2) so
+        # they do not trigger an iOS build. Use ios-v* for app releases.
         - pattern: "ios-v*"
           include: true
 
